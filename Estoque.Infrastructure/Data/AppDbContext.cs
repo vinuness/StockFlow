@@ -18,6 +18,8 @@ namespace Estoque.Infrastructure.Data
             cliente.HasIndex(c => c.Email).IsUnique();
             cliente.HasIndex(c => c.CPF).IsUnique();
 
+            cliente.HasOne(c => c.Endereco).WithMany(c => c.Clientes).HasForeignKey(c => c.EnderecoId);
+
         }
 
         public DbSet<Fornecedor> Fornecedores { get; set; }
@@ -25,6 +27,6 @@ namespace Estoque.Infrastructure.Data
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Endereço> Endereços { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
     }
 }

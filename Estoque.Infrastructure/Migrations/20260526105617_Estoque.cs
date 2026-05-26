@@ -31,7 +31,7 @@ namespace Estoque.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Endereços",
+                name: "Enderecos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -49,7 +49,7 @@ namespace Estoque.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Endereços", x => x.Id);
+                    table.PrimaryKey("PK_Enderecos", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -84,7 +84,7 @@ namespace Estoque.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    EndereçoId = table.Column<int>(type: "int", nullable: true),
+                    EnderecoId = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Senha = table.Column<string>(type: "longtext", nullable: false)
@@ -95,10 +95,11 @@ namespace Estoque.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Clientes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Clientes_Endereços_EndereçoId",
-                        column: x => x.EndereçoId,
-                        principalTable: "Endereços",
-                        principalColumn: "Id");
+                        name: "FK_Clientes_Enderecos_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "Enderecos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -183,9 +184,9 @@ namespace Estoque.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Clientes_EndereçoId",
+                name: "IX_Clientes_EnderecoId",
                 table: "Clientes",
-                column: "EndereçoId");
+                column: "EnderecoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_ClienteId",
@@ -233,7 +234,7 @@ namespace Estoque.Infrastructure.Migrations
                 name: "Clientes");
 
             migrationBuilder.DropTable(
-                name: "Endereços");
+                name: "Enderecos");
         }
     }
 }

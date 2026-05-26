@@ -30,6 +30,7 @@ namespace Estoque.Infrastructure.Repositories
         public async Task<Cliente> FindById(int id)
         {
             Cliente cliente = await _con.Clientes.FindAsync(id);
+            cliente.Endereco = await _con.Enderecos.FindAsync(cliente.EnderecoId);
             return cliente;
         }
 

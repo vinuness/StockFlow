@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estoque.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260525231137_Estoque")]
+    [Migration("20260526105617_Estoque")]
     partial class Estoque
     {
         /// <inheritdoc />
@@ -40,7 +40,7 @@ namespace Estoque.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int?>("EndereçoId")
+                    b.Property<int>("EnderecoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -61,12 +61,12 @@ namespace Estoque.Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.HasIndex("EndereçoId");
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Endereço", b =>
+            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Endereco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,7 +91,7 @@ namespace Estoque.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Endereços");
+                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.Pedido", b =>
@@ -219,11 +219,13 @@ namespace Estoque.Infrastructure.Migrations
 
             modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Cliente", b =>
                 {
-                    b.HasOne("Estoque.Domain.Entities.Clientes.Endereço", "Endereço")
-                        .WithMany()
-                        .HasForeignKey("EndereçoId");
+                    b.HasOne("Estoque.Domain.Entities.Clientes.Endereco", "Endereco")
+                        .WithMany("Clientes")
+                        .HasForeignKey("EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Endereço");
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.Pedido", b =>
@@ -259,6 +261,11 @@ namespace Estoque.Infrastructure.Migrations
             modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
+                });
+
+            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Endereco", b =>
+                {
+                    b.Navigation("Clientes");
                 });
 
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.Pedido", b =>

@@ -31,18 +31,25 @@ namespace Estoque.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logar(LoginModel login)
+        public async Task<IActionResult> Logar([FromBody] LoginModel login)
         {
             var res = await _http.PostAsJsonAsync("https://localhost:7238/api/Cliente/login", login);
-            
 
             if (res.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "Home");
+                var usuario = await res.Content.ReadFromJsonAsync<LoginResponse>();
+
+                return Json(usuario);
             }
 
-            ModelState.AddModelError("", $"Email ou senha inválidos");
-            return View(login);
+            ModelState.AddModelError("", "Email ou senha inválidos");
+
+            return Unauthorized();
+        }
+
+        public async Task<IActionResult> Perfil()
+        {
+            return View();
         }
     }
 }

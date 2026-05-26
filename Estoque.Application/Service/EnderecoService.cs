@@ -1,0 +1,41 @@
+﻿using Estoque.Domain.Entities.Clientes;
+using Estoque.Domain.Interfaces.IServices;
+using Estoque.Domain.Interfaces.Repositories;
+
+namespace Estoque.Domain.Services
+{
+    public class EnderecoService : IEnderecoService
+    {
+        private readonly IEnderecoRepository _repository;
+
+        public EnderecoService(IEnderecoRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public async Task<List<Endereco>> FindAll()
+        {
+            return await _repository.FindAll();
+        }
+
+        public async Task<Endereco> FindById(int id)
+        {
+            return await _repository.FindById(id);
+        }
+
+        public async Task Save(Endereco endereco)
+        {
+            await _repository.Save(endereco);
+        }
+
+        public async Task Update(Endereco endereco)
+        {
+            await _repository.Update(endereco);
+        }
+
+        public async Task Delete(int id)
+        {
+            await _repository.Delete(id);
+        }
+    }
+}

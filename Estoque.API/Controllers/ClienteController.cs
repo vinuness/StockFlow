@@ -62,7 +62,14 @@ namespace Estoque.API.Controllers
                 return Unauthorized();
             }
 
-            return Ok(cliente);
+            var response = new LoginResponse
+            {
+                Id = cliente.Id,
+                Nome = cliente.Nome,
+                Email = cliente.Email
+            };
+
+            return Ok(response);
         }
     }
 }
