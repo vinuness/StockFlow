@@ -1,0 +1,36 @@
+﻿@model List<Estoque.Models.FornecedorModel>
+
+@{
+    var fornecedores = Model;
+}
+
+<h1>Fornecedores</h1>
+<a asp-action="Create" class="btn btn-success">Adicionar Fornecedor</a>
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th> Acões </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fornecedor in fornecedores)
+        {
+            <tr>
+                <td>@fornecedor.Id</td>
+                <td>@fornecedor.Nome</td>
+                <td>@fornecedor.Cnpj</td>
+                <td>@fornecedor.Telefone</td>
+                <td>@fornecedor.Email</td>
+                <td>
+                    <a asp-controller="Fornecedor" asp-action="Edit" asp-route-id="@fornecedor.Id" class="btn btn-primary btn-sm">Editar</a>
+                    <a asp-controller="Fornecedor" asp-action="Delete" asp-route-id="@fornecedor.Id" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

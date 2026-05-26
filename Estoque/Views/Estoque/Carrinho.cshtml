@@ -1,0 +1,75 @@
+﻿@model List<Estoque.Models.EstoqueModel>
+
+@{
+    var produtos = Model;
+}
+
+<h1>Carrinho</h1>
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>SKU</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+            <th>Fornecedor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var produto in Model)
+        {
+            <tr>
+                <td>@produto.SKU</td>
+                <td>@produto.Nome</td>
+                <td>@produto.Quantidade</td>
+                <td>@produto.Descricao</td>
+                <td>R$ @produto.Preco.ToString("F2")</td>
+                <td>@produto.Categoria?.Nome</td>
+                <td>@produto.Fornecedor?.Nome</td>
+                <td>
+                    <a asp-action="RemoverCarrinho"
+                       asp-route-id="@produto.Id"
+                       class="btn btn-danger btn-sm">
+                        Remover
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between mt-3">
+
+    <a asp-controller="Estoque"
+       asp-action="Index"
+       class="btn btn-secondary">
+        Continuar Comprando
+    </a>
+
+    <form asp-controller="Pedido"
+          asp-action="FazerPedido"
+          method="post">
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <input type="hidden" name="[@i].Id" value="@Model[i].Id" />
+            <input type="hidden" name="[@i].SKU" value="@Model[i].SKU" />
+            <input type="hidden" name="[@i].Nome" value="@Model[i].Nome" />
+            <input type="hidden" name="[@i].Quantidade" value="@Model[i].Quantidade" />
+            <input type="hidden" name="[@i].Descricao" value="@Model[i].Descricao" />
+            <input type="hidden" name="[@i].Preco" value="@Model[i].Preco" />
+
+            <input type="hidden" name="[@i].CategoriaId" value="@Model[i].CategoriaId" />
+            <input type="hidden" name="[@i].FornecedorId" value="@Model[i].FornecedorId" />
+        }
+
+        <button type="submit" class="btn btn-success">
+            Fazer Pedido
+        </button>
+    </form>
+
+</div>

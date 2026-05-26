@@ -1,0 +1,30 @@
+﻿@model List<Estoque.Models.CategoriaModel>
+
+@{
+    var categorias = Model;
+}
+
+<h1>Categorias</h1>
+<a asp-action="Create" class="btn btn-success">Adicionar Categoria</a>
+<table class ="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th> ID </th>
+            <th> Nome </th>
+            <th> Acões </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var categoria in categorias)
+        {
+            <tr>
+                <td> @categoria.Id </td>
+                <td>@categoria.Nome</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@categoria.Id" class="btn btn-primary btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@categoria.Id" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

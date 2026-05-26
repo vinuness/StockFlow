@@ -1,0 +1,54 @@
+﻿@model List<Estoque.Models.PedidoModel>
+
+<h1>Pedidos</h1>
+
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>Pedido ID</th>
+            <th>Data</th>
+            <th>Produto ID</th>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+            <th>Fornecedor</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var pedido in Model)
+        {
+            if (pedido.Produtos != null && pedido.Produtos.Any())
+            {
+                foreach (var produto in pedido.Produtos)
+                {
+                    <tr>
+                        <td>@pedido.Id</td>
+                        <td>@pedido.DataPedido</td>
+
+                        <td>@produto.Id</td>
+                        <td>@produto.Nome</td>
+                        <td>@produto.Quantidade</td>
+                        <td>@produto.Descricao</td>
+                        <td>R$ @produto.Preco.ToString("F2")</td>
+                        <td>@produto.Categoria?.Nome</td>
+                        <td>@produto.Fornecedor?.Nome</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>@pedido.Id</td>
+                    <td>@pedido.DataPedido</td>
+
+                    <td colspan="7" class="text-muted">
+                        Nenhum produto encontrado
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

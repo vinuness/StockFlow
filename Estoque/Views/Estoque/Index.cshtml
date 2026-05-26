@@ -1,0 +1,56 @@
+﻿@model List<Estoque.Models.EstoqueModel>
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Produtos</h1>
+    <a asp-action="Create" class="btn btn-success">Adicionar Produto</a>
+    <hr />
+    <div class="row">
+        @foreach (var produto in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 text-center shadow-sm">
+
+                    <img src="@produto.ImagemUrl"
+                         class="card-img-top p-3"
+                         style="height:220px; object-fit:contain;" />
+
+                    <div class="card-body">
+
+                        <h5 class="text-success">
+                            R$ @produto.Preco.ToString("F2")
+                        </h5>
+
+                        <h4>@produto.Nome</h4>
+
+                        <p>@produto.Descricao</p>
+
+                        <a asp-action="AddCarrinho"
+                           asp-route-id="@produto.Id"
+                           class="btn btn-primary">
+                            Adicionar ao Carrinho
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@produto.Id"
+                           class="btn btn-danger">
+                            Excluir
+                        </a>
+                        <hr />
+                        <a asp-action="Edit"
+                           asp-route-id="@produto.Id"
+                           class="btn btn-warning">
+                            Editar
+                        </a>
+                    </div>
+
+                    <div class="card-footer text-muted">
+                        Estoque: @produto.Quantidade
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
