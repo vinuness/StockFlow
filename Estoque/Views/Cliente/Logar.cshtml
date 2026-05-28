@@ -7,7 +7,7 @@
             <div class="card shadow p-4">
                 <h2 class="text-center mb-4">Login</h2>
 
-                <form id="formLogin" asp-action="Logar" method="post">
+                <form asp-action="Logar" method="post">
 
                     <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
@@ -41,5 +41,4 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/js/login.js"></script>
 }

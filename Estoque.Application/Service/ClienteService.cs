@@ -31,6 +31,11 @@ namespace Estoque.Application.Service
             return cliente;
         }
 
+        public async Task<Cliente> FindByEmail(string email)
+        {
+            return await _repo.FindByEmail(email);
+        }
+
         public async Task<Cliente> Login(Cliente cliente)
         {
             throw new NotImplementedException();

@@ -1,4 +1,5 @@
 using Estoque.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,17 @@ builder.Services.AddScoped<FornecedorModel>();
 builder.Services.AddScoped<EstoqueModel>();
 builder.Services.AddScoped<PedidoModel>();
 builder.Services.AddScoped<CategoriaModel>();
+
+//adiciona uma autenticação, onde no caso é baseada em cookie
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie((options) =>
+    {
+        //se o usuário não estiver logado e tentar acessar algo que precise de autorização, redireciona para essa rota
+        options.LoginPath = "/Cliente/Logar";
+
+        //rota padrão de logout
+        options.LogoutPath = "/Cliente/Logout";
+    });
 
 var app = builder.Build();
 
@@ -27,6 +39,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

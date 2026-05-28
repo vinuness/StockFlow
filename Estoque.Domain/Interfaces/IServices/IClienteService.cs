@@ -11,6 +11,7 @@ namespace Estoque.Domain.Interfaces.IServices
     {
         public Task<List<Cliente>> FindAll();
         public Task<Cliente> FindById(int id);
+        public Task<Cliente> FindByEmail(string email);
         public Task<Cliente> Save(Cliente cliente);
         public Task Update(Cliente cliente, int id);
         public Task Delete(int id);

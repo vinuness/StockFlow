@@ -34,6 +34,15 @@ namespace Estoque.Infrastructure.Repositories
             return cliente;
         }
 
+        public async Task<Cliente> FindByEmail(string email)
+        {
+            var cliente = await _con.Clientes
+                .Include(c => c.Endereco)
+                .FirstOrDefaultAsync(c => c.Email == email);
+            
+            return cliente;
+        }
+
         public async Task<Cliente> Save(Cliente cliente)
         {
             _con.Clientes.Add(cliente);

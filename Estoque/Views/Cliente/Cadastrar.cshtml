@@ -15,12 +15,12 @@
 
                         <div class="mb-3">
                             <label asp-for="CPF" class="form-label"></label>
-                            <input asp-for="CPF" class="form-control" />
+                            <input asp-for="CPF" class="form-control" id="cpf"/>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Nome" class="form-label"></label>
-                            <input asp-for="Nome" class="form-control" />
+                            <input asp-for="Nome" class="form-control" id="nome"/>
                         </div>
 
                         <h5 class="mt-4 mb-3">Endereço</h5>
@@ -28,41 +28,41 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label asp-for="Endereco.Cep" class="form-label"></label>
-                                <input asp-for="Endereco.Cep" class="form-control" />
+                                <input asp-for="Endereco.Cep" class="form-control" id="cep"/>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label asp-for="Endereco.Estado" class="form-label"></label>
-                                <input asp-for="Endereco.Estado" class="form-control" />
+                                <input asp-for="Endereco.Estado" class="form-control" id="estado"/>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label asp-for="Endereco.Cidade" class="form-label"></label>
-                                <input asp-for="Endereco.Cidade" class="form-control" />
+                                <input asp-for="Endereco.Cidade" class="form-control" id="cidade"/>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label asp-for="Endereco.Bairro" class="form-label"></label>
-                                <input asp-for="Endereco.Bairro" class="form-control" />
+                                <input asp-for="Endereco.Bairro" class="form-control" id="bairro"/>
                             </div>
 
                             <div class="col-md-12 mb-3">
                                 <label asp-for="Endereco.Rua" class="form-label"></label>
-                                <input asp-for="Endereco.Rua" class="form-control" />
+                                <input asp-for="Endereco.Rua" class="form-control" id="rua"/>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Email" class="form-label"></label>
-                            <input asp-for="Email" class="form-control" type="email"/>
+                            <input asp-for="Email" class="form-control" type="email" id="email"/>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Senha" class="form-label"></label>
-                            <input asp-for="Senha" type="password" class="form-control" />
+                            <input asp-for="Senha" type="password" class="form-control" id="senha"/>
                         </div>
 
-                        <button type="submit" class="btn btn-success w-100">
+                        <button type="submit" class="btn btn-success w-100" id="cadastrar">
                             Cadastrar
                         </button>
                             
@@ -84,4 +84,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/cadastro.js"></script>
 }

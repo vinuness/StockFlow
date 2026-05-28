@@ -146,6 +146,32 @@
   },
   {
     "ContainingType": "Estoque.API.Controllers.ClienteController",
+    "Method": "FindByEmail",
+    "RelativePath": "api/Cliente/findByEmail/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Estoque.Domain.Entities.Clientes.Cliente",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.ClienteController",
     "Method": "FindById",
     "RelativePath": "api/Cliente/findById/{id}",
     "HttpMethod": "GET",

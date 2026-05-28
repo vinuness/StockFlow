@@ -31,6 +31,12 @@ namespace Estoque.API.Controllers
             return Ok(cliente);
         }
 
+        [HttpGet("findByEmail/{email}")]
+        public async Task<ActionResult<Cliente>> FindByEmail(string email)
+        {
+            return await _service.FindByEmail(email);
+        }
+
         [HttpPost("save")]
         public async Task<ActionResult<Cliente>> save([FromBody] Cliente cliente)
         {
