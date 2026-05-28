@@ -1,20 +1,20 @@
 ﻿using Estoque.Models.Cliente;
+using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Http;
 using System.Security.Claims;
 
 namespace Estoque.Controllers
 {
     public class ClienteController : Controller
     {
-        private readonly HttpClient _http;
+        private readonly IClienteService _clienteService;
 
-        public ClienteController(IHttpClientFactory options)
+        public ClienteController(IClienteService clienteService)
         {
-            _http = options.CreateClient();
+            _clienteService = clienteService;
         }
 
         public IActionResult Cadastrar()
@@ -25,7 +25,8 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> Cadastrar(ClienteModel cliente)
         {
-            await _http.PostAsJsonAsync("https://localhost:7238/api/Cliente/save", cliente);
+            await _clienteService.Create(cliente);
+
             return RedirectToAction("Logar");
         }
 
@@ -37,16 +38,14 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> Logar(LoginModel login)
         {
-            var res = await _http.PostAsJsonAsync("https://localhost:7238/api/Cliente/login", login);
+            //pega o usuário que a API devolve depois do login
+            var usuario = await _clienteService.Login(login);
 
-            if (!res.IsSuccessStatusCode)
+            if (usuario is null)
             {
                 ModelState.AddModelError("", "Email ou senha inválidos");
                 return View(login);
             }
-
-            //pega o usuário que a API devolve depois do login
-            var usuario = await res.Content.ReadFromJsonAsync<LoginResponse>(); 
 
             var claims = new List<Claim> //Lista as informações do usuario logado
             {
@@ -61,7 +60,7 @@ namespace Estoque.Controllers
             var principal = new ClaimsPrincipal(identity);
 
             //gera um cookie que será gravado no navegador, onde irá identificar o usuario como logado
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,principal);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
             return RedirectToAction("Index", "Home");
         }
@@ -77,10 +76,9 @@ namespace Estoque.Controllers
         [Authorize]
         public async Task<IActionResult> Perfil()
         {
-
             var email = User.FindFirst(ClaimTypes.Email)?.Value;
 
-            var cliente = await _http.GetFromJsonAsync<ClienteModel>($"https://localhost:7238/api/Cliente/findByEmail/{email}");
+            var cliente = await _clienteService.FindByEmail(email);
 
             return View(cliente);
         }

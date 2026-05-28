@@ -100,7 +100,7 @@
               "RelativeDocumentMoniker": "..\\Estoque.Infrastructure\\Repositories\\ClienteRepository.cs",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\Repositories\\ClienteRepository.cs",
               "RelativeToolTip": "..\\Estoque.Infrastructure\\Repositories\\ClienteRepository.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAA9wCUAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAwwCUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-25T07:54:11.401Z",
               "EditorCaption": ""
@@ -139,8 +139,7 @@
               "RelativeToolTip": "..\\Estoque.Domain\\Entities\\Clientes\\Login.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T09:11:34.991Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T09:11:34.991Z"
             },
             {
               "$type": "Document",
@@ -152,8 +151,7 @@
               "RelativeToolTip": "..\\Estoque.Domain\\Interfaces\\IRepositories\\IClienteRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T07:46:49.76Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T07:46:49.76Z"
             },
             {
               "$type": "Document",
@@ -177,8 +175,7 @@
               "RelativeToolTip": "..\\Estoque.Application\\Service\\ClienteService.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAowCUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T08:17:42.636Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T08:17:42.636Z"
             },
             {
               "$type": "Document",
@@ -190,8 +187,7 @@
               "RelativeToolTip": "Controllers\\ClienteController.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAowBgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T09:22:29.864Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T09:22:29.864Z"
             },
             {
               "$type": "Document",
@@ -203,8 +199,7 @@
               "RelativeToolTip": "..\\Estoque.Domain\\Interfaces\\IServices\\IClienteService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-25T07:48:55.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-25T07:48:55.278Z"
             },
             {
               "$type": "Document",

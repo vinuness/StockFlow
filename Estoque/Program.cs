@@ -1,4 +1,6 @@
 using Estoque.Models;
+using Estoque.Services;
+using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,10 +10,11 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<FornecedorModel>();
-builder.Services.AddScoped<EstoqueModel>();
-builder.Services.AddScoped<PedidoModel>();
-builder.Services.AddScoped<CategoriaModel>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IEstoqueService, EstoqueService>();
+builder.Services.AddScoped<IFornecedorService, FornecedorService>();
+builder.Services.AddScoped<IPedidoService, PedidoService>();
 
 //adiciona uma autenticação, onde no caso é baseada em cookie
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

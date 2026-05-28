@@ -1,22 +1,21 @@
 ﻿using Estoque.Models;
+using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Estoque.Controllers
 {
     public class PedidoController : Controller
     {
-        private readonly HttpClient _http;
+        private readonly IPedidoService _pedidoService;
 
-        public PedidoController(IHttpClientFactory factory)
+        public PedidoController(IPedidoService pedidoService)
         {
-            _http = factory.CreateClient();
+            _pedidoService = pedidoService;
         }
 
         public async Task<IActionResult> Index()
         {
-            List<PedidoModel> pedidos =
-                await _http.GetFromJsonAsync<List<PedidoModel>>
-                ("https://localhost:7238/api/Pedido/findAll");
+            var pedidos = await _pedidoService.FindAll();
 
             return View(pedidos);
         }
@@ -24,7 +23,7 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> FazerPedido(List<EstoqueModel> produtos)
         {
-            var pedido = await _http.PostAsJsonAsync("https://localhost:7238/api/Pedido/save", produtos);
+            var pedido = await _pedidoService.FazerPedido(produtos);
 
             if (!pedido.IsSuccessStatusCode)
             {

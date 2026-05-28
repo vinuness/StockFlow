@@ -1,18 +1,21 @@
 ﻿using Estoque.Models;
+using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Estoque.Controllers
 {
     public class CategoriaController : Controller
     {
-        private readonly HttpClient _http;
-        public CategoriaController(IHttpClientFactory httpFactory)
+        private readonly ICategoriaService _categoriaService;
+
+        public CategoriaController(ICategoriaService categoriaService)
         {
-            _http = httpFactory.CreateClient();
+            _categoriaService = categoriaService;
         }
+
         public async Task<IActionResult> Index()
         {
-            List<CategoriaModel> categorias = await _http.GetFromJsonAsync<List<CategoriaModel>>("https://localhost:7238/api/Categoria/findAll");
+            var categorias = await _categoriaService.FindAll();
             return View(categorias);
         }
 
@@ -25,39 +28,27 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CategoriaModel categoria)
         {
-            await _http.PostAsJsonAsync("https://localhost:7238/api/Categoria/save", categoria);
+            await _categoriaService.Create(categoria);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var categoria = await _http.GetFromJsonAsync<CategoriaModel>(
-                $"https://localhost:7238/api/Categoria/findById/{id}");
-
+            var categoria = await _categoriaService.FindById(id);
             return View(categoria);
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(CategoriaModel categoria)
         {
-
-            var response = await _http.PutAsJsonAsync(
-                $"https://localhost:7238/api/Categoria/update/{categoria.Id}",
-                categoria);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                var error = await response.Content.ReadAsStringAsync();
-                return Content(error);
-            }
-
+            await _categoriaService.Update(categoria);
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            await _http.DeleteAsync($"https://localhost:7238/api/Categoria/delete/{id}");
+            await _categoriaService.Delete(id);
             return RedirectToAction("Index");
         }
     }
