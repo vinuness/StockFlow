@@ -1,5 +1,6 @@
 ﻿using Estoque.Domain.Entities.Pedidos;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Estoque.Domain.Entities.Clientes
 {
@@ -19,6 +20,8 @@ namespace Estoque.Domain.Entities.Clientes
         public string Senha { get; set; }
 
         public Role Role { get; set; } = Role.CLIENTE;
-        public List<Pedido>? Pedidos { get; set; }
+
+        [JsonIgnore]
+        public List<Pedido> Pedidos { get; set; } = new List<Pedido>();
     }
 }

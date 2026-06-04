@@ -1349,13 +1349,6 @@
           },
           "role": {
             "$ref": "#/components/schemas/Role"
-          },
-          "pedidos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Pedido"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false

@@ -15,7 +15,13 @@ namespace Estoque.Services
 
         public async Task Create(ClienteModel cliente)
         {
-            await _http.PostAsJsonAsync($"{BaseUrl}/save", cliente);
+            var response = await _http.PostAsJsonAsync($"{BaseUrl}/save", cliente);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var erro = await response.Content.ReadAsStringAsync();
+                throw new Exception(erro);
+            }
         }
 
         public async Task<LoginResponse?> Login(LoginModel login)

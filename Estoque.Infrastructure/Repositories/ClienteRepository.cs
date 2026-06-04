@@ -1,22 +1,30 @@
 ﻿using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Infrastructure.Data;
+using Estoque.Infrastructure.Utilidades;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace Estoque.Infrastructure.Repositories
 {
     public class ClienteRepository : IClienteRepository
     {
         private readonly AppDbContext _con;
+        private readonly JWTService _jwt;
 
-        public ClienteRepository(AppDbContext con)
+        public ClienteRepository(AppDbContext con, JWTService jwt)
         {
             _con = con;
+            _jwt = jwt;
         }
 
         public async Task Delete(int id)
         {
             Cliente cliente = await _con.Clientes.FindAsync(id);
+            cliente.Endereco = await _con.Enderecos.FindAsync(cliente.EnderecoId);
             _con.Clientes.Remove(cliente);
             await _con.SaveChangesAsync();
         }
@@ -57,10 +65,9 @@ namespace Estoque.Infrastructure.Repositories
             await _con.SaveChangesAsync();
         }
 
-        public async Task<Cliente> Login(string email, string senha)
+        public string GenerateToken(int id)
         {
-            Cliente cliente = await _con.Clientes.FirstOrDefaultAsync(c => c.Email == email && c.Senha == senha);
-            return cliente;
+            return _jwt.GenerateToken(id);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Interfaces.IServices;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Estoque.Application.Service
 {
@@ -36,13 +37,10 @@ namespace Estoque.Application.Service
             return await _repo.FindByEmail(email);
         }
 
-        public async Task<Cliente> Login(Cliente cliente)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Cliente> Save(Cliente cliente)
         {
+            //Transforma a senha em hash usando BCrypt
+            cliente.Senha = HashSenha(cliente.Senha);
             await _repo.Save(cliente);
             return cliente;
         }
@@ -52,14 +50,37 @@ namespace Estoque.Application.Service
             await _repo.Update(cliente, id);
         }
 
-        public async Task<Cliente> Login(string email, string senha)
+        public async Task<LoginResponse> Login(Login login)
         {
-            var cliente = await _repo.Login(email, senha);
-            if (cliente != null && cliente.Senha == senha)
+            var cliente = await _repo.FindByEmail(login.Email);
+            if (cliente == null)
             {
-                return cliente;
+                return null;
             }
-            return null;
+
+            if (!VerificarSenha(login.Senha, cliente.Senha))
+            {
+                return null;
+            }
+
+            return new LoginResponse
+            {
+                Id = cliente.Id,
+                Nome = cliente.Nome,
+                Email = cliente.Email,
+                Token = _repo.GenerateToken(cliente.Id)
+            };
         }
+
+        public string HashSenha(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
+
+        public bool VerificarSenha(string password, string hash)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, hash);
+        }
+
     }
 }

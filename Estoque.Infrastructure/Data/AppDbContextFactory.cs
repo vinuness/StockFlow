@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.Extensions.Configuration.Json;
+using Estoque.Infrastructure.Data;
 
 namespace Estoque.Infrastructure.Data
 {
@@ -9,12 +10,15 @@ namespace Estoque.Infrastructure.Data
     {
         public AppDbContext CreateDbContext(string[] args)
         {
+            IConfigurationRoot config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            var connection = config.GetConnectionString("connection");
+
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-
-            var connectionString = "server=localhost;database=estoque;user=root;password=root";
-
-            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)
-            );
+            optionsBuilder.UseMySql(connection, ServerVersion.AutoDetect(connection));
 
             return new AppDbContext(optionsBuilder.Options);
         }

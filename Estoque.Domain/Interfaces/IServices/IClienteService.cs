@@ -15,6 +15,8 @@ namespace Estoque.Domain.Interfaces.IServices
         public Task<Cliente> Save(Cliente cliente);
         public Task Update(Cliente cliente, int id);
         public Task Delete(int id);
-        public Task<Cliente> Login(string email, string senha);
+        public Task<LoginResponse> Login(Login login);
+        public string HashSenha(string password);
+        public bool VerificarSenha(string password, string hash);
     }
 }

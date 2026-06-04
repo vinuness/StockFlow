@@ -61,21 +61,26 @@ namespace Estoque.API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] Login login)
         {
-            var cliente = await _service.Login(login.Email, login.Senha);
+            var response = await _service.Login(login);
 
-            if(cliente == null)
+            if(response == null)
             {
                 return Unauthorized();
             }
 
-            var response = new LoginResponse
+            Response.Cookies.Append("jwt", response.Token, new CookieOptions
             {
-                Id = cliente.Id,
-                Nome = cliente.Nome,
-                Email = cliente.Email
-            };
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict
+            });
 
-            return Ok(response);
+            return Ok(new
+            {
+                response.Id,
+                response.Nome,
+                response.Email
+            });
         }
     }
 }

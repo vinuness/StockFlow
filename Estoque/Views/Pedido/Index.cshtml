@@ -1,5 +1,9 @@
 ﻿@model List<Estoque.Models.PedidoModel>
 
+@{
+    var id_cliente = Context.User.FindFirst("Id")?.Value;
+}
+
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">

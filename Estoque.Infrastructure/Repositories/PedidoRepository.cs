@@ -24,18 +24,25 @@ namespace Estoque.Infrastructure.Repositories
         public async Task<List<Pedido>> FindAll()
         {
             List<Pedido> pedidos = await _con.Pedidos
-                
+
                 .Include(p => p.Produtos)
                 .ThenInclude(produto => produto.Categoria)
 
                 .Include(p => p.Produtos)
                 .ThenInclude(produto => produto.Fornecedor).ToListAsync();
+
             return pedidos;
         }
 
         public async Task<Pedido> FindById(int id)
         {
-            Pedido pedido = await _con.Pedidos.FindAsync(id);
+            Pedido pedido = await _con.Pedidos
+
+                .Include(p => p.Produtos)
+                .ThenInclude(pr => pr.Categoria)
+
+                .FirstOrDefaultAsync(p => p.Id == id);
+
             return pedido;
         }
 

@@ -6,6 +6,7 @@ using Estoque.Domain.Services;
 using Estoque.Infra.Data.Repositories;
 using Estoque.Infrastructure.Data;
 using Estoque.Infrastructure.Repositories;
+using Estoque.Infrastructure.Utilidades;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,9 @@ builder.Services.AddScoped<IFornecedorService, FornecedorService>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IEnderecoService, EnderecoService>();
+
+builder.Services.AddScoped<JWTService>();
+
 var con = builder.Configuration.GetConnectionString("connection");
 builder.Services.AddDbContext<AppDbContext>((options) =>
 {
