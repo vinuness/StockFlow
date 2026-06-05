@@ -151,3 +151,4 @@ C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\Estoque.API.pdb
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\Estoque.API.genruntimeconfig.cache
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\ref\Estoque.API.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\BCrypt-Net-Next.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -1,5 +1,6 @@
 ﻿using Estoque.Models.Cliente;
 using Estoque.Services.Interfaces;
+using System.Net.Http.Headers;
 
 namespace Estoque.Services
 {

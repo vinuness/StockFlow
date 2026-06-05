@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,10 +12,16 @@ namespace Estoque.Infrastructure.Utilidades
 {
     public class JWTService
     {
-        private string Key = "ESTOQUE_SUPER_SECRET_KEY_2026_@!$#_JWT_SECURITY_128BITS";
+        private readonly string _key;
+
+        public JWTService(IConfiguration configuration)
+        {
+            _key = configuration["jwt:key"];
+        }
+
         public string GenerateToken(int id)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Key));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]

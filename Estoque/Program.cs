@@ -16,19 +16,8 @@ builder.Services.AddScoped<IEstoqueService, EstoqueService>();
 builder.Services.AddScoped<IFornecedorService, FornecedorService>();
 builder.Services.AddScoped<IPedidoService, PedidoService>();
 
-//adiciona uma autenticação, onde no caso é baseada em cookie
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie((options) =>
-    {
-        //se o usuário não estiver logado e tentar acessar algo que precise de autorização, redireciona para essa rota
-        options.LoginPath = "/Cliente/Logar";
-
-        //rota padrão de logout
-        options.LogoutPath = "/Cliente/Logout";
-    });
-
 var app = builder.Build();
-
+    
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

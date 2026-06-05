@@ -11,6 +11,7 @@ namespace Estoque.Controllers
     public class ClienteController : Controller
     {
         private readonly IClienteService _clienteService;
+        private readonly HttpClient _http;
 
         public ClienteController(IClienteService clienteService)
         {
@@ -38,45 +39,42 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> Logar(LoginModel login)
         {
-            //pega o usuário que a API devolve depois do login
-            var usuario = await _clienteService.Login(login);
+            LoginResponse usuario = await _clienteService.Login(login);
 
             if (usuario is null)
             {
-                ModelState.AddModelError("", "Email ou senha inválidos");
-                return View(login);
+                return Content("usuario nulo");
             }
-
-            var claims = new List<Claim> //Lista as informações do usuario logado
+            else
             {
-                new Claim(ClaimTypes.Name, usuario.Nome),
-                new Claim(ClaimTypes.Email, usuario.Email),
-            };
+                Console.WriteLine(usuario);
+            }
+            
+            Response.Cookies.Append("jwt", usuario.Token, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict, 
+                Expires = DateTimeOffset.UtcNow.AddDays(1)
+            });
 
-            //cria uma identidade a partir das informações do usuario autenticada via cookie
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            //usuario final
-            var principal = new ClaimsPrincipal(identity);
-
-            //gera um cookie que será gravado no navegador, onde irá identificar o usuario como logado
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+            Response.Cookies.Append("email", usuario.Email);
+            
 
             return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Logout()
         {
-            //remove o cookie gerado pelo SignIn
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            Response.Cookies.Delete("jwt");
+            Response.Cookies.Delete("email");
 
             return RedirectToAction("Logar", "Cliente");
         }
 
-        [Authorize]
         public async Task<IActionResult> Perfil()
         {
-            var email = User.FindFirst(ClaimTypes.Email)?.Value;
+            var email = Request.Cookies["email"];
 
             var cliente = await _clienteService.FindByEmail(email);
 

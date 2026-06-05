@@ -68,19 +68,7 @@ namespace Estoque.API.Controllers
                 return Unauthorized();
             }
 
-            Response.Cookies.Append("jwt", response.Token, new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict
-            });
-
-            return Ok(new
-            {
-                response.Id,
-                response.Nome,
-                response.Email
-            });
+            return Ok(response);
         }
     }
 }
