@@ -1,3 +1,4 @@
+using Estoque.API.Utilidades;
 using Estoque.Application.Service;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Interfaces.IServices;
@@ -24,7 +25,7 @@ builder.Services.AddSwaggerGen();
 var key = builder.Configuration["Jwt:Key"];
 
 builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme) //adiciona o serviço de autenticação usando o esquema JWT Bearer
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters =
@@ -32,7 +33,7 @@ builder.Services
             {
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(key)),
+                    Encoding.UTF8.GetBytes(key)), //chave secreta usada para validar a assinatura do token
 
                 ValidateIssuer = false,
                 ValidateAudience = false,
@@ -56,10 +57,17 @@ builder.Services.AddScoped<IEnderecoService, EnderecoService>();
 
 builder.Services.AddScoped<JWTService>();
 
-var con = builder.Configuration.GetConnectionString("connection");
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+// Obtém o caminho do arquivo de configuração a partir do appsettings.json e expande as variáveis de ambiente
+var ConfigPath = Environment.ExpandEnvironmentVariables(builder.Configuration["ConnectionStrings:ConfigPath"]);
+
+var constant = new Constants();
+constant.ConfigFilePath = ConfigPath;
+
 builder.Services.AddDbContext<AppDbContext>((options) =>
 {
-    options.UseMySql(con, ServerVersion.AutoDetect(con));
+    options.UseMySql(Constants.Connection, ServerVersion.AutoDetect(Constants.Connection));
 });
 
 builder.Services.AddCors();

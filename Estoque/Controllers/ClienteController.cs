@@ -74,6 +74,7 @@ namespace Estoque.Controllers
 
         public async Task<IActionResult> Perfil()
         {
+            // Recupera o email do cookie
             var email = Request.Cookies["email"];
 
             var cliente = await _clienteService.FindByEmail(email);

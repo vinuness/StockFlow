@@ -53,6 +53,7 @@ namespace Estoque.Application.Service
         public async Task<LoginResponse> Login(Login login)
         {
             var cliente = await _repo.FindByEmail(login.Email);
+
             if (cliente == null)
             {
                 return null;
@@ -63,6 +64,7 @@ namespace Estoque.Application.Service
                 return null;
             }
 
+            //retorna o cliente logado com o token JWT
             return new LoginResponse
             {
                 Id = cliente.Id,
@@ -72,11 +74,13 @@ namespace Estoque.Application.Service
             };
         }
 
+        //metodo para transformar a senha em hash usando BCrypt
         public string HashSenha(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
+        //metodo para verificar a senha usando BCrypt
         public bool VerificarSenha(string password, string hash)
         {
             return BCrypt.Net.BCrypt.Verify(password, hash);
