@@ -66,5 +66,10 @@ namespace Estoque.Application.Service
             produto.Status = StatusProduto.CATALOGADO;
             await _repo.Update(produto, id);
         }
+
+        public async Task<List<ProdutoMaisVendidoDTO>> ProdutosMaisVendidos()
+        {
+            return await _repo.ProdutosMaisVendidos();
+        }
     }
 }

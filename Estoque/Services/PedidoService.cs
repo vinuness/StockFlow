@@ -18,7 +18,7 @@ namespace Estoque.Services
             return await _http.GetFromJsonAsync<List<PedidoModel>>($"{BaseUrl}/findAll");
         }
 
-        public async Task<HttpResponseMessage> FazerPedido(List<EstoqueModel> produtos)
+        public async Task<HttpResponseMessage> FazerPedido(List<ProdutoPedidoDTO> produtos)
         {
             return await _http.PostAsJsonAsync($"{BaseUrl}/save", produtos);
         }

@@ -35,7 +35,7 @@ namespace Estoque.Application.Service
             return pedido;
         }
 
-        public async Task<Pedido> Save(List<Produto> produtos)
+        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos)
         {
             var pedido = await _repo.Save(produtos);
             return pedido;

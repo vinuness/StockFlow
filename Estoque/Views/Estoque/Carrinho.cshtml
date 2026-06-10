@@ -1,36 +1,29 @@
 ﻿@model List<Estoque.Models.EstoqueModel>
 
-@{
-    var produtos = Model;
-}
-
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StockFlow</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">StockFlow</a>
+
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Estoque</a>
+                        <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Index">Estoque</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
+                        <a class="nav-link text-dark" asp-controller="Categoria" asp-action="Index">Categorias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
+                        <a class="nav-link text-dark" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
+                        <a class="nav-link text-dark" asp-controller="Pedido" asp-action="Index">Pedidos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
+                        <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
+                        <a class="nav-link text-dark" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
                     </li>
                 </ul>
             </div>
@@ -39,71 +32,72 @@
 </header>
 
 <h1>Carrinho</h1>
-<table class="table table-sm table-striped">
-    <thead>
-        <tr>
-            <th>SKU</th>
-            <th>Nome</th>
-            <th>Quantidade</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Categoria</th>
-            <th>Fornecedor</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
 
-    <tbody>
-        @foreach (var produto in Model)
-        {
+<form asp-controller="Pedido"
+      asp-action="FazerPedido"
+      method="post">
+
+    <table class="table table-sm table-striped">
+        <thead>
             <tr>
-                <td>@produto.SKU</td>
-                <td>@produto.Nome</td>
-                <td>@produto.Quantidade</td>
-                <td>@produto.Descricao</td>
-                <td>R$ @produto.Preco.ToString("F2")</td>
-                <td>@produto.Categoria?.Nome</td>
-                <td>@produto.Fornecedor?.Nome</td>
-                <td>
-                    <a asp-action="RemoverCarrinho"
-                       asp-route-id="@produto.Id"
-                       class="btn btn-danger btn-sm">
-                        Remover
-                    </a>
-                </td>
+                <th>SKU</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Categoria</th>
+                <th>Fornecedor</th>
+                <th>Ações</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
 
-<div class="d-flex justify-content-between mt-3">
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@Model[i].SKU</td>
+                    <td>@Model[i].Nome</td>
+                    <td>@Model[i].Descricao</td>
+                    <td>R$ @Model[i].Preco.ToString("F2")</td>
 
-    <a asp-controller="Estoque"
-       asp-action="Index"
-       class="btn btn-secondary">
-        Continuar Comprando
-    </a>
+                    <td>
+                        <input type="number"
+                               name="[@i].Quantidade"
+                               value="1"
+                               min="1"
+                               max="@Model[i].Quantidade"
+                               class="form-control" />
+                    </td>
 
-    <form asp-controller="Pedido"
-          asp-action="FazerPedido"
-          method="post">
+                    <td>@Model[i].Categoria?.Nome</td>
+                    <td>@Model[i].Fornecedor?.Nome</td>
 
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <input type="hidden" name="[@i].Id" value="@Model[i].Id" />
-            <input type="hidden" name="[@i].SKU" value="@Model[i].SKU" />
-            <input type="hidden" name="[@i].Nome" value="@Model[i].Nome" />
-            <input type="hidden" name="[@i].Quantidade" value="@Model[i].Quantidade" />
-            <input type="hidden" name="[@i].Descricao" value="@Model[i].Descricao" />
-            <input type="hidden" name="[@i].Preco" value="@Model[i].Preco" />
+                    <td>
+                        <a asp-action="RemoverCarrinho"
+                           asp-route-id="@Model[i].Id"
+                           class="btn btn-danger btn-sm">
+                            Remover
+                        </a>
+                    </td>
+                </tr>
 
-            <input type="hidden" name="[@i].CategoriaId" value="@Model[i].CategoriaId" />
-            <input type="hidden" name="[@i].FornecedorId" value="@Model[i].FornecedorId" />
-        }
+                <input type="hidden"
+                       name="[@i].ProdutoId"
+                       value="@Model[i].Id" />
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between mt-3">
+        <a asp-controller="Estoque"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Continuar Comprando
+        </a>
 
         <button type="submit" class="btn btn-success">
             Fazer Pedido
         </button>
-    </form>
+    </div>
 
-</div>
+</form>

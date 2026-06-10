@@ -41,13 +41,9 @@ namespace Estoque.Controllers
         {
             LoginResponse usuario = await _clienteService.Login(login);
 
-            if (usuario is null)
+            if (usuario == null)
             {
                 return Content("usuario nulo");
-            }
-            else
-            {
-                Console.WriteLine(usuario);
             }
             
             Response.Cookies.Append("jwt", usuario.Token, new CookieOptions
@@ -59,13 +55,13 @@ namespace Estoque.Controllers
             });
 
             Response.Cookies.Append("email", usuario.Email);
-            
-
             return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Logout()
         {
+
+            //remove os cookies armazenados
             Response.Cookies.Delete("jwt");
             Response.Cookies.Delete("email");
 
@@ -73,9 +69,15 @@ namespace Estoque.Controllers
         }
 
         public async Task<IActionResult> Perfil()
-        {
+        {   
             // Recupera o email do cookie
             var email = Request.Cookies["email"];
+            var jwt = Request.Cookies["jwt"];
+
+            if(jwt == null || email == null) 
+            {
+                return RedirectToAction("Logar", "Cliente");
+            }
 
             var cliente = await _clienteService.FindByEmail(email);
 

@@ -1,12 +1,100 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Vinicius\\source\\repos\\Estoque.API\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B2BB68FE-3D57-DDA2-BDB8-3264FDBE4D10}|..\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj|c:\\users\\vinicius\\source\\repos\\estoque.infrastructure\\repositories\\pedidorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1CA492CC-060C-4EE6-B86D-EC4922A8DFF8}|..\\Estoque.Domain\\Estoque.Domain.csproj|c:\\users\\vinicius\\source\\repos\\estoque.domain\\entities\\pedidos\\itempedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1CA492CC-060C-4EE6-B86D-EC4922A8DFF8}|..\\Estoque.Domain\\Estoque.Domain.csproj|c:\\users\\vinicius\\source\\repos\\estoque.domain\\entities\\pedidos\\pedido.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1CA492CC-060C-4EE6-B86D-EC4922A8DFF8}|..\\Estoque.Domain\\Estoque.Domain.csproj|c:\\users\\vinicius\\source\\repos\\estoque.domain\\entities\\produtos\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2BB68FE-3D57-DDA2-BDB8-3264FDBE4D10}|..\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj|c:\\users\\vinicius\\source\\repos\\estoque.infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PedidoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\Repositories\\PedidoRepository.cs",
+              "RelativeDocumentMoniker": "..\\Estoque.Infrastructure\\Repositories\\PedidoRepository.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\Repositories\\PedidoRepository.cs",
+              "RelativeToolTip": "..\\Estoque.Infrastructure\\Repositories\\PedidoRepository.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowFUAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T08:43:32.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Produto.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Domain\\Entities\\Produtos\\Produto.cs",
+              "RelativeDocumentMoniker": "..\\Estoque.Domain\\Entities\\Produtos\\Produto.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Domain\\Entities\\Produtos\\Produto.cs",
+              "RelativeToolTip": "..\\Estoque.Domain\\Entities\\Produtos\\Produto.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAYwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T03:11:17.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ItemPedido.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Domain\\Entities\\Pedidos\\ItemPedido.cs",
+              "RelativeDocumentMoniker": "..\\Estoque.Domain\\Entities\\Pedidos\\ItemPedido.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Domain\\Entities\\Pedidos\\ItemPedido.cs",
+              "RelativeToolTip": "..\\Estoque.Domain\\Entities\\Pedidos\\ItemPedido.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T03:11:13.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Pedido.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Domain\\Entities\\Pedidos\\Pedido.cs",
+              "RelativeDocumentMoniker": "..\\Estoque.Domain\\Entities\\Pedidos\\Pedido.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Domain\\Entities\\Pedidos\\Pedido.cs",
+              "RelativeToolTip": "..\\Estoque.Domain\\Entities\\Pedidos\\Pedido.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T03:10:59.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\Estoque.Infrastructure\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "..\\Estoque.Infrastructure\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T01:55:32.327Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

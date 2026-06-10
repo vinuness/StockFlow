@@ -910,7 +910,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Produto"
+                  "$ref": "#/components/schemas/ProdutoPedidoDTO"
                 }
               }
             },
@@ -918,7 +918,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Produto"
+                  "$ref": "#/components/schemas/ProdutoPedidoDTO"
                 }
               }
             },
@@ -926,7 +926,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Produto"
+                  "$ref": "#/components/schemas/ProdutoPedidoDTO"
                 }
               }
             }
@@ -1295,6 +1295,44 @@
           }
         }
       }
+    },
+    "/api/Produto/mais_vendidos": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProdutoMaisVendidoDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProdutoMaisVendidoDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProdutoMaisVendidoDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1409,6 +1447,35 @@
         },
         "additionalProperties": false
       },
+      "ItemPedido": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pedidoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "produtoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "produto": {
+            "$ref": "#/components/schemas/Produto"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precoUnitario": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "Login": {
         "type": "object",
         "properties": {
@@ -1437,10 +1504,10 @@
           "status": {
             "$ref": "#/components/schemas/StatusPedido"
           },
-          "produtos": {
+          "itens": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Produto"
+              "$ref": "#/components/schemas/ItemPedido"
             },
             "nullable": true
           }
@@ -1502,6 +1569,34 @@
           },
           "status": {
             "$ref": "#/components/schemas/StatusProduto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProdutoMaisVendidoDTO": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantidadeVendida": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProdutoPedidoDTO": {
+        "type": "object",
+        "properties": {
+          "produtoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

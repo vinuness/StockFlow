@@ -1,37 +1,159 @@
-﻿<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+﻿@model List<Estoque.Models.ProdutoMaisVendidoDTO>
+@using System.Text.Json
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StockFlow</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+
+            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+                StockFlow
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+            <div class="navbar-collapse collapse">
                 <ul class="navbar-nav flex-grow-1">
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Estoque</a>
+                        <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Index">Estoque</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
+                        <a class="nav-link text-dark" asp-controller="Categoria" asp-action="Index">Categorias</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
+                        <a class="nav-link text-dark" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
+                        <a class="nav-link text-dark" asp-controller="Pedido" asp-action="Index">Pedidos</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
+                        <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
+                        <a class="nav-link text-dark" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
                     </li>
+
                 </ul>
             </div>
+
         </div>
     </nav>
 </header>
 
-<div class="text-center">
-    <h1 class="display-4">Bem vindo ao StockFlow</h1>
+<!-- HERO -->
+<div class="container mb-4">
+
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark shadow-sm">
+        <div class="col-md-8 px-0">
+            <h1 class="display-5 fw-bold">Bem-vindo ao StockFlow</h1>
+            <p class="lead my-3">
+                Gerencie seu estoque, acompanhe vendas e visualize os produtos mais vendidos em tempo real.
+            </p>
+        </div>
+    </div>
+
+    <!-- CARDS RESUMO -->
+    <div class="row mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Produtos no ranking</h6>
+                    <h3 class="fw-bold">@Model?.Count()</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Produto mais vendido</h6>
+                    <h3 class="fw-bold">
+                        @Model?.OrderByDescending(x => x.QuantidadeVendida).FirstOrDefault()?.Nome
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total de vendas</h6>
+                    <h3 class="fw-bold">
+                        @Model?.Sum(x => x.QuantidadeVendida)
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- GRAFICO -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+
+            <h5 class="mb-3">Produtos mais vendidos</h5>
+
+            <canvas id="grafico" height="100"></canvas>
+            <button class="btn btn-primary mb-3" onclick="downloadChart()">
+                Baixar gráfico
+            </button>
+
+        </div>
+    </div>
+
 </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('grafico').getContext('2d');
+
+        const nomes = @Html.Raw(JsonSerializer.Serialize(Model.Select(p => p.Nome)));
+        const vendas = @Html.Raw(JsonSerializer.Serialize(Model.Select(p => p.QuantidadeVendida)));
+        let chart;
+
+        chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: nomes,
+            datasets: [{
+            label: 'Quantidade Vendida',
+            data: vendas,
+            backgroundColor: '#4A90E2',
+            borderRadius: 6
+            }]
+        },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                    display: true
+                    }
+                },
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function downloadChart(){
+        const link = document.createElement("a");   
+
+        link.href = chart.toBase64Image();
+        link.download = "produtos-mais-vendidos.png";
+
+        link.click();
+        }
+    </script>
+}

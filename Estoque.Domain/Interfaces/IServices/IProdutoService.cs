@@ -12,5 +12,6 @@ namespace Estoque.Domain.Interfaces.IServices
         public Task<List<Produto>> ListarProdutosCarrinho();
         public Task AddCarrinho(int id);
         public Task RemoverCarrinho(int id);
+        public Task<List<ProdutoMaisVendidoDTO>> ProdutosMaisVendidos();
     }
 }

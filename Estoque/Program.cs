@@ -1,3 +1,4 @@
+using Estoque.Interfaces;
 using Estoque.Models;
 using Estoque.Services;
 using Estoque.Services.Interfaces;
@@ -15,6 +16,7 @@ builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IEstoqueService, EstoqueService>();
 builder.Services.AddScoped<IFornecedorService, FornecedorService>();
 builder.Services.AddScoped<IPedidoService, PedidoService>();
+builder.Services.AddScoped<IHomeService, HomeService>(); 
 
 var app = builder.Build();
     

@@ -539,7 +539,7 @@
     "Parameters": [
       {
         "Name": "produtos",
-        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Produtos.Produto, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Produtos.ProdutoPedidoDTO, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": true
       }
     ],
@@ -681,6 +681,26 @@
     "ReturnTypes": [
       {
         "Type": "Estoque.Domain.Entities.Produtos.Produto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.ProdutoController",
+    "Method": "MaisVendidos",
+    "RelativePath": "api/Produto/mais_vendidos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Produtos.ProdutoMaisVendidoDTO, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

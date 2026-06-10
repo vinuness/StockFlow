@@ -21,7 +21,7 @@ namespace Estoque.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> FazerPedido(List<EstoqueModel> produtos)
+        public async Task<IActionResult> FazerPedido(List<ProdutoPedidoDTO> produtos)
         {
             var pedido = await _pedidoService.FazerPedido(produtos);
 

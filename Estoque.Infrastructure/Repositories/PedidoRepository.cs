@@ -25,10 +25,12 @@ namespace Estoque.Infrastructure.Repositories
         {
             List<Pedido> pedidos = await _con.Pedidos
 
-                .Include(p => p.Produtos)
+                .Include(p => p.Itens)
+                .ThenInclude(item => item.Produto)
                 .ThenInclude(produto => produto.Categoria)
 
-                .Include(p => p.Produtos)
+                .Include(p => p.Itens)
+                .ThenInclude(item => item.Produto)
                 .ThenInclude(produto => produto.Fornecedor).ToListAsync();
 
             return pedidos;
@@ -38,28 +40,46 @@ namespace Estoque.Infrastructure.Repositories
         {
             Pedido pedido = await _con.Pedidos
 
-                .Include(p => p.Produtos)
-                .ThenInclude(pr => pr.Categoria)
+                .Include(p => p.Itens)
+                .ThenInclude(item => item.Produto)
+                .ThenInclude(produto => produto.Categoria)
+
+                .Include(p => p.Itens)
+                .ThenInclude(item => item.Produto)
+                .ThenInclude(produto => produto.Fornecedor)
 
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             return pedido;
         }
 
-        public async Task<Pedido> Save(List<Produto> produtos)
+        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos)
         {
-            var produtoIds = produtos.Select(p => p.Id).ToList();
-
-            var produtosBanco = await _con.Produtos
-                .Where(p => produtoIds.Contains(p.Id))
-                .ToListAsync();
-
             var pedido = new Pedido
             {
                 DataPedido = DateTime.Now,
                 Status = StatusPedido.PENDENTE,
-                Produtos = produtosBanco
+                Itens = new List<ItemPedido>()
             };
+
+            foreach (var item in produtos)
+            {
+                var produtoBanco = await _con.Produtos.FindAsync(item.ProdutoId);
+
+                if (produtoBanco == null) throw new Exception("Produto não encontrado");
+
+                if (produtoBanco.Quantidade < item.Quantidade) throw new Exception($"Estoque insuficiente para {produtoBanco.Nome}");
+
+                produtoBanco.Quantidade -= item.Quantidade;
+                _con.Produtos.Update(produtoBanco);
+
+                pedido.Itens.Add(new ItemPedido
+                {
+                    ProdutoId = produtoBanco.Id,
+                    Quantidade = item.Quantidade,
+                    PrecoUnitario = produtoBanco.Preco
+                });
+            }
 
             _con.Pedidos.Add(pedido);
 

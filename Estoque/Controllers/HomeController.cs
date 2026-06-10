@@ -1,3 +1,4 @@
+using Estoque.Interfaces;
 using Estoque.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,15 +9,19 @@ namespace Estoque.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService _service;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHomeService service)
         {
             _logger = logger;
+            _service = service;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<ProdutoMaisVendidoDTO> maisVendidos = await _service.MaisVendidos();
+            return View(maisVendidos);
         }
 
         public IActionResult Privacy()

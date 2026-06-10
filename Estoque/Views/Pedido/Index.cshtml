@@ -1,92 +1,163 @@
 ﻿@model List<Estoque.Models.PedidoModel>
 
-@{
-    var id_cliente = Context.User.FindFirst("Id")?.Value;
-}
-
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StockFlow</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand"
+               asp-controller="Home"
+               asp-action="Index">
+                StockFlow
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target=".navbar-collapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+            <div class="navbar-collapse collapse">
                 <ul class="navbar-nav flex-grow-1">
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Estoque</a>
+                        <a class="nav-link text-dark"
+                           asp-controller="Estoque"
+                           asp-action="Index">
+                            Estoque
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
+                        <a class="nav-link text-dark"
+                           asp-controller="Categoria"
+                           asp-action="Index">
+                            Categorias
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
+                        <a class="nav-link text-dark"
+                           asp-controller="Fornecedor"
+                           asp-action="Index">
+                            Fornecedores
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
+                        <a class="nav-link text-dark"
+                           asp-controller="Pedido"
+                           asp-action="Index">
+                            Pedidos
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
+                        <a class="nav-link text-dark"
+                           asp-controller="Estoque"
+                           asp-action="Carrinho">
+                            Carrinho
+                        </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
+                        <a class="nav-link text-dark"
+                           asp-controller="Cliente"
+                           asp-action="Perfil">
+                            Perfil
+                        </a>
                     </li>
+
                 </ul>
             </div>
         </div>
     </nav>
+
 </header>
 
 <h1>Pedidos</h1>
 
-<table class="table table-sm table-striped">
-    <thead>
-        <tr>
-            <th>Pedido ID</th>
-            <th>Data</th>
-            <th>Produto ID</th>
-            <th>Nome</th>
-            <th>Quantidade</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Categoria</th>
-            <th>Fornecedor</th>
-        </tr>
-    </thead>
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">
+        Nenhum pedido encontrado.
+    </div>
+}
+else
+{
+    @foreach (var pedido in Model)
+    {
+        <div class="card mb-4">
 
-    <tbody>
-        @foreach (var pedido in Model)
-        {
-            if (pedido.Produtos != null && pedido.Produtos.Any())
-            {
-                foreach (var produto in pedido.Produtos)
+            ```
+            <div class="card-header">
+                <strong>Pedido #@pedido.Id</strong>
+                <br />
+                Data: @pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
+                <br />
+                Status: @pedido.Status
+            </div>
+
+            <div class="card-body">
+
+                @if (pedido.ItensPedido != null && pedido.ItensPedido.Any())
                 {
-                    <tr>
-                        <td>@pedido.Id</td>
-                        <td>@pedido.DataPedido</td>
+                    <table class="table table-striped table-sm">
 
-                        <td>@produto.Id</td>
-                        <td>@produto.Nome</td>
-                        <td>@produto.Quantidade</td>
-                        <td>@produto.Descricao</td>
-                        <td>R$ @produto.Preco.ToString("F2")</td>
-                        <td>@produto.Categoria?.Nome</td>
-                        <td>@produto.Fornecedor?.Nome</td>
-                    </tr>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Fornecedor</th>
+                                <th>Preço Unitário</th>
+                                <th>Quantidade</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in pedido.ItensPedido)
+                            {
+                                <tr>
+                                    <td>@item.Produto?.Nome</td>
+
+                                    <td>@item.Produto?.Descricao</td>
+
+                                    <td>
+                                        @item.Produto?.Categoria?.Nome
+                                    </td>
+
+                                    <td>
+                                        @item.Produto?.Fornecedor?.Nome
+                                    </td>
+
+                                    <td>
+                                        R$ @item.PrecoUnitario.ToString("F2")
+                                    </td>
+
+                                    <td>
+                                        @item.Quantidade
+                                    </td>
+
+                                    <td>
+                                        R$ @((item.PrecoUnitario * item.Quantidade).ToString("F2"))
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
                 }
-            }
-            else
-            {
-                <tr>
-                    <td>@pedido.Id</td>
-                    <td>@pedido.DataPedido</td>
+                else
+                {
+                    <p class="text-muted">
+                        Este pedido não possui itens.
+                    </p>
+                }
 
-                    <td colspan="7" class="text-muted">
-                        Nenhum produto encontrado
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
+            </div>
+        </div>
+    }
+}

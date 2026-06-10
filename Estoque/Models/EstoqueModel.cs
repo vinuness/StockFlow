@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Json.Serialization;
 
 namespace Estoque.Models
 {
@@ -20,5 +21,20 @@ namespace Estoque.Models
         public int FornecedorId { get; set; }
         public FornecedorModel Fornecedor { get; set; }
         public StatusProduto Status { get; set; }
+        public List<ItemPedidoModel> ItensPedido { get; set; } = new();
+    }
+
+    public class ProdutoPedidoDTO
+    {
+        public int ProdutoId { get; set; }
+
+        public int Quantidade { get; set; }
+    }
+
+    public class ProdutoMaisVendidoDTO
+    {
+        public string Nome { get; set; } = "";
+
+        public int QuantidadeVendida { get; set; }
     }
 }

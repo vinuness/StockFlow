@@ -32,12 +32,19 @@ namespace Estoque.Services
             if (!response.IsSuccessStatusCode)
                 return null;
 
-            return await response.Content.ReadFromJsonAsync<LoginResponse>();
+            return await response.Content.ReadFromJsonAsync<LoginResponse>()    ;
         }
 
         public async Task<ClienteModel?> FindByEmail(string email)
         {
-            return await _http.GetFromJsonAsync<ClienteModel>($"{BaseUrl}/findByEmail/{email}");
+            var cliente = await _http.GetFromJsonAsync<ClienteModel>($"{BaseUrl}/findByEmail/{email}");
+
+            if(cliente == null)
+            {
+                return null;
+            }
+
+            return cliente;
         }
     }
 }

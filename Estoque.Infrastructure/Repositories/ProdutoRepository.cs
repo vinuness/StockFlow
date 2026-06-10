@@ -36,20 +36,20 @@ namespace Estoque.Infrastructure.Repositories
 
         public async Task<List<Produto>> FindAll()
         {
-            List<Produto> produtos = await _con.Produtos.ToListAsync();
-            foreach (var item in produtos)
-            {
-                item.Categoria = await _con.Categorias.FindAsync(item.CategoriaId);
-                item.Fornecedor = await _con.Fornecedores.FindAsync(item.FornecedorId);
-            }
+            List<Produto> produtos = await _con.Produtos
+                .Include(p => p.Categoria)
+                .Include(p => p.Fornecedor)
+                .ToListAsync();
+
             return produtos;
         }
 
         public async Task<Produto> FindById(int id) 
         {
-            Produto produto = await _con.Produtos.FindAsync(id);
-            produto.Categoria = await _con.Categorias.FindAsync(produto.CategoriaId);
-            produto.Fornecedor = await _con.Fornecedores.FindAsync(produto.FornecedorId);
+            Produto produto = await _con.Produtos
+                .Include(p => p.Categoria)
+                .Include(p => p.Fornecedor)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             return produto;
         }
@@ -72,6 +72,19 @@ namespace Estoque.Infrastructure.Repositories
             produto.Fornecedor = await _con.Fornecedores.FindAsync(produto.FornecedorId);
             _con.Produtos.Update(produto);
             await _con.SaveChangesAsync();
+        }
+
+        public async Task<List<ProdutoMaisVendidoDTO>> ProdutosMaisVendidos()
+        {
+            return await _con.Produtos
+                .Select(p => new ProdutoMaisVendidoDTO
+                {
+                    Nome = p.Nome,
+                    QuantidadeVendida = p.ItensPedido.Sum(i => (int?)i.Quantidade) ?? 0
+                })
+                .OrderByDescending(p => p.QuantidadeVendida)
+                .Take(5)
+                .ToListAsync();
         }
     }
 }

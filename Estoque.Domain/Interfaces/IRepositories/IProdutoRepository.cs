@@ -9,5 +9,6 @@ namespace Estoque.Domain.Interfaces.IRepositories
         public Task<Produto> Save(Produto produto);
         public Task Update(Produto produto, int id);
         public Task Delete(int id);
+        public Task<List<ProdutoMaisVendidoDTO>> ProdutosMaisVendidos();
     }
 }

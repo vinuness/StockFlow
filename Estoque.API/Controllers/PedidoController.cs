@@ -36,7 +36,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpPost("save")]
-        public async Task<ActionResult<Pedido>> Save(List<Produto> produtos)
+        public async Task<ActionResult<Pedido>> Save([FromBody] List<ProdutoPedidoDTO> produtos)
         {
             await _service.Save(produtos);
             return Ok("Produto salvo com sucesso");

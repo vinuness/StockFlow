@@ -75,5 +75,12 @@ namespace Estoque.API.Controllers
             await _service.RemoverCarrinho(id);
             return Ok("Produto removido do carrinho com sucesso");
         }
+
+        [HttpGet("mais_vendidos")]
+        public async Task<ActionResult<List<ProdutoMaisVendidoDTO>>> MaisVendidos()
+        {
+            var produtos = await _service.ProdutosMaisVendidos();
+            return Ok(produtos);
+        }
     }
 }

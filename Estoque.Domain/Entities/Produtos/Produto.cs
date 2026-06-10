@@ -1,4 +1,7 @@
-﻿namespace Estoque.Domain.Entities.Produtos
+﻿using Estoque.Domain.Entities.Pedidos;
+using System.Text.Json.Serialization;
+
+namespace Estoque.Domain.Entities.Produtos
 {
     public class Produto
     {
@@ -7,6 +10,7 @@
         public string ImagemUrl { get; set; } = "";
         public string Nome { get; set; } = "";
         public int Quantidade { get; set; }
+
         public string Descricao { get; set; } = "";
         public decimal Preco { get; set; }
         public string Tamanho { get; set; } = "";
@@ -18,5 +22,22 @@
         public int FornecedorId { get; set; }
         public Fornecedor Fornecedor { get; set; }
         public StatusProduto Status { get; set; }
+
+        [JsonIgnore]
+        public List<ItemPedido> ItensPedido { get; set; } = new();
+    }
+
+    public class ProdutoPedidoDTO
+    {
+        public int ProdutoId { get; set; }
+
+        public int Quantidade { get; set; }
+    }
+
+    public class ProdutoMaisVendidoDTO
+    {
+        public string Nome { get; set; } = "";
+
+        public int QuantidadeVendida { get; set; }
     }
 }

@@ -91,6 +91,35 @@ namespace Estoque.Infrastructure.Migrations
                     b.ToTable("Enderecos");
                 });
 
+            modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.ItemPedido", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PedidoId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PrecoUnitario")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PedidoId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("ItensPedido");
+                });
+
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.Pedido", b =>
                 {
                     b.Property<int>("Id")
@@ -182,9 +211,6 @@ namespace Estoque.Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("PedidoId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(65,30)");
 
@@ -206,8 +232,6 @@ namespace Estoque.Infrastructure.Migrations
 
                     b.HasIndex("FornecedorId");
 
-                    b.HasIndex("PedidoId");
-
                     b.HasIndex("SKU")
                         .IsUnique();
 
@@ -223,6 +247,25 @@ namespace Estoque.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Endereco");
+                });
+
+            modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.ItemPedido", b =>
+                {
+                    b.HasOne("Estoque.Domain.Entities.Pedidos.Pedido", "Pedido")
+                        .WithMany("Itens")
+                        .HasForeignKey("PedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Estoque.Domain.Entities.Produtos.Produto", "Produto")
+                        .WithMany("ItensPedido")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.Pedido", b =>
@@ -246,10 +289,6 @@ namespace Estoque.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Estoque.Domain.Entities.Pedidos.Pedido", null)
-                        .WithMany("Produtos")
-                        .HasForeignKey("PedidoId");
-
                     b.Navigation("Categoria");
 
                     b.Navigation("Fornecedor");
@@ -267,7 +306,12 @@ namespace Estoque.Infrastructure.Migrations
 
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.Pedido", b =>
                 {
-                    b.Navigation("Produtos");
+                    b.Navigation("Itens");
+                });
+
+            modelBuilder.Entity("Estoque.Domain.Entities.Produtos.Produto", b =>
+                {
+                    b.Navigation("ItensPedido");
                 });
 #pragma warning restore 612, 618
         }
