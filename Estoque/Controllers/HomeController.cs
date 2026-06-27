@@ -20,6 +20,14 @@ namespace Estoque.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+
+            var jwt = Request.Cookies["jwt"];
+
+            if (jwt == null)
+            {
+                return RedirectToAction("Logar", "Cliente");
+            }
+
             List<ProdutoMaisVendidoDTO> maisVendidos = await _service.MaisVendidos();
             return View(maisVendidos);
         }

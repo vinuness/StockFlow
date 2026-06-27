@@ -1398,6 +1398,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
           "cep": {
             "type": "string",
             "nullable": true

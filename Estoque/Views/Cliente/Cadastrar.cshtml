@@ -46,9 +46,14 @@
                                 <input asp-for="Endereco.Bairro" class="form-control" id="bairro"/>
                             </div>
 
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label asp-for="Endereco.Rua" class="form-label"></label>
-                                <input asp-for="Endereco.Rua" class="form-control" id="rua"/>
+                                <input asp-for="Endereco.Rua" class="form-control" id="rua" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Endereco.Numero" class="form-label"></label>
+                                <input asp-for="Endereco.Numero" class="form-control" id="numero" />
                             </div>
                         </div>
 
@@ -59,7 +64,7 @@
 
                         <div class="mb-3">
                             <label asp-for="Senha" class="form-label"></label>
-                            <input asp-for="Senha" type="password" class="form-control" id="senha"/>
+                            <input asp-for="Senha" type="password" class="form-control" id="senha" />
                         </div>
 
                         <button type="submit" class="btn btn-success w-100" id="cadastrar">
@@ -84,4 +89,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/cadastro.js"></script>
 }

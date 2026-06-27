@@ -83,6 +83,9 @@ namespace Estoque.Infrastructure.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
                     b.Property<string>("Rua")
                         .HasColumnType("longtext");
 

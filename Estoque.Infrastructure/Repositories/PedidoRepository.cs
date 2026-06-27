@@ -64,24 +64,24 @@ namespace Estoque.Infrastructure.Repositories
 
             foreach (var item in produtos)
             {
-                var produtoBanco = await _con.Produtos.FindAsync(item.ProdutoId);
+                var produtoBanco = await _con.Produtos.FindAsync(item.ProdutoId); //acha o produto pelo id
 
                 if (produtoBanco == null) throw new Exception("Produto não encontrado");
 
                 if (produtoBanco.Quantidade < item.Quantidade) throw new Exception($"Estoque insuficiente para {produtoBanco.Nome}");
 
-                produtoBanco.Quantidade -= item.Quantidade;
-                _con.Produtos.Update(produtoBanco);
+                produtoBanco.Quantidade -= item.Quantidade; //subtrai a quantidade do produto no estoque
+                _con.Produtos.Update(produtoBanco); //atualiza os produtos no banco de dados
 
                 pedido.Itens.Add(new ItemPedido
                 {
                     ProdutoId = produtoBanco.Id,
                     Quantidade = item.Quantidade,
                     PrecoUnitario = produtoBanco.Preco
-                });
+                }); //adiciona o item ao pedido
             }
 
-            _con.Pedidos.Add(pedido);
+            _con.Pedidos.Add(pedido); //adiciona o pedido ao banco de dados
 
             await _con.SaveChangesAsync();
 

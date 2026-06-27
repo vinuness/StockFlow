@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estoque.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260610030832_Estoque")]
-    partial class Estoque
+    [Migration("20260627043310_ESTOQUE")]
+    partial class ESTOQUE
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,9 @@ namespace Estoque.Infrastructure.Migrations
 
                     b.Property<string>("Estado")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
 
                     b.Property<string>("Rua")
                         .HasColumnType("longtext");
