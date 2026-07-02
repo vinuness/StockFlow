@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Text.Json.Serialization;
 
 namespace Estoque.Models.Cliente
 {
@@ -14,8 +15,8 @@ namespace Estoque.Models.Cliente
         public string Nome { get; set; }
 
         [Required]
-        public EnderecoModel Endereco { get; set; }
-        
+        public List<EnderecoModel> Enderecos { get; set; }
+
         [Required]
         [EmailAddress]
         public string Email { get; set; }

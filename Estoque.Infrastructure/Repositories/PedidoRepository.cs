@@ -66,9 +66,11 @@ namespace Estoque.Infrastructure.Repositories
             {
                 var produtoBanco = await _con.Produtos.FindAsync(item.ProdutoId); //acha o produto pelo id
 
-                if (produtoBanco == null) throw new Exception("Produto não encontrado");
+                if (produtoBanco == null) 
+                    throw new Exception("Produto não encontrado");
 
-                if (produtoBanco.Quantidade < item.Quantidade) throw new Exception($"Estoque insuficiente para {produtoBanco.Nome}");
+                if (produtoBanco.Quantidade < item.Quantidade) 
+                    throw new Exception($"Estoque insuficiente para {produtoBanco.Nome}");
 
                 produtoBanco.Quantidade -= item.Quantidade; //subtrai a quantidade do produto no estoque
                 _con.Produtos.Update(produtoBanco); //atualiza os produtos no banco de dados

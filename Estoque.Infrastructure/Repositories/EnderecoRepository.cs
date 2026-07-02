@@ -24,10 +24,32 @@ namespace Estoque.Infra.Data.Repositories
             return await _context.Enderecos.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task Save(Endereco endereco)
+        public async Task Save(string email, EnderecoDTO dto)
         {
-            await _context.Enderecos.AddAsync(endereco);
+            var cliente = await _context.Clientes
+                .Include(c => c.Enderecos)
+                .FirstOrDefaultAsync(c => c.Email == email);
+
+            if (cliente == null) 
+                throw new Exception("Cliente não encontrado");
+
+            var endereco = new Endereco
+            {
+                Rua = dto.Rua,
+                Numero = dto.Numero,
+                Bairro = dto.Bairro,
+                Cidade = dto.Cidade,
+                Estado = dto.Estado,
+                Cep = dto.Cep
+            };
+            cliente.Enderecos.Add(endereco);
+
+            _context.Enderecos.Add(endereco);
+
+            _context.Clientes.Update(cliente);
+
             await _context.SaveChangesAsync();
+
         }
 
         public async Task Update(Endereco endereco)

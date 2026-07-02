@@ -22,6 +22,21 @@ namespace Estoque.Infrastructure.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("ClienteEndereco", b =>
+                {
+                    b.Property<int>("ClientesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnderecosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ClientesId", "EnderecosId");
+
+                    b.HasIndex("EnderecosId");
+
+                    b.ToTable("ClienteEndereco");
+                });
+
             modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Cliente", b =>
                 {
                     b.Property<int>("Id")
@@ -34,7 +49,6 @@ namespace Estoque.Infrastructure.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("EnderecoId")
@@ -47,7 +61,6 @@ namespace Estoque.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
@@ -57,8 +70,6 @@ namespace Estoque.Infrastructure.Migrations
 
                     b.HasIndex("Email")
                         .IsUnique();
-
-                    b.HasIndex("EnderecoId");
 
                     b.ToTable("Clientes");
                 });
@@ -241,15 +252,19 @@ namespace Estoque.Infrastructure.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Cliente", b =>
+            modelBuilder.Entity("ClienteEndereco", b =>
                 {
-                    b.HasOne("Estoque.Domain.Entities.Clientes.Endereco", "Endereco")
-                        .WithMany("Clientes")
-                        .HasForeignKey("EnderecoId")
+                    b.HasOne("Estoque.Domain.Entities.Clientes.Cliente", null)
+                        .WithMany()
+                        .HasForeignKey("ClientesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Endereco");
+                    b.HasOne("Estoque.Domain.Entities.Clientes.Endereco", null)
+                        .WithMany()
+                        .HasForeignKey("EnderecosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.ItemPedido", b =>
@@ -300,11 +315,6 @@ namespace Estoque.Infrastructure.Migrations
             modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
-                });
-
-            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Endereco", b =>
-                {
-                    b.Navigation("Clientes");
                 });
 
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.Pedido", b =>

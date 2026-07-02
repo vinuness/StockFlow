@@ -9,6 +9,7 @@ using Estoque.Infrastructure.Data;
 using Estoque.Infrastructure.Repositories;
 using Estoque.Infrastructure.Utilidades;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -68,6 +69,11 @@ constant.ConfigFilePath = ConfigPath;
 builder.Services.AddDbContext<AppDbContext>((options) =>
 {
     options.UseMySql(Constants.Connection, ServerVersion.AutoDetect(Constants.Connection));
+});
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 50 * 1024 * 1024; // 50MB
 });
 
 builder.Services.AddCors();

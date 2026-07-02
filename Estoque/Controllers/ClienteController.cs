@@ -83,5 +83,18 @@ namespace Estoque.Controllers
 
             return View(cliente);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEndereco(EnderecoModel endereco)
+        {
+            var email = Request.Cookies["email"];
+            await _clienteService.AddEndereco(email, endereco);
+            return RedirectToAction("Perfil");
+        }
+
+        public IActionResult AddEndereco()
+        {
+            return View();
+        }
     }
 }

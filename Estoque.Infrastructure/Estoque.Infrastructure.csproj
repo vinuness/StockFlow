@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Storage\**" />
+    <EmbeddedResource Remove="Storage\**" />
+    <None Remove="Storage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.3.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.27">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,6 +31,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.*" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
+	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>

@@ -32,11 +32,11 @@ namespace Estoque.API.Controllers
             return Ok(endereco);
         }
 
-        [HttpPost("save")]
-        public async Task<IActionResult> Save([FromBody] Endereco endereco)
+        [HttpPost("save/user/{email}")]
+        public async Task<IActionResult> Save(string email, [FromBody] EnderecoDTO endereco)
         {
-            await _service.Save(endereco);
-            return Ok();
+            await _service.Save(email, endereco);
+            return Ok(endereco);
         }
 
         [HttpPut("update{id}")]

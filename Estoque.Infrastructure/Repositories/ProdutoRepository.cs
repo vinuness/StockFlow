@@ -44,7 +44,7 @@ namespace Estoque.Infrastructure.Repositories
             return produtos;
         }
 
-        public async Task<Produto> FindById(int id) 
+        public async Task<Produto> FindById(int id)
         {
             Produto produto = await _con.Produtos
                 .Include(p => p.Categoria)

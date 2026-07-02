@@ -1,6 +1,7 @@
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\appsettings.json
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\global.json
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Estoque.API.staticwebassets.runtime.json
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Estoque.API.exe
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Estoque.API.deps.json
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Estoque.API.runtimeconfig.json
@@ -8,7 +9,9 @@ C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Estoque.API.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Estoque.API.pdb
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\BCrypt-Net-Next.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Humanizer.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
@@ -150,5 +153,5 @@ C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\refint\Estoque.API.d
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\Estoque.API.pdb
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\Estoque.API.genruntimeconfig.cache
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\ref\Estoque.API.dll
-C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\BCrypt-Net-Next.dll
-C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll

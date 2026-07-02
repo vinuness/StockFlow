@@ -12,5 +12,8 @@ namespace Estoque.Models.Cliente
         public string Cidade { get; set; }
         public string Estado { get; set; }
 
+        [JsonIgnore]
+        public List<ClienteModel> Clientes { get; set; } = new List<ClienteModel>();
+
     }
 }

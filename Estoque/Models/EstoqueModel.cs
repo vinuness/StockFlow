@@ -18,7 +18,7 @@ namespace Estoque.Models
         public int CategoriaId { get; set; }
         public CategoriaModel Categoria { get; set; }
 
-        public int FornecedorId { get; set; }
+        public int FornecedorId { get; set; } 
         public FornecedorModel Fornecedor { get; set; }
         public StatusProduto Status { get; set; }
         public List<ItemPedidoModel> ItensPedido { get; set; } = new();

@@ -11,16 +11,20 @@ namespace Estoque.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //Produto tem SKU unico
             var produto = modelBuilder.Entity<Produto>();
             produto.HasIndex(p => p.SKU).IsUnique();
 
+            //Cliente tem email e Cpf unicos
             var cliente = modelBuilder.Entity<Cliente>();
             cliente.HasIndex(c => c.Email).IsUnique();
             cliente.HasIndex(c => c.CPF).IsUnique();
-
-            cliente.HasOne(c => c.Endereco).WithMany(c => c.Clientes).HasForeignKey(c => c.EnderecoId);
-
+            cliente.HasMany(c => c.Enderecos)
+                .WithMany(c => c.Clientes);
         }
+
+        //Entidades no banco
 
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Produto> Produtos { get; set; }

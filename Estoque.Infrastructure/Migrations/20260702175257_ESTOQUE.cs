@@ -31,6 +31,29 @@ namespace Estoque.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CPF = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Nome = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    EnderecoId = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Senha = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Role = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Enderecos",
                 columns: table => new
                 {
@@ -76,28 +99,45 @@ namespace Estoque.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Clientes",
+                name: "Pedidos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CPF = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Nome = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    EnderecoId = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Senha = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Role = table.Column<int>(type: "int", nullable: false)
+                    DataPedido = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.Id);
+                    table.PrimaryKey("PK_Pedidos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Clientes_Enderecos_EnderecoId",
-                        column: x => x.EnderecoId,
+                        name: "FK_Pedidos_Clientes_ClienteId",
+                        column: x => x.ClienteId,
+                        principalTable: "Clientes",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ClienteEndereco",
+                columns: table => new
+                {
+                    ClientesId = table.Column<int>(type: "int", nullable: false),
+                    EnderecosId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClienteEndereco", x => new { x.ClientesId, x.EnderecosId });
+                    table.ForeignKey(
+                        name: "FK_ClienteEndereco_Clientes_ClientesId",
+                        column: x => x.ClientesId,
+                        principalTable: "Clientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClienteEndereco_Enderecos_EnderecosId",
+                        column: x => x.EnderecosId,
                         principalTable: "Enderecos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -146,27 +186,6 @@ namespace Estoque.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Pedidos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DataPedido = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    ClienteId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pedidos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Pedidos_Clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Clientes",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "ItensPedido",
                 columns: table => new
                 {
@@ -196,6 +215,11 @@ namespace Estoque.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClienteEndereco_EnderecosId",
+                table: "ClienteEndereco",
+                column: "EnderecosId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clientes_CPF",
                 table: "Clientes",
                 column: "CPF",
@@ -206,11 +230,6 @@ namespace Estoque.Infrastructure.Migrations
                 table: "Clientes",
                 column: "Email",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clientes_EnderecoId",
-                table: "Clientes",
-                column: "EnderecoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItensPedido_PedidoId",
@@ -248,7 +267,13 @@ namespace Estoque.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ClienteEndereco");
+
+            migrationBuilder.DropTable(
                 name: "ItensPedido");
+
+            migrationBuilder.DropTable(
+                name: "Enderecos");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");
@@ -264,9 +289,6 @@ namespace Estoque.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Fornecedores");
-
-            migrationBuilder.DropTable(
-                name: "Enderecos");
         }
     }
 }

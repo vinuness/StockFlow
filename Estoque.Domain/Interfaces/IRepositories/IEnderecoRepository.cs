@@ -6,7 +6,7 @@ namespace Estoque.Domain.Interfaces.Repositories
     {
         Task<List<Endereco>> FindAll();
         Task<Endereco> FindById(int id);
-        Task Save(Endereco endereco);
+        Task Save(string email, EnderecoDTO endereco);
         Task Update(Endereco endereco);
         Task Delete(int id);
     }

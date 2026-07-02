@@ -324,14 +324,19 @@
   {
     "ContainingType": "Estoque.API.Controllers.EnderecoController",
     "Method": "Save",
-    "RelativePath": "api/Endereco/save",
+    "RelativePath": "api/Endereco/save/user/{email}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
         "Name": "endereco",
-        "Type": "Estoque.Domain.Entities.Clientes.Endereco",
+        "Type": "Estoque.Domain.Entities.Clientes.EnderecoDTO",
         "IsRequired": true
       }
     ],

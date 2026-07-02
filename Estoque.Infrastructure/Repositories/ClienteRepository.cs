@@ -3,10 +3,6 @@ using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Infrastructure.Data;
 using Estoque.Infrastructure.Utilidades;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
 namespace Estoque.Infrastructure.Repositories
 {
@@ -23,29 +19,40 @@ namespace Estoque.Infrastructure.Repositories
 
         public async Task Delete(int id)
         {
-            Cliente cliente = await _con.Clientes.FindAsync(id);
-            cliente.Endereco = await _con.Enderecos.FindAsync(cliente.EnderecoId);
+            var cliente = await _con.Clientes
+                .Include(c => c.Enderecos)
+                .Include(c => c.Pedidos)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             _con.Clientes.Remove(cliente);
             await _con.SaveChangesAsync();
         }
 
         public async Task<List<Cliente>> FindAll()    
         {
-            List<Cliente> clientes = await _con.Clientes.ToListAsync();
+            List<Cliente> clientes = await _con.Clientes
+                .Include(c => c.Enderecos)
+                .Include(c => c.Pedidos)
+                .ToListAsync();
+
             return clientes;
         }
 
         public async Task<Cliente> FindById(int id)
         {
-            Cliente cliente = await _con.Clientes.FindAsync(id);
-            cliente.Endereco = await _con.Enderecos.FindAsync(cliente.EnderecoId);
+            var cliente = await _con.Clientes
+                .Include(c => c.Enderecos)
+                .Include(c => c.Pedidos)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             return cliente;
         }
 
         public async Task<Cliente> FindByEmail(string email)
         {
             var cliente = await _con.Clientes
-                .Include(c => c.Endereco)
+                .Include(c => c.Enderecos)
+                .Include(c => c.Pedidos)
                 .FirstOrDefaultAsync(c => c.Email == email);
             
             return cliente;

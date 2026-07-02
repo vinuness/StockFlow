@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "SAIM/duD98ig3krl1jFJrRjrTJFMpwCaSI/rEAwztt0=",
+  "Hash": "zUwOSan4B/XC9H4138Bf2U2VZs9RYU3QpWUzgdsoR40=",
   "Source": "Estoque.API",
   "BasePath": "_content/Estoque.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Estoque.API\\wwwroot",
+      "Source": "Estoque.API",
+      "ContentRoot": "C:\\Users\\Vinicius\\source\\repos\\Estoque.API\\wwwroot\\",
+      "BasePath": "_content/Estoque.API",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

@@ -9,14 +9,9 @@ namespace Estoque.Domain.Entities.Clientes
         public int Id { get; set; }
         public string CPF { get; set; }
         public string Nome { get; set; }
-
         public int EnderecoId { get; set; }
-        public Endereco Endereco { get; set; }
-
-        [Required(ErrorMessage = "O campo Email é obrigatório.")]
+        public List<Endereco> Enderecos { get; set; } = new();
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "O campo Senha é obrigatório.")]
         public string Senha { get; set; }
 
         public Role Role { get; set; } = Role.CLIENTE;

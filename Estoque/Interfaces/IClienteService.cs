@@ -7,5 +7,6 @@ namespace Estoque.Services.Interfaces
         Task Create(ClienteModel cliente);
         Task<LoginResponse?> Login(LoginModel login);
         Task<ClienteModel?> FindByEmail(string email);
+        Task<EnderecoModel> AddEndereco(string email, EnderecoModel endereco);
     }
 }

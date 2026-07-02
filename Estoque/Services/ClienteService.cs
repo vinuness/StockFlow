@@ -45,6 +45,12 @@ namespace Estoque.Services
             }
 
             return cliente;
+        }   
+
+        public async Task<EnderecoModel> AddEndereco(string email, EnderecoModel endereco)
+        {
+            var response = await _http.PostAsJsonAsync($"https://localhost:7238/api/Endereco/save/user/{email}", endereco);
+            return await response.Content.ReadFromJsonAsync<EnderecoModel>();
         }
     }
 }

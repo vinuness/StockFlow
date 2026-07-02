@@ -535,26 +535,36 @@
         }
       }
     },
-    "/api/Endereco/save": {
+    "/api/Endereco/save/user/{email}": {
       "post": {
         "tags": [
           "Endereco"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Endereco"
+                "$ref": "#/components/schemas/EnderecoDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Endereco"
+                "$ref": "#/components/schemas/EnderecoDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Endereco"
+                "$ref": "#/components/schemas/EnderecoDTO"
               }
             }
           }
@@ -1352,10 +1362,6 @@
         "additionalProperties": false
       },
       "Cliente": {
-        "required": [
-          "email",
-          "senha"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1374,16 +1380,20 @@
             "type": "integer",
             "format": "int32"
           },
-          "endereco": {
-            "$ref": "#/components/schemas/Endereco"
+          "enderecos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Endereco"
+            },
+            "nullable": true
           },
           "email": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "senha": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "role": {
             "$ref": "#/components/schemas/Role"
@@ -1398,6 +1408,36 @@
             "type": "integer",
             "format": "int32"
           },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "rua": {
+            "type": "string",
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "nullable": true
+          },
+          "cidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EnderecoDTO": {
+        "type": "object",
+        "properties": {
           "numero": {
             "type": "integer",
             "format": "int32"

@@ -23,9 +23,9 @@ namespace Estoque.Domain.Services
             return await _repository.FindById(id);
         }
 
-        public async Task Save(Endereco endereco)
+        public async Task Save(string email, EnderecoDTO endereco)
         {
-            await _repository.Save(endereco);
+            await _repository.Save(email, endereco);
         }
 
         public async Task Update(Endereco endereco)
