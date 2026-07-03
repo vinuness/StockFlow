@@ -3,64 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\cliente\\perfil.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\cliente\\perfil.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\models\\cliente\\clientemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:models\\cliente\\clientemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\models\\cliente\\enderecomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:models\\cliente\\enderecomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\cliente\\addendereco.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\cliente\\addendereco.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\pedido\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\pedido\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\models\\estoquemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:models\\estoquemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\interfaces\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:interfaces\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\models\\estoquemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:models\\estoquemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\wwwroot\\js\\cadastro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:wwwroot\\js\\cadastro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\cliente\\cadastrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\cliente\\cadastrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\cliente\\addendereco.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\cliente\\addendereco.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\wwwroot\\js\\endereco.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:wwwroot\\js\\endereco.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\interfaces\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:interfaces\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,46 +50,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "cadastro.js",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\wwwroot\\js\\cadastro.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\cadastro.js",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\wwwroot\\js\\cadastro.js",
+              "RelativeToolTip": "wwwroot\\js\\cadastro.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-07-02T20:05:10.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Estoque\\Edit.cshtml",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Edit.cshtml",
               "RelativeToolTip": "Views\\Estoque\\Edit.cshtml",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAEYAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAEcAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-07-02T19:42:06.692Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Pedido\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Pedido\\Index.cshtml",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Pedido\\Index.cshtml",
               "RelativeToolTip": "Views\\Pedido\\Index.cshtml",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-07-02T19:25:13.436Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "cadastro.js",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\wwwroot\\js\\cadastro.js",
-              "RelativeDocumentMoniker": "wwwroot\\js\\cadastro.js",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\wwwroot\\js\\cadastro.js",
-              "RelativeToolTip": "wwwroot\\js\\cadastro.js",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAACwAAAADAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "endereco.js",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\wwwroot\\js\\endereco.js",
+              "RelativeDocumentMoniker": "wwwroot\\js\\endereco.js",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\wwwroot\\js\\endereco.js",
+              "RelativeToolTip": "wwwroot\\js\\endereco.js",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACwAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-07-02T18:28:12.91Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T18:28:12.91Z"
             },
             {
               "$type": "Document",
@@ -119,14 +111,13 @@
               "RelativeDocumentMoniker": "Views\\Cliente\\AddEndereco.cshtml",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Cliente\\AddEndereco.cshtml",
               "RelativeToolTip": "Views\\Cliente\\AddEndereco.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-07-02T18:10:21.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T18:10:21.322Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "IClienteService.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Interfaces\\IClienteService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IClienteService.cs",
@@ -134,90 +125,11 @@
               "RelativeToolTip": "Interfaces\\IClienteService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-02T18:04:47.732Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T18:04:47.732Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EnderecoModel.cs",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Models\\Cliente\\EnderecoModel.cs",
-              "RelativeDocumentMoniker": "Models\\Cliente\\EnderecoModel.cs",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Models\\Cliente\\EnderecoModel.cs",
-              "RelativeToolTip": "Models\\Cliente\\EnderecoModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-02T17:34:29.967Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ClienteModel.cs",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Models\\Cliente\\ClienteModel.cs",
-              "RelativeDocumentMoniker": "Models\\Cliente\\ClienteModel.cs",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Models\\Cliente\\ClienteModel.cs",
-              "RelativeToolTip": "Models\\Cliente\\ClienteModel.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBUAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-02T17:34:29.234Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ClienteService.cs",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Services\\ClienteService.cs",
-              "RelativeDocumentMoniker": "Services\\ClienteService.cs",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Services\\ClienteService.cs",
-              "RelativeToolTip": "Services\\ClienteService.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAowCcAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-02T17:26:11.327Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\ClienteController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\ClienteController.cs",
-              "RelativeToolTip": "Controllers\\ClienteController.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAmwEgAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-02T17:25:26.906Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Perfil.cshtml",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Cliente\\Perfil.cshtml",
-              "RelativeDocumentMoniker": "Views\\Cliente\\Perfil.cshtml",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Cliente\\Perfil.cshtml",
-              "RelativeToolTip": "Views\\Cliente\\Perfil.cshtml",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAGMAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-07-02T17:24:59.651Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Cadastrar.cshtml",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Cliente\\Cadastrar.cshtml",
-              "RelativeDocumentMoniker": "Views\\Cliente\\Cadastrar.cshtml",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Cliente\\Cadastrar.cshtml",
-              "RelativeToolTip": "Views\\Cliente\\Cadastrar.cshtml",
-              "ViewState": "AgIAACgAAAAAAAAAAAAAADUAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-07-02T17:23:38.611Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 9,
               "Title": "EstoqueController.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\EstoqueController.cs",
               "RelativeDocumentMoniker": "Controllers\\EstoqueController.cs",
@@ -225,42 +137,43 @@
               "RelativeToolTip": "Controllers\\EstoqueController.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAcwBkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-02T14:31:50.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-02T14:31:50.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 3,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Estoque\\Create.cshtml",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Create.cshtml",
               "RelativeToolTip": "Views\\Estoque\\Create.cshtml",
-              "ViewState": "AgIAADQAAAAAAAAAAAAAADsAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAADQAAAAAAAAAAAAAAEQAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-07-02T14:25:40.492Z"
+              "WhenOpened": "2026-07-02T14:25:40.492Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Estoque\\Index.cshtml",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Index.cshtml",
               "RelativeToolTip": "Views\\Estoque\\Index.cshtml",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADoAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-07-02T01:32:44.248Z"
+              "WhenOpened": "2026-07-02T01:32:44.248Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "EstoqueModel.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Models\\EstoqueModel.cs",
               "RelativeDocumentMoniker": "Models\\EstoqueModel.cs",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Models\\EstoqueModel.cs",
               "RelativeToolTip": "Models\\EstoqueModel.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAA5wB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-02T00:53:29.619Z",
               "EditorCaption": ""
