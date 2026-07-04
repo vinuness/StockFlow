@@ -19,7 +19,7 @@ namespace Estoque.Infrastructure.Utilidades
             _key = configuration["jwt:key"];
         }
 
-        public string GenerateToken(Cliente cliente)
+        public string GenerateToken(Cliente cliente) //gera o token JWT para o cliente, contendo ID, nome, email e roles do cliente como claims
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_key));

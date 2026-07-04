@@ -5,7 +5,7 @@ namespace Estoque.Infrastructure.SwaggerPerso
 {
     public static class DependencyInjectionSwagger
     {
-        public static IServiceCollection AddInfrastructureSwagger(this IServiceCollection service)
+        public static IServiceCollection AddInfrastructureSwagger(this IServiceCollection service) //adiciona servico Swagger para auteticacao JWT
         {
             service.AddSwaggerGen(c =>
             {

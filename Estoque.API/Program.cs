@@ -23,17 +23,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Adiciona o Swagger personalizado
 builder.Services.AddInfrastructureSwagger();
 
-var key = builder.Configuration["Jwt:Key"];
+var key = builder.Configuration["Jwt:Key"]; //pego a chave do appsettings.json
 
 builder.Services
-    .AddAuthentication(options =>
+    .AddAuthentication(options => //configuro a autenticação para usar JWT Bearer
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    .AddJwtBearer(options =>
+    .AddJwtBearer(options => //configuro o JWT Bearer
     {
         options.MapInboundClaims = false;
 
@@ -83,11 +85,6 @@ constant.ConfigFilePath = ConfigPath;
 builder.Services.AddDbContext<AppDbContext>((options) =>
 {
     options.UseMySql(Constants.Connection, ServerVersion.AutoDetect(Constants.Connection));
-});
-
-builder.Services.Configure<FormOptions>(options =>
-{
-    options.MultipartBodyLengthLimit = 50 * 1024 * 1024; // 50MB
 });
 
 builder.Services.AddCors();
