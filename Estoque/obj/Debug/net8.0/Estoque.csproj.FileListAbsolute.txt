@@ -31,3 +31,12 @@ C:\Users\Vinicius\source\repos\Estoque\obj\Debug\net8.0\refint\Estoque.dll
 C:\Users\Vinicius\source\repos\Estoque\obj\Debug\net8.0\Estoque.pdb
 C:\Users\Vinicius\source\repos\Estoque\obj\Debug\net8.0\Estoque.genruntimeconfig.cache
 C:\Users\Vinicius\source\repos\Estoque\obj\Debug\net8.0\ref\Estoque.dll
+C:\Users\Vinicius\source\repos\Estoque\bin\Debug\net8.0\Microsoft.Bcl.Cryptography.dll
+C:\Users\Vinicius\source\repos\Estoque\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Vinicius\source\repos\Estoque\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Vinicius\source\repos\Estoque\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Vinicius\source\repos\Estoque\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Vinicius\source\repos\Estoque\bin\Debug\net8.0\System.Formats.Asn1.dll
+C:\Users\Vinicius\source\repos\Estoque\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Vinicius\source\repos\Estoque\obj\Debug\net8.0\Estoque.csproj.AssemblyReference.cache
+C:\Users\Vinicius\source\repos\Estoque\obj\Debug\net8.0\Estoque.csproj.Up2Date

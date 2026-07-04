@@ -57,8 +57,8 @@ namespace Estoque.Infrastructure.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                    b.Property<string>("Roles")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Senha")
                         .HasColumnType("longtext");

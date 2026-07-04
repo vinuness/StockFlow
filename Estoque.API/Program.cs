@@ -7,11 +7,13 @@ using Estoque.Domain.Services;
 using Estoque.Infra.Data.Repositories;
 using Estoque.Infrastructure.Data;
 using Estoque.Infrastructure.Repositories;
+using Estoque.Infrastructure.SwaggerPerso;
 using Estoque.Infrastructure.Utilidades;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,25 +23,37 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddInfrastructureSwagger();
 
 var key = builder.Configuration["Jwt:Key"];
 
 builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme) //adiciona o serviço de autenticação usando o esquema JWT Bearer
+    .AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
     .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters =
-            new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(key)), //chave secreta usada para validar a assinatura do token
+        options.MapInboundClaims = false;
 
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = true
-            };
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(key)),
+
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+
+            RoleClaimType = "role"
+        };
+
+        options.IncludeErrorDetails = true;
+        options.Events = new JwtBearerEvents
+        {
+        };
     });
 
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
@@ -96,8 +110,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

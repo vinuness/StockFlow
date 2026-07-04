@@ -1,6 +1,7 @@
 ﻿using Estoque.Application.Service;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findAll")]
+        [Authorize(Roles = "Admin,Operador,Cliente")]
         public async Task<ActionResult<List<Produto>>> FindAll()
         {
             List<Produto> produtos = await _service.FindAll();
@@ -24,6 +26,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findById/{id}")]
+        [Authorize(Roles = "Admin,Operador,Cliente")]
         public async Task<ActionResult<Produto>> FindById(int id)
         {
             Produto produto = await _service.FindById(id);
@@ -35,6 +38,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpPost("save")]
+        [Authorize(Roles = "Admin,Operador")]
         public async Task<ActionResult<Produto>> Save([FromBody] Produto produto)
         {
             await _service.Save(produto);
@@ -42,6 +46,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpPut("update/{id}")]
+        [Authorize(Roles = "Admin,Operador")]
         public async Task<ActionResult> Update([FromBody] Produto produto, int id)
         {
             await _service.Update(produto, id);
@@ -49,6 +54,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "Admin,Operador")]
         public async Task<ActionResult> Delete(int id)
         {
             await _service.Delete(id);

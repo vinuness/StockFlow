@@ -1,6 +1,7 @@
 ﻿using Estoque.Models;
 using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Estoque.Controllers
 {
@@ -15,7 +16,11 @@ namespace Estoque.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var pedidos = await _pedidoService.FindAll();
+            var email = User.FindFirstValue(ClaimTypes.Email);
+
+            Console.WriteLine(email);
+
+            var pedidos = await _pedidoService.FindAll(email);
 
             return View(pedidos);
         }
@@ -23,7 +28,8 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> FazerPedido(List<ProdutoPedidoDTO> produtos)
         {
-            var pedido = await _pedidoService.FazerPedido(produtos);
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var pedido = await _pedidoService.FazerPedido(produtos, int.Parse(id));
 
             if (!pedido.IsSuccessStatusCode)
             {

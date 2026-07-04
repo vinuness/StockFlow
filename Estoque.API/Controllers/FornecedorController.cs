@@ -1,6 +1,7 @@
 ﻿using Estoque.Application.Service;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace Estoque.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin, Operador")]
     public class FornecedorController : ControllerBase
     {
         private readonly IFornecedorService _service;

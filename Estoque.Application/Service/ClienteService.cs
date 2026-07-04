@@ -2,6 +2,7 @@
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Interfaces.IServices;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Estoque.Application.Service
 {
@@ -70,7 +71,7 @@ namespace Estoque.Application.Service
                 Id = cliente.Id,
                 Nome = cliente.Nome,
                 Email = cliente.Email,
-                Token = _repo.GenerateToken(cliente.Id)
+                Token = _repo.GenerateToken(cliente)
             };
         }
 
@@ -85,6 +86,5 @@ namespace Estoque.Application.Service
         {
             return BCrypt.Net.BCrypt.Verify(password, hash);
         }
-
     }
 }

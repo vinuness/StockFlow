@@ -11,7 +11,7 @@ namespace Estoque.Services
 
         public FornecedorService(IHttpClientFactory factory)
         {
-            _http = factory.CreateClient();
+            _http = factory.CreateClient("API");
         }
 
         public async Task<List<FornecedorModel>?> FindAll()

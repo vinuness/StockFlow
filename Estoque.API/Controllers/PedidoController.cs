@@ -2,6 +2,7 @@
 using Estoque.Domain.Entities.Pedidos;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findAll")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Pedido>>> FindAll()
         {
             List<Pedido> pedidos = await _service.FindAll();
@@ -25,6 +27,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findById/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Pedido>> FindById(int id)
         {
             Pedido pedido = await _service.FindById(id);
@@ -35,14 +38,15 @@ namespace Estoque.API.Controllers
             return Ok(pedido);
         }
 
-        [HttpPost("save")]
-        public async Task<ActionResult<Pedido>> Save([FromBody] List<ProdutoPedidoDTO> produtos)
+        [HttpPost("save/pedido/user/{id}")]
+        public async Task<ActionResult<Pedido>> Save([FromBody] List<ProdutoPedidoDTO> produtos, int id)
         {
-            await _service.Save(produtos);
+            await _service.Save(produtos, id);
             return Ok("Produto salvo com sucesso");
         }
 
         [HttpPut("update/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Update([FromBody] Pedido pedido, int id)
         {
             await _service.Update(pedido, id);
@@ -50,10 +54,18 @@ namespace Estoque.API.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
             await _service.Delete(id);
             return Ok("Pedido deletado com sucesso");
+        }
+
+        [HttpGet("buscarPedidosDeCliente/{email}")]
+        public async Task<ActionResult<List<Pedido>>> buscarPedidosDeCliente(string email)
+        {
+            List<Pedido> pedidos = await _service.buscarPedidosDeCliente(email);
+            return Ok(pedidos);
         }
     }
 }

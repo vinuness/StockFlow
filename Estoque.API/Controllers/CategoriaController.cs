@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Estoque.Domain.Interfaces.IServices;
 using Estoque.Domain.Entities.Produtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Estoque.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin, Operador")]
     public class CategoriaController : ControllerBase
     {
         private readonly ICategoriaService _service;

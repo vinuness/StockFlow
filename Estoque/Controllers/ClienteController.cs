@@ -16,6 +16,7 @@ namespace Estoque.Controllers
         public ClienteController(IClienteService clienteService)
         {
             _clienteService = clienteService;
+            _http = new HttpClient();
         }
 
         public IActionResult Cadastrar()
@@ -54,7 +55,6 @@ namespace Estoque.Controllers
                 Expires = DateTimeOffset.UtcNow.AddDays(1)
             });
 
-            Response.Cookies.Append("email", usuario.Email);
             return RedirectToAction("Index", "Home");
         }
 
@@ -63,7 +63,6 @@ namespace Estoque.Controllers
 
             //remove os cookies armazenados
             Response.Cookies.Delete("jwt");
-            Response.Cookies.Delete("email");
 
             return RedirectToAction("Logar", "Cliente");
         }
@@ -71,7 +70,7 @@ namespace Estoque.Controllers
         public async Task<IActionResult> Perfil()
         {   
             // Recupera o email do cookie
-            var email = Request.Cookies["email"];
+            var email = User.FindFirstValue(ClaimTypes.Email);
             var jwt = Request.Cookies["jwt"];
 
             if(jwt == null || email == null) 
@@ -87,7 +86,7 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEndereco(EnderecoModel endereco)
         {
-            var email = Request.Cookies["email"];
+            var email = User.FindFirst("email")?.Value;
             await _clienteService.AddEndereco(email, endereco);
             return RedirectToAction("Perfil");
         }

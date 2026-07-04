@@ -7,8 +7,9 @@ namespace Estoque.Domain.Interfaces.IServices
     {
         public Task<List<Pedido>> FindAll();
         public Task<Pedido> FindById(int id);
-        public Task<Pedido> Save(List<ProdutoPedidoDTO> produtos);
+        public Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, int id);
         public Task Update(Pedido pedido, int id);
         public Task Delete(int id);
+        public Task<List<Pedido>> buscarPedidosDeCliente(string email);
     }
 }

@@ -8,14 +8,19 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Index">Estoque</a>
+                        <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Index">Produtos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Categoria" asp-action="Index">Categorias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
-                    </li>
+                    @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") ||
+                                                         User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
+                                                    )
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Pedido" asp-action="Index">Pedidos</a>
                     </li>

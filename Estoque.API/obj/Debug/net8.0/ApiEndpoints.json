@@ -198,45 +198,13 @@
   },
   {
     "ContainingType": "Estoque.API.Controllers.ClienteController",
-    "Method": "Login",
-    "RelativePath": "api/Cliente/login",
-    "HttpMethod": "POST",
+    "Method": "RoleTest",
+    "RelativePath": "api/Cliente/role-test",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "login",
-        "Type": "Estoque.Domain.Entities.Clientes.Login",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Estoque.API.Controllers.ClienteController",
-    "Method": "save",
-    "RelativePath": "api/Cliente/save",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "cliente",
-        "Type": "Estoque.Domain.Entities.Clientes.Cliente",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Estoque.Domain.Entities.Clientes.Cliente",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "Estoque.API.Controllers.ClienteController",
@@ -474,6 +442,32 @@
   },
   {
     "ContainingType": "Estoque.API.Controllers.PedidoController",
+    "Method": "buscarPedidosDeCliente",
+    "RelativePath": "api/Pedido/buscarPedidosDeCliente/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Pedidos.Pedido, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.PedidoController",
     "Method": "Delete",
     "RelativePath": "api/Pedido/delete/{id}",
     "HttpMethod": "DELETE",
@@ -537,7 +531,7 @@
   {
     "ContainingType": "Estoque.API.Controllers.PedidoController",
     "Method": "Save",
-    "RelativePath": "api/Pedido/save",
+    "RelativePath": "api/Pedido/save/pedido/user/{id}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -545,6 +539,11 @@
       {
         "Name": "produtos",
         "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Produtos.ProdutoPedidoDTO, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -757,6 +756,48 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.UsuarioController",
+    "Method": "save",
+    "RelativePath": "api/Usuario/cadastro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cliente",
+        "Type": "Estoque.Domain.Entities.Clientes.Cliente",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Estoque.Domain.Entities.Clientes.Cliente",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.UsuarioController",
+    "Method": "Login",
+    "RelativePath": "api/Usuario/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "Estoque.Domain.Entities.Clientes.Login",
         "IsRequired": true
       }
     ],

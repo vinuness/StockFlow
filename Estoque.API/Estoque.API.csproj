@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Estoque.Infrastructure\Estoque.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Storage\" />
-  </ItemGroup>
-
 </Project>

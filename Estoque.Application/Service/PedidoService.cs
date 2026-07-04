@@ -35,15 +35,20 @@ namespace Estoque.Application.Service
             return pedido;
         }
 
-        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos)
+        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, int id)
         {
-            var pedido = await _repo.Save(produtos);
+            var pedido = await _repo.Save(produtos, id);
             return pedido;
         }
 
         public async Task Update(Pedido pedido, int id)
         {
             await _repo.Update(pedido, id);
+        }
+
+        public async Task<List<Pedido>> buscarPedidosDeCliente(string email)
+        {
+            return await _repo.buscarPedidosDeCliente(email);
         }
     }
 }

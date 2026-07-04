@@ -10,17 +10,17 @@ namespace Estoque.Services
 
         public PedidoService(IHttpClientFactory factory)
         {
-            _http = factory.CreateClient();
+            _http = factory.CreateClient("API");
         }
 
-        public async Task<List<PedidoModel>?> FindAll()
+        public async Task<List<PedidoModel>> FindAll(string email)
         {
-            return await _http.GetFromJsonAsync<List<PedidoModel>>($"{BaseUrl}/findAll");
+            return await _http.GetFromJsonAsync<List<PedidoModel>>($"{BaseUrl}/buscarPedidosDeCliente/{email}");
         }
 
-        public async Task<HttpResponseMessage> FazerPedido(List<ProdutoPedidoDTO> produtos)
+        public async Task<HttpResponseMessage> FazerPedido(List<ProdutoPedidoDTO> produtos, int id)
         {
-            return await _http.PostAsJsonAsync($"{BaseUrl}/save", produtos);
+            return await _http.PostAsJsonAsync($"{BaseUrl}/save/pedido/user/{id}", produtos);
         }
     }
 }

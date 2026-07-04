@@ -14,8 +14,10 @@ namespace Estoque.Models.Cliente
         [Required]
         public string Nome { get; set; }
 
+        public string Roles { get; set; }
+
         [Required]
-        public List<EnderecoModel> Enderecos { get; set; }
+        public List<EnderecoModel> Enderecos { get; set; } = new();
 
         [Required]
         [EmailAddress]
@@ -23,9 +25,6 @@ namespace Estoque.Models.Cliente
 
         [Required]
         public string Senha { get; set; }
-
-        [Required]
-        public Role Role { get; set; } = Role.CLIENTE;
         public List<PedidoModel>? Pedidos { get; set; }
     }
 }

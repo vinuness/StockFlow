@@ -10,6 +10,6 @@ namespace Estoque.Domain.Interfaces.IRepositories
         public Task<Cliente> Save(Cliente cliente);
         public Task Update(Cliente cliente, int id);
         public Task Delete(int id);
-        public string GenerateToken(int id);
+        public string GenerateToken(Cliente cliente);
     }
 }

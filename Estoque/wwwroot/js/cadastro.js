@@ -5,6 +5,7 @@ cadastrar.addEventListener("click", (e) => {
     const usuarioCadastrado = {
         cpf: document.getElementById("cpf").value,
         nome: document.getElementById("nome").value,
+        role: document.getElementById("role").value,
         email: document.getElementById("email").value,
         senha: document.getElementById("senha").value,
     };
@@ -14,6 +15,7 @@ cadastrar.addEventListener("click", (e) => {
         usuarioCadastrado.nome &&
         usuarioCadastrado.email &&
         usuarioCadastrado.senha &&
+        usuarioCadastrado.role
     ) {
         alert("Cadastro efetuado com sucesso!");
     } else {

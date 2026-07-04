@@ -1,12 +1,13 @@
 ﻿using Estoque.Application.Service;
 using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Interfaces.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Estoque.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]")] 
     [ApiController]
     public class ClienteController : ControllerBase
     {
@@ -18,6 +19,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findAll")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Cliente>>> FindAll()
         {
             List<Cliente> clientes = await _service.FindAll();
@@ -25,6 +27,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findById/{id}")]
+        [Authorize(Roles = "Admin,Operador,Cliente")]
         public async Task<ActionResult<Cliente>> FindById(int id)
         {
             Cliente cliente = await _service.FindById(id);
@@ -32,19 +35,14 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findByEmail/{email}")]
+        [Authorize(Roles = "Admin,Operador,Cliente")]
         public async Task<ActionResult<Cliente>> FindByEmail(string email)
         {
             return await _service.FindByEmail(email);
         }
 
-        [HttpPost("save")]
-        public async Task<ActionResult<Cliente>> save([FromBody] Cliente cliente)
-        {
-            await _service.Save(cliente);
-            return Ok(cliente);
-        }
-
         [HttpPut("update/{id}")]
+        [Authorize(Roles = "Admin,Operador,Cliente")]
         public async Task<ActionResult> Update([FromBody] Cliente cliente, int id)
         {
             await _service.Update(cliente, id);
@@ -52,23 +50,11 @@ namespace Estoque.API.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int id)
         {
             await _service.Delete(id);
             return Ok("Usuario deletado com sucesso");
-        }
-
-        [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] Login login)
-        {
-            var response = await _service.Login(login);
-
-            if(response == null)
-            {
-                return Unauthorized();
-            }
-
-            return Ok(response);
         }
     }
 }

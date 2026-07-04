@@ -8,15 +8,18 @@ namespace Estoque.Services
     {
         private readonly HttpClient _http;
         private const string BaseUrl = "https://localhost:7238/api/Cliente";
+        private const string Usuario = "https://localhost:7238/api/Usuario";
 
         public ClienteService(IHttpClientFactory httpFactory)
         {
-            _http = httpFactory.CreateClient();
+            _http = httpFactory.CreateClient("API");
         }
 
         public async Task Create(ClienteModel cliente)
         {
-            var response = await _http.PostAsJsonAsync($"{BaseUrl}/save", cliente);
+            var response = await _http.PostAsJsonAsync($"{Usuario}/cadastro", cliente);
+
+            Console.WriteLine(response);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -27,7 +30,7 @@ namespace Estoque.Services
 
         public async Task<LoginResponse?> Login(LoginModel login)
         {
-            var response = await _http.PostAsJsonAsync($"{BaseUrl}/login", login);
+            var response = await _http.PostAsJsonAsync($"{Usuario}/login", login);
 
             if (!response.IsSuccessStatusCode)
                 return null;

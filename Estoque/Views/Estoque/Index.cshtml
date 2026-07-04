@@ -11,14 +11,19 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Estoque</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Produtos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
-                    </li>
+                    @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") ||
+                                                         User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
+                                                    )
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
                     </li>
@@ -37,7 +42,14 @@
 <div class="container mt-4">
 
     <h1 class="text-center mb-4">Produtos</h1>
-    <a asp-action="Create" class="btn btn-success">Adicionar Produto</a>
+
+    @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") || 
+         User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
+    )
+    {
+        <a asp-action="Create" class="btn btn-success">Adicionar Produto</a>
+    }
+    
     <hr />
     <div class="row">
         @foreach (var produto in Model)
@@ -73,18 +85,22 @@
                            class="btn btn-primary">
                             Adicionar ao Carrinho
                         </a>
-
-                        <a asp-action="Delete"
-                           asp-route-id="@produto.Id"
-                           class="btn btn-danger">
-                            Excluir
-                        </a>
-                        <hr />
-                        <a asp-action="Edit"
-                           asp-route-id="@produto.Id"
-                           class="btn btn-warning">
-                            Editar
-                        </a>
+                        @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") ||
+                            User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
+                        )
+                        {
+                            <a asp-action="Delete"
+                            asp-route-id="@produto.Id"
+                            class="btn btn-danger">
+                                Excluir
+                            </a>
+                            <hr />
+                            <a asp-action="Edit"
+                            asp-route-id="@produto.Id"
+                            class="btn btn-warning">
+                                Editar
+                            </a>
+                        }
                     </div>
 
                     <div class="card-footer text-muted">

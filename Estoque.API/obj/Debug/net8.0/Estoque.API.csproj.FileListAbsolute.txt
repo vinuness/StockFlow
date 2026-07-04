@@ -27,6 +27,8 @@ C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
@@ -153,5 +155,3 @@ C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\refint\Estoque.API.d
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\Estoque.API.pdb
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\Estoque.API.genruntimeconfig.cache
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\ref\Estoque.API.dll
-C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
-C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll

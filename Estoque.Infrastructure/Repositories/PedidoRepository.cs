@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Entities.Pedidos;
 using Estoque.Domain.Entities.Produtos;
+using Estoque.Domain.Entities.Clientes;
 
 namespace Estoque.Infrastructure.Repositories
 {
@@ -53,8 +54,15 @@ namespace Estoque.Infrastructure.Repositories
             return pedido;
         }
 
-        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos)
+        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, int id)
         {
+
+            var cliente = await _con.Clientes
+                .Include(c => c.Pedidos)
+                .ThenInclude(p => p.Itens)
+                .ThenInclude(item => item.Produto)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             var pedido = new Pedido
             {
                 DataPedido = DateTime.Now,
@@ -84,6 +92,9 @@ namespace Estoque.Infrastructure.Repositories
             }
 
             _con.Pedidos.Add(pedido); //adiciona o pedido ao banco de dados
+            cliente.Pedidos.Add(pedido);
+
+            _con.Clientes.Update(cliente);
 
             await _con.SaveChangesAsync();
 
@@ -95,6 +106,19 @@ namespace Estoque.Infrastructure.Repositories
             pedido.Id = id;
             _con.Pedidos.Update(pedido);
             await _con.SaveChangesAsync();
+        }
+
+        public async Task<List<Pedido>> buscarPedidosDeCliente(string email)
+        {
+            Cliente cliente = await _con.Clientes
+                .Include(c => c.Pedidos)
+                .ThenInclude(p => p.Itens)
+                .ThenInclude(item => item.Produto)
+                .FirstOrDefaultAsync(c => c.Email == email);
+
+            List<Pedido> pedidos = cliente.Pedidos.ToList();
+
+            return pedidos;
         }
     }
 }

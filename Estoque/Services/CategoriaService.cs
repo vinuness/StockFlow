@@ -9,7 +9,7 @@ namespace Estoque.Services
 
         public CategoriaService(IHttpClientFactory httpFactory)
         {
-            _http = httpFactory.CreateClient();
+            _http = httpFactory.CreateClient("API");
         }
 
         public async Task<List<CategoriaModel>> FindAll()

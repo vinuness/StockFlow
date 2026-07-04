@@ -72,9 +72,9 @@ namespace Estoque.Infrastructure.Repositories
             await _con.SaveChangesAsync();
         }
 
-        public string GenerateToken(int id)
+        public string GenerateToken(Cliente cliente)
         {
-            return _jwt.GenerateToken(id);
+            return _jwt.GenerateToken(cliente);
         }
     }
 }

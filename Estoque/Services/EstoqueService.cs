@@ -12,7 +12,7 @@ namespace Estoque.Services
 
         public EstoqueService(IHttpClientFactory factory)
         {
-            _http = factory.CreateClient();
+            _http = factory.CreateClient("API");
         }
 
         public async Task<List<EstoqueModel>?> FindAll()
