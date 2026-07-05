@@ -1,5 +1,9 @@
 ﻿@model List<Estoque.Models.EstoqueModel>
 
+@{
+    var imagem = "https://localhost:7238/api/Produto/produto/imagem/";
+}
+
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
@@ -43,9 +47,7 @@
 
     <h1 class="text-center mb-4">Produtos</h1>
 
-    @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") || 
-         User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
-    )
+    @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
     {
         <a asp-action="Create" class="btn btn-success">Adicionar Produto</a>
     }
@@ -57,9 +59,9 @@
             <div class="col-md-3 mb-4">
                 <div class="card h-100 text-center shadow-sm">
 
-                    <img src="@produto.ImagemUrl"
+                    <img src="@imagem@produto.Id"
                          class="card-img-top p-3"
-                         style="height:220px; object-fit:contain;" />
+                         style="height:220px; object-fit:contain;" /> 
 
                     <div class="card-body">
 
@@ -85,9 +87,7 @@
                            class="btn btn-primary">
                             Adicionar ao Carrinho
                         </a>
-                        @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") ||
-                            User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
-                        )
+                        @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
                         {
                             <a asp-action="Delete"
                             asp-route-id="@produto.Id"

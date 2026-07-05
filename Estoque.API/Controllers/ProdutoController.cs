@@ -1,9 +1,12 @@
-﻿using Estoque.Application.Service;
+﻿using Estoque.API.DTO;
+using Estoque.Application.Service;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Estoque.API.Controllers
 {
@@ -12,9 +15,14 @@ namespace Estoque.API.Controllers
     public class ProdutoController : ControllerBase
     {
         private readonly IProdutoService _service;
-        public ProdutoController(IProdutoService service)
+        private readonly byte[] _key;
+        private readonly byte[] _iv;
+
+        public ProdutoController(IProdutoService service, IConfiguration config)
         {
             _service = service;
+            _key = Encoding.UTF8.GetBytes(config["ImagemByte:ImgKey"]);
+            _iv = Encoding.UTF8.GetBytes(config["ImagemByte:ImgIv"]);
         }
 
         [HttpGet("findAll")]
@@ -39,17 +47,114 @@ namespace Estoque.API.Controllers
 
         [HttpPost("save")]
         [Authorize(Roles = "Admin,Operador")]
-        public async Task<ActionResult<Produto>> Save([FromBody] Produto produto)
+        public async Task<ActionResult<Produto>> Save([FromForm] ProdutoSaveDTO produto)
         {
-            await _service.Save(produto);
-            return Ok(produto);
+            // Cria o diretório "uploaded_files_encrypted" se não existir
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "uploaded_files_encrypted"); 
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            // Define o caminho completo do arquivo criptografado
+            var encryptedFilePath = Path.Combine(path, produto.Imagem.FileName + ".enc");
+
+            using (var aes = Aes.Create())
+            {
+                aes.Key = _key;
+                aes.IV = _iv;
+
+                // Cria um fluxo de arquivo para escrever o arquivo criptografado
+                using (var cryptorTransform = aes.CreateEncryptor())
+                using (var fileStream = new FileStream(encryptedFilePath, FileMode.Create))
+                using (var cryptoStream = new CryptoStream(fileStream, cryptorTransform, CryptoStreamMode.Write))
+                {
+                    await produto.Imagem.CopyToAsync(cryptoStream);
+
+                }
+            }
+
+            var produtoModel = new Produto
+            {
+                Imagens = new ImagemModel
+                {
+                    FileName = produto.Imagem.FileName,
+                    ContentType = produto.Imagem.ContentType,
+                    Path = encryptedFilePath
+                },
+                Nome = produto.Nome,
+                Quantidade = produto.Quantidade,
+                Descricao = produto.Descricao,
+                Preco = produto.Preco,
+                Tamanho = produto.Tamanho,
+                Cor = produto.Cor,
+                CategoriaId = produto.CategoriaId,
+                FornecedorId = produto.FornecedorId
+            };
+
+            await _service.Save(produtoModel);
+            return Ok("produto salvo com sucesso");
         }
 
         [HttpPut("update/{id}")]
         [Authorize(Roles = "Admin,Operador")]
-        public async Task<ActionResult> Update([FromBody] Produto produto, int id)
+        public async Task<ActionResult> Update(int id, [FromForm] ProdutoSaveDTO dto)
         {
-            await _service.Update(produto, id);
+
+            string encryptedFilePath = null;
+            string fileName = null;
+            string contentType = null;
+
+            if(dto.Imagem != null)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "uploaded_files_encrypted");
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                fileName = dto.Imagem.FileName + ".enc";
+                encryptedFilePath = Path.Combine(path, fileName);
+
+                using var aes = Aes.Create();
+                aes.Key = _key;
+                aes.IV = _iv;
+
+                using var cryptorTransform = aes.CreateEncryptor();
+                using var fileStream = new FileStream(encryptedFilePath, FileMode.Create);
+                using var cryptoStream = new CryptoStream(fileStream, cryptorTransform, CryptoStreamMode.Write);
+
+                await dto.Imagem.CopyToAsync(cryptoStream);
+
+                contentType = dto.Imagem.ContentType;
+            }
+
+            var produto = new Produto
+            {
+                Id = id,
+                Nome = dto.Nome,
+                Quantidade = dto.Quantidade,
+                Descricao = dto.Descricao,
+                Preco = dto.Preco,
+                Cor = dto.Cor,
+                Tamanho = dto.Tamanho,
+                CategoriaId = dto.CategoriaId,
+                FornecedorId = dto.FornecedorId
+            };
+
+            if (encryptedFilePath != null)
+            {
+                produto.Imagens = new ImagemModel
+                {
+                    FileName = dto.Imagem?.FileName,
+                    ContentType = contentType!,
+                    Path = encryptedFilePath
+                };
+            }
+
+            await _service.Update(produto);
             return Ok("Produto atualizado com sucesso");
         }
 
@@ -87,6 +192,48 @@ namespace Estoque.API.Controllers
         {
             var produtos = await _service.ProdutosMaisVendidos();
             return Ok(produtos);
+        }
+
+        [HttpGet("produto/imagem/{id}")]
+        public async Task<IActionResult> ObterImagem(int id)
+        {
+            // Recupera o produto pelo ID
+            var produto = await _service.FindById(id);
+
+            if(produto == null || produto.Imagens == null)
+            {
+                return NotFound("Produto não encontrado");
+            }
+
+            // Recupera o caminho completo do arquivo de imagem
+            var FullPath = produto.Imagens.Path;
+
+            if (!System.IO.File.Exists(FullPath))
+            {
+                return NotFound("Arquivo de imagem não encontrado");
+            }
+
+            byte[] bytes;
+            using var aes = Aes.Create();
+            aes.Key = _key;
+            aes.IV = _iv;
+
+            // Cria um fluxo de arquivo para ler o arquivo criptografado
+            using var fileStream = new FileStream(FullPath, FileMode.Open);
+            using var decryptor = aes.CreateDecryptor();
+            using var cryptoStream = new CryptoStream(fileStream, decryptor, CryptoStreamMode.Read);
+
+            // Cria um fluxo de memória para armazenar os dados descriptografados
+            using var memory = new MemoryStream();
+
+            // Copia os dados descriptografados para a memória
+            await cryptoStream.CopyToAsync(memory);
+
+            // Converte o fluxo de memória em um array de bytes
+            bytes = memory.ToArray();
+
+            // Retorna o arquivo de imagem descriptografado com o tipo de conteúdo correto
+            return File(bytes, produto.Imagens.ContentType);
         }
     }
 }

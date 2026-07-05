@@ -6,8 +6,8 @@ namespace Estoque.Services.Interfaces
     {
         Task<List<EstoqueModel>?> FindAll();
         Task<EstoqueModel?> FindById(int id);
-        Task Create(EstoqueModel produto);
-        Task Update(EstoqueModel produto);
+        Task Create(ProdutoCreateViewModel produto);
+        Task Update(ProdutoCreateViewModel produto, int id);
         Task Delete(int id);
         Task<List<EstoqueModel>?> Carrinho();
         Task AddCarrinho(int id);

@@ -27,7 +27,7 @@ namespace Estoque.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(EstoqueModel produto)
+        public async Task<IActionResult> Create(ProdutoCreateViewModel produto)
         {
             await _estoqueService.Create(produto);
 
@@ -39,13 +39,25 @@ namespace Estoque.Controllers
         {
             var produto = await _estoqueService.FindById(id);
 
-            return View(produto);
+            var vm = new ProdutoCreateViewModel
+            {
+                Nome = produto.Nome,
+                Quantidade = produto.Quantidade,
+                Descricao = produto.Descricao,
+                Preco = produto.Preco,
+                Cor = produto.Cor,
+                Tamanho = produto.Tamanho,
+                CategoriaId = produto.CategoriaId,
+                FornecedorId = produto.FornecedorId
+            };
+
+            return View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EstoqueModel produto)
+        public async Task<IActionResult> Edit(ProdutoCreateViewModel produto, int id)
         {
-            await _estoqueService.Update(produto);
+            await _estoqueService.Update(produto, id);
 
             return RedirectToAction("Index");
         }

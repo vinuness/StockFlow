@@ -22,12 +22,15 @@ namespace Estoque.Infrastructure.Data
             cliente.HasIndex(c => c.CPF).IsUnique();
             cliente.HasMany(c => c.Enderecos)
                 .WithMany(c => c.Clientes);
+
+            
         }
 
         //Entidades no banco
 
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<ImagemModel> Imagens { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItensPedido { get; set; }
         public DbSet<Categoria> Categorias { get; set; }

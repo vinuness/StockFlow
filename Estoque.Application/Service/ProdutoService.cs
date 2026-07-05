@@ -34,9 +34,9 @@ namespace Estoque.Application.Service
             return produto;
         }
 
-        public async Task Update(Produto produto, int id)
+        public async Task Update(Produto produto)
         {
-            await _repo.Update(produto, id);
+            await _repo.Update(produto);
         }
 
         public async Task<List<Produto>> ListarProdutosCarrinho()
@@ -57,14 +57,14 @@ namespace Estoque.Application.Service
         {
             Produto produto = await _repo.FindById(id);
             produto.Status = StatusProduto.CARRINHO;
-            await _repo.Update(produto, id);
+            await _repo.Update(produto);
         }
 
         public async Task RemoverCarrinho(int id)
         {
             Produto produto = await _repo.FindById(id);
             produto.Status = StatusProduto.CATALOGADO;
-            await _repo.Update(produto, id);
+            await _repo.Update(produto);
         }
 
         public async Task<List<ProdutoMaisVendidoDTO>> ProdutosMaisVendidos()

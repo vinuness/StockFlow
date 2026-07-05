@@ -378,18 +378,6 @@
         }
       }
     },
-    "/api/Cliente/role-test": {
-      "get": {
-        "tags": [
-          "Cliente"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Endereco": {
       "get": {
         "tags": [
@@ -1108,19 +1096,268 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Produto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Produto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Produto"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Produto"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "Imagem": {
+                        "type": "string",
+                        "format": "binary"
+                      },
+                      "Imagens.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.FileName": {
+                        "type": "string"
+                      },
+                      "Imagens.ContentType": {
+                        "type": "string"
+                      },
+                      "Imagens.Path": {
+                        "type": "string"
+                      },
+                      "Imagens.ProdutoId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.SKU": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "Imagens.Produto.Imagens.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Imagens.FileName": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Imagens.ContentType": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Imagens.Path": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Imagens.ProdutoId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Nome": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Quantidade": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Descricao": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Preco": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "Imagens.Produto.Tamanho": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Cor": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.CategoriaId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Categoria.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Categoria.Nome": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.FornecedorId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Fornecedor.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Fornecedor.Nome": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Fornecedor.Cnpj": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Fornecedor.Telefone": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Fornecedor.Email": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Status": {
+                        "$ref": "#/components/schemas/StatusProduto"
+                      },
+                      "Imagens.Produto.ItensPedido": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/ItemPedido"
+                        }
+                      },
+                      "Nome": {
+                        "type": "string"
+                      },
+                      "Quantidade": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Descricao": {
+                        "type": "string"
+                      },
+                      "Preco": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "Tamanho": {
+                        "type": "string"
+                      },
+                      "Cor": {
+                        "type": "string"
+                      },
+                      "CategoriaId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "FornecedorId": {
+                        "type": "integer",
+                        "format": "int32"
+                      }
+                    }
+                  }
+                ]
+              },
+              "encoding": {
+                "Imagem": {
+                  "style": "form"
+                },
+                "Imagens.Id": {
+                  "style": "form"
+                },
+                "Imagens.FileName": {
+                  "style": "form"
+                },
+                "Imagens.ContentType": {
+                  "style": "form"
+                },
+                "Imagens.Path": {
+                  "style": "form"
+                },
+                "Imagens.ProdutoId": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Id": {
+                  "style": "form"
+                },
+                "Imagens.Produto.SKU": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.Id": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.FileName": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.ContentType": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.Path": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.ProdutoId": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Nome": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Quantidade": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Descricao": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Preco": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Tamanho": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Cor": {
+                  "style": "form"
+                },
+                "Imagens.Produto.CategoriaId": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Categoria.Id": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Categoria.Nome": {
+                  "style": "form"
+                },
+                "Imagens.Produto.FornecedorId": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Id": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Nome": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Cnpj": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Telefone": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Email": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Status": {
+                  "style": "form"
+                },
+                "Imagens.Produto.ItensPedido": {
+                  "style": "form"
+                },
+                "Nome": {
+                  "style": "form"
+                },
+                "Quantidade": {
+                  "style": "form"
+                },
+                "Descricao": {
+                  "style": "form"
+                },
+                "Preco": {
+                  "style": "form"
+                },
+                "Tamanho": {
+                  "style": "form"
+                },
+                "Cor": {
+                  "style": "form"
+                },
+                "CategoriaId": {
+                  "style": "form"
+                },
+                "FornecedorId": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -1167,19 +1404,268 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Produto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Produto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Produto"
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Produto"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "Imagem": {
+                        "type": "string",
+                        "format": "binary"
+                      },
+                      "Imagens.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.FileName": {
+                        "type": "string"
+                      },
+                      "Imagens.ContentType": {
+                        "type": "string"
+                      },
+                      "Imagens.Path": {
+                        "type": "string"
+                      },
+                      "Imagens.ProdutoId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.SKU": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "Imagens.Produto.Imagens.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Imagens.FileName": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Imagens.ContentType": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Imagens.Path": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Imagens.ProdutoId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Nome": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Quantidade": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Descricao": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Preco": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "Imagens.Produto.Tamanho": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Cor": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.CategoriaId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Categoria.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Categoria.Nome": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.FornecedorId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Fornecedor.Id": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Imagens.Produto.Fornecedor.Nome": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Fornecedor.Cnpj": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Fornecedor.Telefone": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Fornecedor.Email": {
+                        "type": "string"
+                      },
+                      "Imagens.Produto.Status": {
+                        "$ref": "#/components/schemas/StatusProduto"
+                      },
+                      "Imagens.Produto.ItensPedido": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/ItemPedido"
+                        }
+                      },
+                      "Nome": {
+                        "type": "string"
+                      },
+                      "Quantidade": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Descricao": {
+                        "type": "string"
+                      },
+                      "Preco": {
+                        "type": "number",
+                        "format": "double"
+                      },
+                      "Tamanho": {
+                        "type": "string"
+                      },
+                      "Cor": {
+                        "type": "string"
+                      },
+                      "CategoriaId": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "FornecedorId": {
+                        "type": "integer",
+                        "format": "int32"
+                      }
+                    }
+                  }
+                ]
+              },
+              "encoding": {
+                "Imagem": {
+                  "style": "form"
+                },
+                "Imagens.Id": {
+                  "style": "form"
+                },
+                "Imagens.FileName": {
+                  "style": "form"
+                },
+                "Imagens.ContentType": {
+                  "style": "form"
+                },
+                "Imagens.Path": {
+                  "style": "form"
+                },
+                "Imagens.ProdutoId": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Id": {
+                  "style": "form"
+                },
+                "Imagens.Produto.SKU": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.Id": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.FileName": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.ContentType": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.Path": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Imagens.ProdutoId": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Nome": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Quantidade": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Descricao": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Preco": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Tamanho": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Cor": {
+                  "style": "form"
+                },
+                "Imagens.Produto.CategoriaId": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Categoria.Id": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Categoria.Nome": {
+                  "style": "form"
+                },
+                "Imagens.Produto.FornecedorId": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Id": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Nome": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Cnpj": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Telefone": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Fornecedor.Email": {
+                  "style": "form"
+                },
+                "Imagens.Produto.Status": {
+                  "style": "form"
+                },
+                "Imagens.Produto.ItensPedido": {
+                  "style": "form"
+                },
+                "Nome": {
+                  "style": "form"
+                },
+                "Quantidade": {
+                  "style": "form"
+                },
+                "Descricao": {
+                  "style": "form"
+                },
+                "Preco": {
+                  "style": "form"
+                },
+                "Tamanho": {
+                  "style": "form"
+                },
+                "Cor": {
+                  "style": "form"
+                },
+                "CategoriaId": {
+                  "style": "form"
+                },
+                "FornecedorId": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -1332,6 +1818,29 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Produto/produto/imagem/{id}": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -1636,10 +2145,6 @@
           "sku": {
             "type": "integer",
             "format": "int64"
-          },
-          "imagemUrl": {
-            "type": "string",
-            "nullable": true
           },
           "nome": {
             "type": "string",

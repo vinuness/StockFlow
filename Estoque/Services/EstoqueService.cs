@@ -1,5 +1,7 @@
 ﻿using Estoque.Models;
 using Estoque.Services.Interfaces;
+using System.Globalization;
+using System.Net.Http.Headers;
 
 namespace Estoque.Services
 {
@@ -24,29 +26,75 @@ namespace Estoque.Services
         {
             var produto = await _http.GetFromJsonAsync<EstoqueModel>($"{ProdutoUrl}/findById/{id}");
 
-            produto.Categoria = await _http.GetFromJsonAsync<CategoriaModel>($"{CategoriaUrl}/findById/{produto.CategoriaId}");
-
-            produto.Fornecedor = await _http.GetFromJsonAsync<FornecedorModel>($"{FornecedorUrl}/findById/{produto.FornecedorId}");
-
             return produto;
         }
 
-        public async Task Create(EstoqueModel produto)
+        public async Task Create(ProdutoCreateViewModel produto)
         {
-            produto.Categoria = await _http.GetFromJsonAsync<CategoriaModel>($"{CategoriaUrl}/findById/{produto.CategoriaId}");
+            using var form = new MultipartFormDataContent();
 
-            produto.Fornecedor = await _http.GetFromJsonAsync<FornecedorModel>($"{FornecedorUrl}/findById/{produto.FornecedorId}");
+            form.Add(new StringContent(produto.Nome), "Nome");
+            form.Add(new StringContent(produto.Quantidade.ToString()), "Quantidade");
+            form.Add(new StringContent(produto.Descricao ?? ""), "Descricao");
+            form.Add(new StringContent(produto.Preco.ToString(CultureInfo.InvariantCulture)), "Preco");
+            form.Add(new StringContent(produto.Tamanho ?? ""), "Tamanho");
+            form.Add(new StringContent(produto.Cor ?? ""), "Cor");
+            form.Add(new StringContent(produto.CategoriaId.ToString()), "CategoriaId");
+            form.Add(new StringContent(produto.FornecedorId.ToString()), "FornecedorId");
 
-            await _http.PostAsJsonAsync($"{ProdutoUrl}/save", produto);
+            if (produto.Imagem != null)
+            {
+                var streamContent = new StreamContent(produto.Imagem.OpenReadStream());
+
+                streamContent.Headers.ContentType =
+                    new System.Net.Http.Headers.MediaTypeHeaderValue(produto.Imagem.ContentType);
+
+                form.Add(streamContent, "Imagem", produto.Imagem.FileName);
+            }
+
+            var response = await _http.PostAsync($"{ProdutoUrl}/save", form);
+
+            var body = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Status: {response.StatusCode}\n\n{body}");
+            }
+
+            response.EnsureSuccessStatusCode();
         }
 
-        public async Task Update(EstoqueModel produto)
+        public async Task Update(ProdutoCreateViewModel produto, int id)
         {
-            produto.Categoria = await _http.GetFromJsonAsync<CategoriaModel>($"{CategoriaUrl}/findById/{produto.CategoriaId}");
+            using var form = new MultipartFormDataContent();
 
-            produto.Fornecedor = await _http.GetFromJsonAsync<FornecedorModel>($"{FornecedorUrl}/findById/{produto.FornecedorId}");
+            form.Add(new StringContent(produto.Nome), "Nome");
+            form.Add(new StringContent(produto.Quantidade.ToString()), "Quantidade");
+            form.Add(new StringContent(produto.Descricao ?? ""), "Descricao");
+            form.Add(new StringContent(produto.Preco.ToString(CultureInfo.InvariantCulture)), "Preco");
+            form.Add(new StringContent(produto.Tamanho ?? ""), "Tamanho");
+            form.Add(new StringContent(produto.Cor ?? ""), "Cor");
+            form.Add(new StringContent(produto.CategoriaId.ToString()), "CategoriaId");
+            form.Add(new StringContent(produto.FornecedorId.ToString()), "FornecedorId");
 
-            await _http.PutAsJsonAsync($"{ProdutoUrl}/update/{produto.Id}", produto);
+            if (produto.Imagem != null)
+            {
+                var streamContent = new StreamContent(produto.Imagem.OpenReadStream());
+
+                streamContent.Headers.ContentType =
+                    new MediaTypeHeaderValue(produto.Imagem.ContentType);
+
+                form.Add(streamContent, "Imagem", produto.Imagem.FileName);
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Put, $"{ProdutoUrl}/update/{id}")
+            {
+                Content = form
+            };
+
+            var response = await _http.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
         }
 
         public async Task Delete(int id)

@@ -49,6 +49,7 @@ namespace Estoque.Infrastructure.Repositories
             Produto produto = await _con.Produtos
                 .Include(p => p.Categoria)
                 .Include(p => p.Fornecedor)
+                .Include(p => p.Imagens)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             return produto;
@@ -65,12 +66,38 @@ namespace Estoque.Infrastructure.Repositories
             return produto;
         }
 
-        public async Task Update(Produto produto, int id)
+        public async Task Update(Produto produtoAtualizado)
         {
-            produto.Id = id;
-            produto.Categoria = await _con.Categorias.FindAsync(produto.CategoriaId);
-            produto.Fornecedor = await _con.Fornecedores.FindAsync(produto.FornecedorId);
-            _con.Produtos.Update(produto);
+            var produto = await _con.Produtos
+                .Include(p => p.Imagens)
+                .FirstOrDefaultAsync(p => p.Id == produtoAtualizado.Id);
+
+            produto.Nome = produtoAtualizado.Nome;
+            produto.Descricao = produtoAtualizado.Descricao;
+            produto.Preco = produtoAtualizado.Preco;
+            produto.Quantidade = produtoAtualizado.Quantidade;
+            produto.Cor = produtoAtualizado.Cor;
+            produto.Tamanho = produtoAtualizado.Tamanho;
+            produto.CategoriaId = produtoAtualizado.CategoriaId;
+            produto.FornecedorId = produtoAtualizado.FornecedorId;
+
+            if (produtoAtualizado.Imagens != null)
+            {
+                if (produto.Imagens != null && System.IO.File.Exists(produto.Imagens.Path))
+                {
+                    System.IO.File.Delete(produto.Imagens.Path);
+                }
+
+                if (produto.Imagens == null)
+                {
+                    produto.Imagens = new ImagemModel();
+                }
+
+                produto.Imagens.FileName = produtoAtualizado.Imagens.FileName;
+                produto.Imagens.ContentType = produtoAtualizado.Imagens.ContentType;
+                produto.Imagens.Path = produtoAtualizado.Imagens.Path;
+            }
+
             await _con.SaveChangesAsync();
         }
 
