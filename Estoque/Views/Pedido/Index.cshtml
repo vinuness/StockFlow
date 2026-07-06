@@ -13,9 +13,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Produtos</a>
                     </li>
-                    @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") ||
-                                                         User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
-                                                    )
+                    @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>

@@ -114,11 +114,24 @@ namespace Estoque.Infrastructure.Repositories
                 .Include(c => c.Pedidos)
                 .ThenInclude(p => p.Itens)
                 .ThenInclude(item => item.Produto)
+                .ThenInclude(pr => pr.Categoria)
+
+                .Include(c => c.Pedidos)
+                .ThenInclude(p => p.Itens)
+                .ThenInclude(item => item.Produto)
+                .ThenInclude(pr => pr.Fornecedor)
                 .FirstOrDefaultAsync(c => c.Email == email);
 
             List<Pedido> pedidos = cliente.Pedidos.ToList();
 
             return pedidos;
+        }
+
+        public async Task<double> Faturamento()
+        {
+            return await _con.Pedidos
+                .SelectMany(p => p.Itens)
+                .SumAsync(i => (double)(i.PrecoUnitario * i.Quantidade));
         }
     }
 }

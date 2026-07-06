@@ -7,9 +7,7 @@ namespace Estoque.Domain.Entities.Produtos
     {
         public int Id { get; set; }
         public long SKU { get; set; }
-
-        [JsonIgnore]
-        public ImagemModel Imagens { get; set; } = new();
+        public List<ImagemModel> Imagens { get; set; } = new();
         public string Nome { get; set; } = "";
         public int Quantidade { get; set; }
 
@@ -49,9 +47,8 @@ namespace Estoque.Domain.Entities.Produtos
         public string FileName { get; set; }
         public string ContentType { get; set; }
         public string Path { get; set; }
-
-        [JsonIgnore]
         public int ProdutoId { get; set; }
+        [JsonIgnore]
         public Produto Produto { get; set; }
 
     }

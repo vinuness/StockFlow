@@ -152,8 +152,6 @@ namespace Estoque.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     SKU = table.Column<long>(type: "bigint", nullable: false),
-                    ImagemUrl = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
@@ -181,6 +179,32 @@ namespace Estoque.Infrastructure.Migrations
                         name: "FK_Produtos_Fornecedores_FornecedorId",
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Imagens",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FileName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ContentType = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Path = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Imagens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Imagens_Produtos_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produtos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -233,6 +257,11 @@ namespace Estoque.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Imagens_ProdutoId",
+                table: "Imagens",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ItensPedido_PedidoId",
                 table: "ItensPedido",
                 column: "PedidoId");
@@ -269,6 +298,9 @@ namespace Estoque.Infrastructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ClienteEndereco");
+
+            migrationBuilder.DropTable(
+                name: "Imagens");
 
             migrationBuilder.DropTable(
                 name: "ItensPedido");

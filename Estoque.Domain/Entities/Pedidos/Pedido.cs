@@ -11,4 +11,9 @@ namespace Estoque.Domain.Entities.Pedidos
         public StatusPedido Status { get; set; }
         public List<ItemPedido> Itens { get; set; } = new();
     }
+
+    public class Faturamento
+    {
+        public double Valor { get; set; }
+    }
 }

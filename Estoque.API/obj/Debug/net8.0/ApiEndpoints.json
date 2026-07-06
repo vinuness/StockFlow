@@ -474,6 +474,26 @@
   },
   {
     "ContainingType": "Estoque.API.Controllers.PedidoController",
+    "Method": "Faturamento",
+    "RelativePath": "api/Pedido/faturamento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Double",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.PedidoController",
     "Method": "FindAll",
     "RelativePath": "api/Pedido/findAll",
     "HttpMethod": "GET",
@@ -686,6 +706,22 @@
   },
   {
     "ContainingType": "Estoque.API.Controllers.ProdutoController",
+    "Method": "ObterImagem",
+    "RelativePath": "api/Produto/imagem/{imagemId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "imagemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.ProdutoController",
     "Method": "MaisVendidos",
     "RelativePath": "api/Produto/mais_vendidos",
     "HttpMethod": "GET",
@@ -706,22 +742,6 @@
   },
   {
     "ContainingType": "Estoque.API.Controllers.ProdutoController",
-    "Method": "ObterImagem",
-    "RelativePath": "api/Produto/produto/imagem/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Estoque.API.Controllers.ProdutoController",
     "Method": "Save",
     "RelativePath": "api/Produto/save",
     "HttpMethod": "POST",
@@ -730,157 +750,12 @@
     "Parameters": [
       {
         "Name": "Imagem",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
         "IsRequired": false
       },
       {
-        "Name": "Imagens.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.FileName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.ContentType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Path",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.ProdutoId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.SKU",
-        "Type": "System.Int64",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.FileName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.ContentType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.Path",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.ProdutoId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.Produto",
-        "Type": "Estoque.Domain.Entities.Produtos.Produto",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Nome",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Quantidade",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Descricao",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Preco",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Tamanho",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Cor",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.CategoriaId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Categoria.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Categoria.Nome",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.FornecedorId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Nome",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Cnpj",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Telefone",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Status",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.ItensPedido",
-        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Pedidos.ItemPedido, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Imagens",
+        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Produtos.ImagemModel, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {
@@ -951,157 +826,12 @@
       },
       {
         "Name": "Imagem",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
         "IsRequired": false
       },
       {
-        "Name": "Imagens.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.FileName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.ContentType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Path",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.ProdutoId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.SKU",
-        "Type": "System.Int64",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.FileName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.ContentType",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.Path",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.ProdutoId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Imagens.Produto",
-        "Type": "Estoque.Domain.Entities.Produtos.Produto",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Nome",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Quantidade",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Descricao",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Preco",
-        "Type": "System.Decimal",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Tamanho",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Cor",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.CategoriaId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Categoria.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Categoria.Nome",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.FornecedorId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Id",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Nome",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Cnpj",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Telefone",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Fornecedor.Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.Status",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Imagens.Produto.ItensPedido",
-        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Pedidos.ItemPedido, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Name": "Imagens",
+        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Produtos.ImagemModel, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
       },
       {

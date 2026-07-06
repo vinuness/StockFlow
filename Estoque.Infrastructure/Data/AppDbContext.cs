@@ -16,6 +16,11 @@ namespace Estoque.Infrastructure.Data
             var produto = modelBuilder.Entity<Produto>();
             produto.HasIndex(p => p.SKU).IsUnique();
 
+            modelBuilder.Entity<ImagemModel>()
+                .HasOne(i => i.Produto)
+                .WithMany(P => P.Imagens)
+                .HasForeignKey(i => i.ProdutoId);
+
             //Cliente tem email e Cpf unicos
             var cliente = modelBuilder.Entity<Cliente>();
             cliente.HasIndex(c => c.Email).IsUnique();

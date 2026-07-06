@@ -6,5 +6,6 @@ namespace Estoque.Services.Interfaces
     {
         Task<List<PedidoModel>> FindAll(string email);
         Task<HttpResponseMessage> FazerPedido(List<ProdutoPedidoDTO> produtos, int id);
+        Task<double> Faturamento();
     }
 }

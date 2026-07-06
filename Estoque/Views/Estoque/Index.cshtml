@@ -1,7 +1,7 @@
 ﻿@model List<Estoque.Models.EstoqueModel>
 
 @{
-    var imagem = "https://localhost:7238/api/Produto/produto/imagem/";
+    var imagem = "https://localhost:7238/api/Produto/imagem/";
 }
 
 <header>
@@ -17,9 +17,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Produtos</a>
                     </li>
-                    @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") ||
-                                                         User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
-                                                    )
+                    @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
@@ -58,10 +56,54 @@
         {
             <div class="col-md-3 mb-4">
                 <div class="card h-100 text-center shadow-sm">
+                    @if (produto.Imagens != null && produto.Imagens.Any())
+                    {
+                        <div id="carousel-@produto.Id" class="carousel slide" data-bs-ride="carousel">
 
-                    <img src="@imagem@produto.Id"
-                         class="card-img-top p-3"
-                         style="height:220px; object-fit:contain;" /> 
+                            <div class="carousel-inner">
+
+                                @for (int i = 0; i < produto.Imagens.Count; i++)
+                                {
+                                    var img = produto.Imagens[i];
+
+                                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                                        <img src="@($"{imagem}{img.Id}")"
+                                             class="d-block w-100"
+                                             style="height:220px; object-fit:contain;" />
+                                    </div>
+                                }
+
+                            </div>
+
+                            @if (produto.Imagens.Count > 1)
+                            {
+                                <button class="carousel-control-prev"
+                                        type="button"
+                                        data-bs-target="#carousel-@produto.Id"
+                                        data-bs-slide="prev">
+
+                                    <span class="carousel-control-prev-icon"></span>
+
+                                </button>
+
+                                <button class="carousel-control-next"
+                                        type="button"
+                                        data-bs-target="#carousel-@produto.Id"
+                                        data-bs-slide="next">
+
+                                    <span class="carousel-control-next-icon"></span>
+
+                                </button>
+                            }
+
+                        </div>
+                    }
+                    else
+                    {
+                        <img src="/images/sem-imagem.png"
+                             class="card-img-top"
+                             style="height:220px; object-fit:contain;" />
+                    }
 
                     <div class="card-body">
 

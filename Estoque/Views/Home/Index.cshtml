@@ -14,9 +14,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Produtos</a>
                     </li>
-                    @if (User.HasClaim(c => c.Type == "role" && c.Value == "Admin") ||
-                         User.HasClaim(c => c.Type == "role" && c.Value == "Operador")
-                                                    )
+                    @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
@@ -71,6 +69,21 @@
                     </h3>
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Faturamento</h6>
+                    <h3 class="fw-bold text-success">
+                        @(((double)ViewBag.Faturamento).ToString("C"))
+                    </h3>
+                    <button class="btn btn-success mb-3" onclick="baixarFaturamento()">
+                        Baixar faturamento
+                    </button>
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-4">
@@ -138,12 +151,24 @@
         });
 
         function downloadChart(){
-        const link = document.createElement("a");   
+            const link = document.createElement("a");   
 
-        link.href = chart.toBase64Image();
-        link.download = "produtos-mais-vendidos.png";
+            link.href = chart.toBase64Image();
+            link.download = "produtos-mais-vendidos.png";
 
-        link.click();
+            link.click();
         }
+
+        function baixarFaturamento() {
+        const link = document.createElement("a");
+
+        link.href = "/Home/DownloadFaturamento";
+        link.download = "faturamento.txt";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        }
+
     </script>
 }

@@ -39,6 +39,7 @@ namespace Estoque.Infrastructure.Repositories
             List<Produto> produtos = await _con.Produtos
                 .Include(p => p.Categoria)
                 .Include(p => p.Fornecedor)
+                .Include(p => p.Imagens)
                 .ToListAsync();
 
             return produtos;
@@ -72,6 +73,8 @@ namespace Estoque.Infrastructure.Repositories
                 .Include(p => p.Imagens)
                 .FirstOrDefaultAsync(p => p.Id == produtoAtualizado.Id);
 
+            if (produto == null) throw new Exception("produto nao encontrado");
+
             produto.Nome = produtoAtualizado.Nome;
             produto.Descricao = produtoAtualizado.Descricao;
             produto.Preco = produtoAtualizado.Preco;
@@ -81,21 +84,22 @@ namespace Estoque.Infrastructure.Repositories
             produto.CategoriaId = produtoAtualizado.CategoriaId;
             produto.FornecedorId = produtoAtualizado.FornecedorId;
 
-            if (produtoAtualizado.Imagens != null)
+            if (produtoAtualizado.Imagens != null && produtoAtualizado.Imagens.Any())
             {
-                if (produto.Imagens != null && System.IO.File.Exists(produto.Imagens.Path))
+                // Remove os arquivos antigos do disco
+                foreach (var imagem in produto.Imagens)
                 {
-                    System.IO.File.Delete(produto.Imagens.Path);
+                    if (System.IO.File.Exists(imagem.Path))
+                    {
+                        System.IO.File.Delete(imagem.Path);
+                    }
                 }
 
-                if (produto.Imagens == null)
-                {
-                    produto.Imagens = new ImagemModel();
-                }
+                // Remove os registros antigos do banco
+                _con.Imagens.RemoveRange(produto.Imagens);
 
-                produto.Imagens.FileName = produtoAtualizado.Imagens.FileName;
-                produto.Imagens.ContentType = produtoAtualizado.Imagens.ContentType;
-                produto.Imagens.Path = produtoAtualizado.Imagens.Path;
+                // Adiciona as novas imagens
+                produto.Imagens = produtoAtualizado.Imagens;
             }
 
             await _con.SaveChangesAsync();
@@ -112,6 +116,11 @@ namespace Estoque.Infrastructure.Repositories
                 .OrderByDescending(p => p.QuantidadeVendida)
                 .Take(5)
                 .ToListAsync();
+        }
+
+        public async Task<ImagemModel> buscarImagem(int id)
+        {
+            return await _con.Imagens.FindAsync(id);
         }
     }
 }

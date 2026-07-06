@@ -67,5 +67,11 @@ namespace Estoque.API.Controllers
             List<Pedido> pedidos = await _service.buscarPedidosDeCliente(email);
             return Ok(pedidos);
         }
+
+        [HttpGet("faturamento")]
+        public async Task<ActionResult<double>> Faturamento() {
+            double valor = await _service.Faturamento();
+            return Ok(valor);
+        }
     }
 }

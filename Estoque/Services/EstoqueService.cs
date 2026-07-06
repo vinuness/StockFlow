@@ -19,7 +19,9 @@ namespace Estoque.Services
 
         public async Task<List<EstoqueModel>?> FindAll()
         {
-            return await _http.GetFromJsonAsync<List<EstoqueModel>>($"{ProdutoUrl}/findAll");
+            var produtos = await _http.GetFromJsonAsync<List<EstoqueModel>>($"{ProdutoUrl}/findAll");
+
+            return produtos;
         }
 
         public async Task<EstoqueModel?> FindById(int id)
@@ -36,20 +38,23 @@ namespace Estoque.Services
             form.Add(new StringContent(produto.Nome), "Nome");
             form.Add(new StringContent(produto.Quantidade.ToString()), "Quantidade");
             form.Add(new StringContent(produto.Descricao ?? ""), "Descricao");
-            form.Add(new StringContent(produto.Preco.ToString(CultureInfo.InvariantCulture)), "Preco");
+            form.Add(new StringContent(produto.Preco.ToString(new CultureInfo("pt-BR"))), "Preco");
             form.Add(new StringContent(produto.Tamanho ?? ""), "Tamanho");
             form.Add(new StringContent(produto.Cor ?? ""), "Cor");
             form.Add(new StringContent(produto.CategoriaId.ToString()), "CategoriaId");
             form.Add(new StringContent(produto.FornecedorId.ToString()), "FornecedorId");
 
-            if (produto.Imagem != null)
+            if (produto.Imagem != null && produto.Imagem.Any())
             {
-                var streamContent = new StreamContent(produto.Imagem.OpenReadStream());
+                foreach (var imagem in produto.Imagem)
+                {
+                    var streamContent = new StreamContent(imagem.OpenReadStream());
 
-                streamContent.Headers.ContentType =
-                    new System.Net.Http.Headers.MediaTypeHeaderValue(produto.Imagem.ContentType);
+                    streamContent.Headers.ContentType =
+                        new System.Net.Http.Headers.MediaTypeHeaderValue(imagem.ContentType);
 
-                form.Add(streamContent, "Imagem", produto.Imagem.FileName);
+                    form.Add(streamContent, "Imagem", imagem.FileName);
+                }
             }
 
             var response = await _http.PostAsync($"{ProdutoUrl}/save", form);
@@ -71,20 +76,23 @@ namespace Estoque.Services
             form.Add(new StringContent(produto.Nome), "Nome");
             form.Add(new StringContent(produto.Quantidade.ToString()), "Quantidade");
             form.Add(new StringContent(produto.Descricao ?? ""), "Descricao");
-            form.Add(new StringContent(produto.Preco.ToString(CultureInfo.InvariantCulture)), "Preco");
+            form.Add(new StringContent(produto.Preco.ToString(new CultureInfo("pt-BR"))), "Preco");
             form.Add(new StringContent(produto.Tamanho ?? ""), "Tamanho");
             form.Add(new StringContent(produto.Cor ?? ""), "Cor");
             form.Add(new StringContent(produto.CategoriaId.ToString()), "CategoriaId");
             form.Add(new StringContent(produto.FornecedorId.ToString()), "FornecedorId");
 
-            if (produto.Imagem != null)
+            if (produto.Imagem != null && produto.Imagem.Any())
             {
-                var streamContent = new StreamContent(produto.Imagem.OpenReadStream());
+                foreach (var imagem in produto.Imagem)
+                {
+                    var streamContent = new StreamContent(imagem.OpenReadStream());
 
-                streamContent.Headers.ContentType =
-                    new MediaTypeHeaderValue(produto.Imagem.ContentType);
+                    streamContent.Headers.ContentType =
+                        new MediaTypeHeaderValue(imagem.ContentType);
 
-                form.Add(streamContent, "Imagem", produto.Imagem.FileName);
+                    form.Add(streamContent, "Imagem", imagem.FileName);
+                }
             }
 
             var request = new HttpRequestMessage(HttpMethod.Put, $"{ProdutoUrl}/update/{id}")

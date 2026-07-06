@@ -11,5 +11,6 @@ namespace Estoque.Domain.Interfaces.IServices
         public Task Update(Pedido pedido, int id);
         public Task Delete(int id);
         public Task<List<Pedido>> buscarPedidosDeCliente(string email);
+        public Task<double> Faturamento();
     }
 }

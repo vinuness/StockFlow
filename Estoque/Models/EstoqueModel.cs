@@ -7,7 +7,7 @@ namespace Estoque.Models
     {
         public int Id { get; set; }
         public long SKU { get; set; }
-        public ImagemModel Imagem { get; set; }
+        public List<ImagemModel> Imagens { get; set; }
         public string Nome { get; set; }
         public int Quantidade { get; set; }
         public string Descricao { get; set; }
@@ -64,6 +64,6 @@ namespace Estoque.Models
 
         public int FornecedorId { get; set; }
 
-        public IFormFile? Imagem { get; set; }
+        public List<IFormFile>? Imagem { get; set; }
     }
 }

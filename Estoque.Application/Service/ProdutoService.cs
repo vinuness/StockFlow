@@ -71,5 +71,11 @@ namespace Estoque.Application.Service
         {
             return await _repo.ProdutosMaisVendidos();
         }
+
+        public async Task<ImagemModel> buscarImagem(int id)
+        {
+            return await _repo.buscarImagem(id);
+        }
+
     }
 }

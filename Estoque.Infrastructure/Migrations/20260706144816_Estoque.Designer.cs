@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estoque.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260705155429_ProdutoFile")]
-    partial class ProdutoFile
+    [Migration("20260706144816_Estoque")]
+    partial class Estoque
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,8 +224,7 @@ namespace Estoque.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdutoId")
-                        .IsUnique();
+                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Imagens");
                 });
@@ -324,8 +323,8 @@ namespace Estoque.Infrastructure.Migrations
             modelBuilder.Entity("Estoque.Domain.Entities.Produtos.ImagemModel", b =>
                 {
                     b.HasOne("Estoque.Domain.Entities.Produtos.Produto", "Produto")
-                        .WithOne("Imagens")
-                        .HasForeignKey("Estoque.Domain.Entities.Produtos.ImagemModel", "ProdutoId")
+                        .WithMany("Imagens")
+                        .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

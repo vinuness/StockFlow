@@ -22,5 +22,10 @@ namespace Estoque.Services
         {
             return await _http.PostAsJsonAsync($"{BaseUrl}/save/pedido/user/{id}", produtos);
         }
+
+        public async Task<double> Faturamento()
+        {
+            return await _http.GetFromJsonAsync<double>("https://localhost:7238/api/Pedido/faturamento");
+        }
     }
 }

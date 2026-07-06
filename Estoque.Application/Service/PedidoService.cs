@@ -50,5 +50,10 @@ namespace Estoque.Application.Service
         {
             return await _repo.buscarPedidosDeCliente(email);
         }
+
+        public async Task<double> Faturamento()
+        {
+            return await _repo.Faturamento();
+        }
     }
 }

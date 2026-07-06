@@ -10,5 +10,6 @@ namespace Estoque.Domain.Interfaces.IRepositories
         public Task Update(Produto produto);
         public Task Delete(int id);
         public Task<List<ProdutoMaisVendidoDTO>> ProdutosMaisVendidos();
+        public Task<ImagemModel> buscarImagem(int id);
     }
 }

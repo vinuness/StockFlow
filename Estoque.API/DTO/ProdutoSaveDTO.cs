@@ -6,8 +6,8 @@ namespace Estoque.API.DTO
 {
     public class ProdutoSaveDTO
     {
-        public IFormFile? Imagem { get; set; }
-        public ImagemModel Imagens { get; set; } = new();
+        public List<IFormFile>? Imagem { get; set; }
+        public List<ImagemModel> Imagens { get; set; } = new();
         public string Nome { get; set; } = "";
         public int Quantidade { get; set; }
 
