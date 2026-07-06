@@ -84,24 +84,6 @@ namespace Estoque.Infrastructure.Repositories
             produto.CategoriaId = produtoAtualizado.CategoriaId;
             produto.FornecedorId = produtoAtualizado.FornecedorId;
 
-            if (produtoAtualizado.Imagens != null && produtoAtualizado.Imagens.Any())
-            {
-                // Remove os arquivos antigos do disco
-                foreach (var imagem in produto.Imagens)
-                {
-                    if (System.IO.File.Exists(imagem.Path))
-                    {
-                        System.IO.File.Delete(imagem.Path);
-                    }
-                }
-
-                // Remove os registros antigos do banco
-                _con.Imagens.RemoveRange(produto.Imagens);
-
-                // Adiciona as novas imagens
-                produto.Imagens = produtoAtualizado.Imagens;
-            }
-
             await _con.SaveChangesAsync();
         }
 

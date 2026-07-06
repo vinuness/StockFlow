@@ -86,7 +86,7 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEndereco(EnderecoModel endereco)
         {
-            var email = User.FindFirst("email")?.Value;
+            var email = User.FindFirstValue(ClaimTypes.Email);
             await _clienteService.AddEndereco(email, endereco);
             return RedirectToAction("Perfil");
         }
