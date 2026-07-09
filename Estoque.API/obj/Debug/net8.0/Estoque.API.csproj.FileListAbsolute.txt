@@ -155,3 +155,7 @@ C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\refint\Estoque.API.d
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\Estoque.API.pdb
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\Estoque.API.genruntimeconfig.cache
 C:\Users\Vinicius\source\repos\Estoque.API\obj\Debug\net8.0\ref\Estoque.API.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Npgsql.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll

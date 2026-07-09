@@ -84,7 +84,7 @@ constant.ConfigFilePath = ConfigPath;
 
 builder.Services.AddDbContext<AppDbContext>((options) =>
 {
-    options.UseMySql(Constants.Connection, ServerVersion.AutoDetect(Constants.Connection));
+    options.UseNpgsql(Constants.Connection);
 });
 
 builder.Services.AddCors();

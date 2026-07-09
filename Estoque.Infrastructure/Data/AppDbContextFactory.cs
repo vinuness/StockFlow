@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace Estoque.Infrastructure.Data
 {
@@ -16,7 +17,7 @@ namespace Estoque.Infrastructure.Data
             var connection = config.GetConnectionString("connection"); //recebo o atributo connection presente no arquivo
 
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseMySql(connection, ServerVersion.AutoDetect(connection)); //insiro a conexao com o MySQL
+            optionsBuilder.UseNpgsql(connection); //insiro a conexao com o Postgre
 
             return new AppDbContext(optionsBuilder.Options); //retorno um novo DbContext
         }
