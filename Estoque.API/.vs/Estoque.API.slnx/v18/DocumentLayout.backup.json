@@ -3,6 +3,13 @@
   "WorkspaceRootPath": "C:\\Users\\Vinicius\\source\\repos\\Estoque.API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B2BB68FE-3D57-DDA2-BDB8-3264FDBE4D10}|..\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj|c:\\users\\vinicius\\source\\repos\\estoque.infrastructure\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C93F38BD-7AC7-FEAC-71A8-8ED634CCB71D}|Estoque.API.csproj|c:\\users\\vinicius\\source\\repos\\estoque.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C93F38BD-7AC7-FEAC-71A8-8ED634CCB71D}|Estoque.API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C93F38BD-7AC7-FEAC-71A8-8ED634CCB71D}|Estoque.API.csproj|c:\\users\\vinicius\\source\\repos\\estoque.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C93F38BD-7AC7-FEAC-71A8-8ED634CCB71D}|Estoque.API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,9 +18,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{B2BB68FE-3D57-DDA2-BDB8-3264FDBE4D10}|..\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj|c:\\users\\vinicius\\source\\repos\\estoque.infrastructure\\estoque.infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2BB68FE-3D57-DDA2-BDB8-3264FDBE4D10}|..\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj|c:\\users\\vinicius\\source\\repos\\estoque.infrastructure\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Vinicius\\OneDrive\\\u00C1rea de Trabalho\\Conexoes\\STOCKFLOW.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
@@ -33,37 +37,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Estoque.Infrastructure",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-10T00:05:39.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Estoque.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj",
               "RelativeDocumentMoniker": "..\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj",
               "RelativeToolTip": "..\\Estoque.Infrastructure\\Estoque.Infrastructure.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-07-09T12:28:12.809Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-09T12:28:12.809Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.API\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAAAFMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwCUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-09T12:07:43.28Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "STOCKFLOW.config",
               "DocumentMoniker": "C:\\Users\\Vinicius\\OneDrive\\\u00C1rea de Trabalho\\Conexoes\\STOCKFLOW.config",
               "RelativeDocumentMoniker": "..\\..\\..\\OneDrive\\\u00C1rea de Trabalho\\Conexoes\\STOCKFLOW.config",
@@ -71,25 +87,24 @@
               "RelativeToolTip": "..\\..\\..\\OneDrive\\\u00C1rea de Trabalho\\Conexoes\\STOCKFLOW.config",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2026-07-09T12:06:50.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-09T12:06:50.418Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\appsettings.json",
               "RelativeDocumentMoniker": "..\\Estoque.Infrastructure\\appsettings.json",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\appsettings.json",
               "RelativeToolTip": "..\\Estoque.Infrastructure\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-07-09T12:02:42.694Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "AppDbContextFactory.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Infrastructure\\Data\\AppDbContextFactory.cs",
               "RelativeDocumentMoniker": "..\\Estoque.Infrastructure\\Data\\AppDbContextFactory.cs",
@@ -97,12 +112,11 @@
               "RelativeToolTip": "..\\Estoque.Infrastructure\\Data\\AppDbContextFactory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-09T11:58:41.516Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-09T11:58:41.516Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ProdutoService.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Application\\Service\\ProdutoService.cs",
               "RelativeDocumentMoniker": "..\\Estoque.Application\\Service\\ProdutoService.cs",
@@ -110,12 +124,11 @@
               "RelativeToolTip": "..\\Estoque.Application\\Service\\ProdutoService.cs",
               "ViewState": "AgIAACUAAAAAAAAAAAAcwE4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-09T02:49:10.646Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-09T02:49:10.646Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "EnderecoController.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque.API\\Controllers\\EnderecoController.cs",
               "RelativeDocumentMoniker": "Controllers\\EnderecoController.cs",
@@ -123,8 +136,7 @@
               "RelativeToolTip": "Controllers\\EnderecoController.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAIBJwAoAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T22:07:35.441Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-06T22:07:35.441Z"
             }
           ]
         }

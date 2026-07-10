@@ -27,7 +27,16 @@ builder.Services.AddEndpointsApiExplorer();
 // Adiciona o Swagger personalizado
 builder.Services.AddInfrastructureSwagger();
 
+builder.Configuration.SetBasePath(
+    Path.Combine(Directory.GetCurrentDirectory(),
+    "..",
+    "Estoque.Infrastructure")
+    ).AddJsonFile("appsettings.json");
+
 var key = builder.Configuration["Jwt:Key"]; //pego a chave do appsettings.json
+
+// Obtém o caminho do arquivo de configuração a partir do appsettings.json e expande as variáveis de ambiente
+var ConfigPath = Environment.ExpandEnvironmentVariables(builder.Configuration["ConnectionStrings:connection"]);
 
 builder.Services
     .AddAuthentication(options => //configuro a autenticação para usar JWT Bearer
@@ -73,11 +82,6 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IEnderecoService, EnderecoService>();
 
 builder.Services.AddScoped<JWTService>();
-
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-// Obtém o caminho do arquivo de configuração a partir do appsettings.json e expande as variáveis de ambiente
-var ConfigPath = Environment.ExpandEnvironmentVariables(builder.Configuration["ConnectionStrings:ConfigPath"]);
 
 var constant = new Constants();
 constant.ConfigFilePath = ConfigPath;
