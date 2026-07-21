@@ -1,4 +1,5 @@
-﻿using Estoque.Domain.Entities.Clientes;
+﻿using Estoque.Domain.Entities;
+using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Interfaces.IServices;
 using System.IdentityModel.Tokens.Jwt;
@@ -43,6 +44,8 @@ namespace Estoque.Application.Service
             //Transforma a senha em hash usando BCrypt
             cliente.Senha = HashSenha(cliente.Senha);
             await _repo.Save(cliente);
+            EmailSender emailSender = new();
+            emailSender.SendEmail(cliente);
             return cliente;
         }
 

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Hxypkg2cEDk=",
+  "dgSpecHash": "9cjRMVhwwvc=",
   "success": true,
   "projectFilePath": "C:\\Users\\Vinicius\\source\\repos\\Estoque.Domain\\Estoque.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Vinicius\\.nuget\\packages\\extended.wpf.toolkit\\5.1.2\\extended.wpf.toolkit.5.1.2.nupkg.sha512"
+  ],
   "logs": []
 }
