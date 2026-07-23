@@ -37,6 +37,25 @@ namespace Estoque.Infrastructure.Migrations
                     b.ToTable("ClienteEndereco");
                 });
 
+            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Carrinho", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId")
+                        .IsUnique();
+
+                    b.ToTable("Carrinhos");
+                });
+
             modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Cliente", b =>
                 {
                     b.Property<int>("Id")
@@ -103,6 +122,32 @@ namespace Estoque.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Enderecos");
+                });
+
+            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.ItemCarrinho", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CarrinhoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarrinhoId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("ItensCarrinho");
                 });
 
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.ItemPedido", b =>
@@ -291,6 +336,36 @@ namespace Estoque.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Carrinho", b =>
+                {
+                    b.HasOne("Estoque.Domain.Entities.Clientes.Cliente", "Cliente")
+                        .WithOne("Carrinho")
+                        .HasForeignKey("Estoque.Domain.Entities.Clientes.Carrinho", "ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.ItemCarrinho", b =>
+                {
+                    b.HasOne("Estoque.Domain.Entities.Clientes.Carrinho", "Carrinho")
+                        .WithMany("Items")
+                        .HasForeignKey("CarrinhoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Estoque.Domain.Entities.Produtos.Produto", "Produto")
+                        .WithMany("ItensCarrinho")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Carrinho");
+
+                    b.Navigation("Produto");
+                });
+
             modelBuilder.Entity("Estoque.Domain.Entities.Pedidos.ItemPedido", b =>
                 {
                     b.HasOne("Estoque.Domain.Entities.Pedidos.Pedido", "Pedido")
@@ -347,8 +422,15 @@ namespace Estoque.Infrastructure.Migrations
                     b.Navigation("Fornecedor");
                 });
 
+            modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Carrinho", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("Estoque.Domain.Entities.Clientes.Cliente", b =>
                 {
+                    b.Navigation("Carrinho");
+
                     b.Navigation("Pedidos");
                 });
 
@@ -360,6 +442,8 @@ namespace Estoque.Infrastructure.Migrations
             modelBuilder.Entity("Estoque.Domain.Entities.Produtos.Produto", b =>
                 {
                     b.Navigation("Imagens");
+
+                    b.Navigation("ItensCarrinho");
 
                     b.Navigation("ItensPedido");
                 });

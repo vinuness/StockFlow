@@ -593,14 +593,20 @@
   {
     "ContainingType": "Estoque.API.Controllers.ProdutoController",
     "Method": "ListarProdutosCarrinho",
-    "RelativePath": "api/Produto/carrinho",
+    "RelativePath": "api/Produto/carrinho/{email}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Produtos.Produto, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[Estoque.Domain.Entities.Clientes.ItemCarrinho, Estoque.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -613,11 +619,16 @@
   {
     "ContainingType": "Estoque.API.Controllers.ProdutoController",
     "Method": "AddCarrinho",
-    "RelativePath": "api/Produto/carrinho/add/{id}",
+    "RelativePath": "api/Produto/carrinho/{email}/add/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
       {
         "Name": "id",
         "Type": "System.Int32",
@@ -629,14 +640,35 @@
   {
     "ContainingType": "Estoque.API.Controllers.ProdutoController",
     "Method": "RemoverCarrinho",
-    "RelativePath": "api/Produto/carrinho/remove/{id}",
+    "RelativePath": "api/Produto/carrinho/{email}/remove/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.ProdutoController",
+    "Method": "limparCarrinho",
+    "RelativePath": "api/Produto/carrinho/clean/{email}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

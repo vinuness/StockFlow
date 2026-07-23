@@ -10,15 +10,17 @@ namespace Estoque.Infrastructure
     {
         public static byte[] GerarPedidoPdf(Cliente cliente, Pedido pedido)
         {
-            return Document.Create(document =>
+            return Document.Create(document => //cria documento
             {
-                document.Page(page =>
+                document.Page(page => //define o conteudo do pdf
                 {
+
+                    //config da pagina
                     page.Size(PageSizes.A4);
                     page.Margin(30);
                     page.DefaultTextStyle(x => x.FontSize(11));
 
-                    page.Header().Column(column =>
+                    page.Header().Column(column => //define o cabeçalho
                     {
                         column.Item().Text("STOCKFLOW")
                             .Bold()
@@ -26,22 +28,20 @@ namespace Estoque.Infrastructure
                             .FontColor(Colors.Blue.Medium);
 
                         column.Item().Text("Comprovante do Pedido");
+                        column.Spacing(10);
                     });
 
                     page.Content().Column(column =>
                     {
-                        column.Spacing(10);
-
                         column.Item().Text($"Cliente: {cliente.Nome}");
                         column.Item().Text($"E-mail: {cliente.Email}");
-
                         column.Item().Text($"Pedido: #{pedido.Id}");
                         column.Item().Text($"Data: {pedido.DataPedido:dd/MM/yyyy HH:mm}");
                         column.Item().Text($"Status: {pedido.Status}");
 
                         column.Item().PaddingVertical(10);
 
-                        column.Item().Table(table =>
+                        column.Item().Table(table => //cria uma tabela
                         {
                             table.ColumnsDefinition(columns =>
                             {
@@ -53,8 +53,9 @@ namespace Estoque.Infrastructure
 
                             table.Header(header =>
                             {
+                                //cabeçalhos da tabela
                                 header.Cell().Background(Colors.Grey.Lighten2).Padding(5).Text("Produto").Bold();
-                                header.Cell().Background(Colors.Grey.Lighten2).Padding(5).Text("Qtd").Bold();
+                                header.Cell().Background(Colors.Grey.Lighten2).Padding(5).Text("Quantidade").Bold();
                                 header.Cell().Background(Colors.Grey.Lighten2).Padding(5).Text("Valor").Bold();
                                 header.Cell().Background(Colors.Grey.Lighten2).Padding(5).Text("Subtotal").Bold();
                             });
@@ -62,7 +63,7 @@ namespace Estoque.Infrastructure
                             decimal total = 0;
 
                             foreach (var item in pedido.Itens)
-                            {
+                            { //para cada item cria uma linha da tabela
                                 var subtotal = item.Quantidade * item.PrecoUnitario;
                                 total += subtotal;
 
@@ -72,6 +73,7 @@ namespace Estoque.Infrastructure
                                 table.Cell().Padding(5).Text($"R$ {subtotal:N2}");
                             }
 
+                            //cria mais duas celulas para determinar o Total, alinhadas a direita
                             table.Cell().ColumnSpan(3)
                                 .AlignRight()
                                 .PaddingTop(10)

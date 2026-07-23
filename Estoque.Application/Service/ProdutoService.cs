@@ -1,4 +1,5 @@
-﻿using Estoque.Domain.Entities.Produtos;
+﻿using Estoque.Domain.Entities.Clientes;
+using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Interfaces.IServices;
 
@@ -7,9 +8,11 @@ namespace Estoque.Application.Service
     public class ProdutoService : IProdutoService
     {
         private readonly IProdutoRepository _repo;
-        public ProdutoService(IProdutoRepository repo)
+        private readonly ICarrinhoRepository _repoCar;
+        public ProdutoService(IProdutoRepository repo, ICarrinhoRepository repoCar)
         {
             _repo = repo;
+            _repoCar = repoCar;
         }
         public async Task Delete(int id)
         {
@@ -39,32 +42,20 @@ namespace Estoque.Application.Service
             await _repo.Update(produto);
         }
 
-        public async Task<List<Produto>> ListarProdutosCarrinho()
+        public async Task<List<ItemCarrinho>> ListarProdutosCarrinho(string email)
         {
-            List<Produto> produtos = await _repo.FindAll();
-            List<Produto> carrinho = new List<Produto>();
-            foreach (var produto in produtos)
-            {
-                if (produto.Status.Equals(StatusProduto.CARRINHO))
-                {
-                    carrinho.Add(produto);
-                }
-            }
+            List<ItemCarrinho> carrinho = await _repoCar.Carrinho(email);
             return carrinho;
         }
 
-        public async Task AddCarrinho(int id)
+        public async Task AddCarrinho(string email, int id)
         {
-            Produto produto = await _repo.FindById(id);
-            produto.Status = StatusProduto.CARRINHO;
-            await _repo.Update(produto);
+            await _repoCar.addCarrinho(email, id);
         }
 
-        public async Task RemoverCarrinho(int id)
+        public async Task RemoverCarrinho(string email, int id)
         {
-            Produto produto = await _repo.FindById(id);
-            produto.Status = StatusProduto.CATALOGADO;
-            await _repo.Update(produto);
+            await _repoCar.removeCarrinho(email, id);
         }
 
         public async Task<List<ProdutoMaisVendidoDTO>> ProdutosMaisVendidos()
@@ -75,6 +66,11 @@ namespace Estoque.Application.Service
         public async Task<ImagemModel> buscarImagem(int id)
         {
             return await _repo.buscarImagem(id);
+        }
+
+        public async Task limparCarrinho(string email)
+        {
+            await _repoCar.limparCarrinho(email);
         }
 
     }

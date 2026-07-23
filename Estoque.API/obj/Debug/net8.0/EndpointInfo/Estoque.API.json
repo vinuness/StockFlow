@@ -1363,10 +1363,20 @@
         }
       }
     },
-    "/api/Produto/carrinho": {
+    "/api/Produto/carrinho/{email}": {
       "get": {
         "tags": [
           "Produto"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -1376,7 +1386,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Produto"
+                    "$ref": "#/components/schemas/ItemCarrinho"
                   }
                 }
               },
@@ -1384,7 +1394,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Produto"
+                    "$ref": "#/components/schemas/ItemCarrinho"
                   }
                 }
               },
@@ -1392,7 +1402,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Produto"
+                    "$ref": "#/components/schemas/ItemCarrinho"
                   }
                 }
               }
@@ -1401,12 +1411,20 @@
         }
       }
     },
-    "/api/Produto/carrinho/add/{id}": {
+    "/api/Produto/carrinho/{email}/add/{id}": {
       "put": {
         "tags": [
           "Produto"
         ],
         "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path",
@@ -1424,12 +1442,20 @@
         }
       }
     },
-    "/api/Produto/carrinho/remove/{id}": {
+    "/api/Produto/carrinho/{email}/remove/{id}": {
       "put": {
         "tags": [
           "Produto"
         ],
         "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path",
@@ -1437,6 +1463,28 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Produto/carrinho/clean/{email}": {
+      "put": {
+        "tags": [
+          "Produto"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -1590,6 +1638,30 @@
   },
   "components": {
     "schemas": {
+      "Carrinho": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemCarrinho"
+            },
+            "nullable": true
+          },
+          "clienteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          }
+        },
+        "additionalProperties": false
+      },
       "Categoria": {
         "type": "object",
         "properties": {
@@ -1751,6 +1823,34 @@
             "nullable": true
           },
           "produtoId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemCarrinho": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrinhoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carrinho": {
+            "$ref": "#/components/schemas/Carrinho"
+          },
+          "produtoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "produto": {
+            "$ref": "#/components/schemas/Produto"
+          },
+          "quantidade": {
             "type": "integer",
             "format": "int32"
           }

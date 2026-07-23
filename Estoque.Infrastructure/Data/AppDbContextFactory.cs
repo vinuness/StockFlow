@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Estoque.Infrastructure.Utilidades;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
@@ -14,10 +15,13 @@ namespace Estoque.Infrastructure.Data
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build(); //pego o diretorio atual e coloco o arquivo .json
 
-            var connection = config.GetConnectionString("connection"); //recebo o atributo connection presente no arquivo
+            var ConfigPath = Environment.ExpandEnvironmentVariables(config["ConnectionStrings:connection"]); //recebo o atributo connection presente no arquivo
+
+            var constant = new Constants();
+            constant.ConfigFilePath = ConfigPath;
 
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseNpgsql(connection); //insiro a conexao com o Postgre
+            optionsBuilder.UseNpgsql(Constants.Connection); //insiro a conexao com o Postgre
 
             return new AppDbContext(optionsBuilder.Options); //retorno um novo DbContext
         }

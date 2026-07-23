@@ -19,5 +19,8 @@ namespace Estoque.Domain.Entities.Clientes
 
         [JsonIgnore]
         public List<Pedido> Pedidos { get; set; } = new List<Pedido>();
+
+        [JsonIgnore]
+        public Carrinho Carrinho { get; set; }
     }
 }

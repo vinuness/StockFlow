@@ -58,12 +58,30 @@ namespace Estoque.Infrastructure.Repositories
 
         public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, string email)
         {
-
             var cliente = await _con.Clientes
+                .Include(c => c.Carrinho)
+                    .ThenInclude(c => c.Items)
+                        .ThenInclude(i => i.Produto)
                 .Include(c => c.Pedidos)
-                .ThenInclude(p => p.Itens)
-                .ThenInclude(item => item.Produto)
                 .FirstOrDefaultAsync(c => c.Email == email);
+
+            if (cliente == null)
+                throw new Exception("Cliente não encontrado.");
+
+            if (cliente.Carrinho == null)
+                throw new Exception("Carrinho não encontrado.");
+
+            // Atualiza as quantidades escolhidas pelo usuário
+            foreach (var dto in produtos)
+            {
+                var itemCarrinho = cliente.Carrinho.Items
+                    .FirstOrDefault(i => i.ProdutoId == dto.ProdutoId);
+
+                if (itemCarrinho == null)
+                    throw new Exception($"Produto {dto.ProdutoId} não encontrado no carrinho.");
+
+                itemCarrinho.Quantidade = dto.Quantidade;
+            }
 
             var pedido = new Pedido
             {
@@ -72,38 +90,46 @@ namespace Estoque.Infrastructure.Repositories
                 Itens = new List<ItemPedido>()
             };
 
-            foreach (var item in produtos)
+            foreach (var itemCarrinho in cliente.Carrinho.Items)
             {
-                var produtoBanco = await _con.Produtos
-                    .Include(p => p.Categoria)
-                    .Include(p => p.Fornecedor)
-                    .FirstOrDefaultAsync(p => p.Id == item.ProdutoId); //acha o produto pelo id
+                var produto = itemCarrinho.Produto;
 
-                if (produtoBanco == null) 
-                    throw new Exception("Produto não encontrado");
+                if (produto == null)
+                    throw new Exception("Produto não encontrado.");
 
-                if (produtoBanco.Quantidade < item.Quantidade) 
-                    throw new Exception($"Estoque insuficiente para {produtoBanco.Nome}");
+                if (produto.Quantidade < itemCarrinho.Quantidade)
+                    throw new Exception($"Estoque insuficiente para {produto.Nome}");
 
-                produtoBanco.Quantidade -= item.Quantidade; //subtrai a quantidade do produto no estoque
-                _con.Produtos.Update(produtoBanco); //atualiza os produtos no banco de dados
+                produto.Quantidade -= itemCarrinho.Quantidade;
 
                 pedido.Itens.Add(new ItemPedido
                 {
-                    ProdutoId = produtoBanco.Id,
-                    Quantidade = item.Quantidade,
-                    PrecoUnitario = produtoBanco.Preco
-                }); //adiciona o item ao pedido
+                    ProdutoId = produto.Id,
+                    Quantidade = itemCarrinho.Quantidade,
+                    PrecoUnitario = produto.Preco
+                });
             }
 
-            _con.Pedidos.Add(pedido); //adiciona o pedido ao banco de dados
             cliente.Pedidos.Add(pedido);
 
-            _con.Clientes.Update(cliente);
+            _con.Pedidos.Add(pedido);
+
+            // Esvazia o carrinho após finalizar a compra
+            _con.ItensCarrinho.RemoveRange(cliente.Carrinho.Items);
 
             await _con.SaveChangesAsync();
+
+            pedido = await _con.Pedidos
+                .Include(p => p.Itens)
+                    .ThenInclude(i => i.Produto)
+                        .ThenInclude(p => p.Categoria)
+                .Include(p => p.Itens)
+                    .ThenInclude(i => i.Produto)
+                        .ThenInclude(p => p.Fornecedor)
+                .FirstAsync(p => p.Id == pedido.Id);
+
             EmailSender emailSender = new();
-            emailSender.EmailPedido(cliente, pedido);
+            await emailSender.EmailPedido(cliente, pedido);
 
             return pedido;
         }

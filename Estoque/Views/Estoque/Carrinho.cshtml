@@ -1,4 +1,4 @@
-﻿@model List<Estoque.Models.EstoqueModel>
+﻿@model List<Estoque.Models.Carrinho.ItemCarrinho>
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -10,21 +10,25 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Index">Produtos</a>
                     </li>
+
                     @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
+                            <a class="nav-link text-dark" asp-controller="Categoria" asp-action="Index">Categorias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
+                            <a class="nav-link text-dark" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
                         </li>
                     }
+
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Pedido" asp-action="Index">Pedidos</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
                     </li>
@@ -58,26 +62,26 @@
             @for (int i = 0; i < Model.Count; i++)
             {
                 <tr>
-                    <td>@Model[i].SKU</td>
-                    <td>@Model[i].Nome</td>
-                    <td>@Model[i].Descricao</td>
-                    <td>R$ @Model[i].Preco.ToString("F2")</td>
+                    <td>@Model[i].Produto.SKU</td>
+                    <td>@Model[i].Produto.Nome</td>
+                    <td>@Model[i].Produto.Descricao</td>
+                    <td>R$ @Model[i].Produto.Preco.ToString("F2")</td>
 
                     <td>
                         <input type="number"
                                name="[@i].Quantidade"
-                               value="1"
+                               value="@Model[i].Quantidade"
                                min="1"
-                               max="@Model[i].Quantidade"
+                               max="@Model[i].Produto.Quantidade"
                                class="form-control" />
                     </td>
 
-                    <td>@Model[i].Categoria?.Nome</td>
-                    <td>@Model[i].Fornecedor?.Nome</td>
+                    <td>@Model[i].Produto.Categoria?.Nome</td>
+                    <td>@Model[i].Produto.Fornecedor?.Nome</td>
 
                     <td>
                         <a asp-action="RemoverCarrinho"
-                           asp-route-id="@Model[i].Id"
+                           asp-route-id="@Model[i].ProdutoId"
                            class="btn btn-danger btn-sm">
                             Remover
                         </a>
@@ -86,7 +90,7 @@
 
                 <input type="hidden"
                        name="[@i].ProdutoId"
-                       value="@Model[i].Id" />
+                       value="@Model[i].ProdutoId" />
             }
         </tbody>
     </table>

@@ -1,4 +1,5 @@
 ﻿using Estoque.Models;
+using Estoque.Models.Carrinho;
 using Estoque.Services.Interfaces;
 using System.Globalization;
 using System.Net.Http.Headers;
@@ -110,33 +111,24 @@ namespace Estoque.Services
             await _http.DeleteAsync($"{ProdutoUrl}/delete/{id}");
         }
 
-        public async Task<List<EstoqueModel>?> Carrinho()
+        public async Task<List<ItemCarrinho>?> Carrinho(string email)
         {
-            return await _http.GetFromJsonAsync<List<EstoqueModel>>($"{ProdutoUrl}/carrinho");
+            return await _http.GetFromJsonAsync<List<ItemCarrinho>>($"{ProdutoUrl}/carrinho/{email}");
         }
 
-        public async Task AddCarrinho(int id)
+        public async Task AddCarrinho(string email, int id)
         {
-            var produto = await _http.GetFromJsonAsync<EstoqueModel>($"{ProdutoUrl}/findById/{id}");
-
-            if (produto.Status == StatusProduto.CATALOGADO)
-            {
-                produto.Status = StatusProduto.CARRINHO;
-
-                await _http.PutAsJsonAsync($"{ProdutoUrl}/carrinho/add/{id}", produto);
-            }
+            await _http.PutAsync($"{ProdutoUrl}/carrinho/{email}/add/{id}", null);
         }
 
-        public async Task RemoverCarrinho(int id)
+        public async Task RemoverCarrinho(string email, int id)
         {
-            var produto = await _http.GetFromJsonAsync<EstoqueModel>($"{ProdutoUrl}/findById/{id}");
+            await _http.PutAsync($"{ProdutoUrl}/carrinho/{email}/remove/{id}", null);
+        }
 
-            if (produto.Status == StatusProduto.CARRINHO)
-            {
-                produto.Status = StatusProduto.CATALOGADO;
-
-                await _http.PutAsJsonAsync($"{ProdutoUrl}/carrinho/remove/{id}", produto);
-            }
+        public async Task limparCarrinho(string email)
+        {
+            await _http.PutAsync($"{ProdutoUrl}/carrinho/clean/{email}", null);
         }
     }
 }

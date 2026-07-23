@@ -28,7 +28,21 @@ namespace Estoque.Infrastructure.Data
             cliente.HasMany(c => c.Enderecos)
                 .WithMany(c => c.Clientes);
 
-            
+            cliente.HasOne(c => c.Carrinho)
+                .WithOne(c => c.Cliente)
+                .HasForeignKey<Carrinho>(c => c.ClienteId);
+
+            modelBuilder.Entity<ItemCarrinho>()
+                .HasOne(i => i.Carrinho)
+                .WithMany(c => c.Items)
+                .HasForeignKey(i => i.CarrinhoId);
+
+            modelBuilder.Entity<ItemCarrinho>()
+                .HasOne(i => i.Produto)
+                .WithMany(p => p.ItensCarrinho)
+                .HasForeignKey(i => i.ProdutoId);
+
+
         }
 
         //Entidades no banco
@@ -40,6 +54,8 @@ namespace Estoque.Infrastructure.Data
         public DbSet<ItemPedido> ItensPedido { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Carrinho> Carrinhos { get; set; }
+        public DbSet<ItemCarrinho> ItensCarrinho { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
     }
 }

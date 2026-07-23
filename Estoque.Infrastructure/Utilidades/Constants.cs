@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace Estoque.API.Utilidades
+namespace Estoque.Infrastructure.Utilidades
 {
     public class Constants
     {

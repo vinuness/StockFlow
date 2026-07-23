@@ -1,4 +1,5 @@
-﻿using Estoque.Domain.Entities.Pedidos;
+﻿using Estoque.Domain.Entities.Clientes;
+using Estoque.Domain.Entities.Pedidos;
 using System.Text.Json.Serialization;
 
 namespace Estoque.Domain.Entities.Produtos
@@ -25,6 +26,9 @@ namespace Estoque.Domain.Entities.Produtos
 
         [JsonIgnore]
         public List<ItemPedido> ItensPedido { get; set; } = new();
+
+        [JsonIgnore]
+        public List<ItemCarrinho> ItensCarrinho { get; set; } = new();
     }
 
     public class ProdutoPedidoDTO

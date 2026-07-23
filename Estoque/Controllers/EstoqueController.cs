@@ -1,6 +1,9 @@
 ﻿using Estoque.Models;
 using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using static System.Net.WebRequestMethods;
 
 namespace Estoque.Controllers
 {
@@ -72,21 +75,24 @@ namespace Estoque.Controllers
         [HttpGet]
         public async Task<IActionResult> Carrinho()
         {
-            var carrinho = await _estoqueService.Carrinho();
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var carrinho = await _estoqueService.Carrinho(email);
 
             return View(carrinho);
         }
 
         public async Task<IActionResult> AddCarrinho(int id)
         {
-            await _estoqueService.AddCarrinho(id);
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            await _estoqueService.AddCarrinho(email, id);
 
             return RedirectToAction("Carrinho");
         }
 
         public async Task<IActionResult> RemoverCarrinho(int id)
         {
-            await _estoqueService.RemoverCarrinho(id);
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            await _estoqueService.RemoverCarrinho(email, id);
 
             return RedirectToAction("Carrinho");
         }

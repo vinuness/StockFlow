@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Entities.Produtos;
+using Estoque.Domain.Entities.Clientes;
 
 namespace Estoque.Infrastructure.Repositories
 {

@@ -1,4 +1,5 @@
-﻿using Estoque.Domain.Entities.Produtos;
+﻿using Estoque.Domain.Entities.Clientes;
+using Estoque.Domain.Entities.Produtos;
 
 namespace Estoque.Domain.Interfaces.IServices
 {
@@ -9,9 +10,10 @@ namespace Estoque.Domain.Interfaces.IServices
         public Task<Produto> Save(Produto produto);
         public Task Update(Produto produto);
         public Task Delete(int id);
-        public Task<List<Produto>> ListarProdutosCarrinho();
-        public Task AddCarrinho(int id);
-        public Task RemoverCarrinho(int id);
+        public Task<List<ItemCarrinho>> ListarProdutosCarrinho(string email);
+        public Task AddCarrinho(string email, int id);
+        public Task RemoverCarrinho(string email, int id);
+        public Task limparCarrinho(string email);
         public Task<List<ProdutoMaisVendidoDTO>> ProdutosMaisVendidos();
         public Task<ImagemModel> buscarImagem(int id);
     }

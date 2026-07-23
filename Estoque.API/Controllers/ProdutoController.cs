@@ -1,10 +1,12 @@
 ﻿using Estoque.API.DTO;
 using Estoque.Application.Service;
+using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -184,24 +186,34 @@ namespace Estoque.API.Controllers
             return Ok("Produto deletado com sucesso");
         }
 
-        [HttpGet("carrinho")]
-        public async Task<ActionResult<List<Produto>>> ListarProdutosCarrinho()
+        [HttpGet("carrinho/{email}")]
+        public async Task<ActionResult<List<ItemCarrinho>>> ListarProdutosCarrinho(string email)
         {
-            List<Produto> produtos = await _service.ListarProdutosCarrinho();
+            List<ItemCarrinho> produtos = await _service.ListarProdutosCarrinho(email);
             return Ok(produtos);
         }
 
-        [HttpPut("carrinho/add/{id}")]
-        public async Task<ActionResult> AddCarrinho(int id)
+        [HttpPut("carrinho/{email}/add/{id}")]
+        [Authorize(Roles = "Admin,Operador,Cliente")]
+        public async Task<ActionResult> AddCarrinho(string email, int id)
         {
-            await _service.AddCarrinho(id);
+            await _service.AddCarrinho(email, id);
             return Ok("Produto adicionado ao carrinho com sucesso");
         }
 
-        [HttpPut("carrinho/remove/{id}")]
-        public async Task<ActionResult> RemoverCarrinho(int id)
+        [HttpPut("carrinho/{email}/remove/{id}")]
+        [Authorize(Roles = "Admin,Operador,Cliente")]
+        public async Task<ActionResult> RemoverCarrinho(string email, int id)
         {
-            await _service.RemoverCarrinho(id);
+            await _service.RemoverCarrinho(email, id);
+            return Ok("Produto removido do carrinho com sucesso");
+        }
+
+        [HttpPut("carrinho/clean/{email}")]
+        [Authorize(Roles = "Admin,Operador,Cliente")]
+        public async Task<ActionResult> limparCarrinho(string email)
+        {
+            await _service.limparCarrinho(email);
             return Ok("Produto removido do carrinho com sucesso");
         }
 
