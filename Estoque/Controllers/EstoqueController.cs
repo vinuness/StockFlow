@@ -96,5 +96,13 @@ namespace Estoque.Controllers
 
             return RedirectToAction("Carrinho");
         }
+
+        public async Task<IActionResult> LimparCarrinho()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            await _estoqueService.limparCarrinho(email);
+
+            return RedirectToAction("Carrinho");
+        }
     }
 }

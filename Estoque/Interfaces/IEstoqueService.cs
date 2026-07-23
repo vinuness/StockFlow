@@ -13,5 +13,6 @@ namespace Estoque.Services.Interfaces
         Task<List<ItemCarrinho>?> Carrinho(string email);
         Task AddCarrinho(string email, int id);
         Task RemoverCarrinho(string email, int id);
+        Task limparCarrinho(string email);
     }
 }

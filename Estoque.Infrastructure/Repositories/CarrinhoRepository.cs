@@ -34,17 +34,19 @@ namespace Estoque.Infrastructure.Repositories
                 .FirstOrDefaultAsync(c => c.Email == email);
 
             if (cliente == null)
-                throw new InvalidOperationException($"Cliente não encontrado: {email}");
+                throw new Exception($"cliente não encontrado: {cliente.Email}");
 
             if (cliente.Carrinho == null)
-                cliente.Carrinho = new Carrinho { Items = new List<ItemCarrinho>() };
+                cliente.Carrinho = new Carrinho
+                {
+                    Items = new List<ItemCarrinho>()
+                };
 
             if (cliente.Carrinho.Items == null)
                 cliente.Carrinho.Items = new List<ItemCarrinho>();
 
             var item = cliente.Carrinho.Items.FirstOrDefault(i => i.ProdutoId == produtoId);
-            if (item != null)
-                return;
+            if (item == null) return;
 
             cliente.Carrinho.Items.Add(new ItemCarrinho
             {
@@ -64,8 +66,7 @@ namespace Estoque.Infrastructure.Repositories
                     i.ProdutoId == produtoId &&
                     i.Carrinho.Cliente.Email == email);
 
-            if (item == null)
-                return;
+            if (item == null) return;
 
             _con.ItensCarrinho.Remove(item);
 

@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\carrinho.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\carrinho.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\interfaces\\iestoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:interfaces\\iestoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\services\\estoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:services\\estoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\interfaces\\iestoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:interfaces\\iestoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\carrinho.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\carrinho.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\models\\carrinho\\carrinho.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -70,17 +70,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "IEstoqueService.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Interfaces\\IEstoqueService.cs",
               "RelativeDocumentMoniker": "Interfaces\\IEstoqueService.cs",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Interfaces\\IEstoqueService.cs",
               "RelativeToolTip": "Interfaces\\IEstoqueService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-23T10:46:33.667Z",
               "EditorCaption": ""
@@ -95,8 +95,7 @@
               "RelativeToolTip": "Models\\Carrinho\\ItemCarrinho.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-23T10:38:26.133Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-23T10:38:26.133Z"
             },
             {
               "$type": "Document",
@@ -108,18 +107,17 @@
               "RelativeToolTip": "Models\\Carrinho\\Carrinho.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-23T10:37:12.646Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-23T10:37:12.646Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "EstoqueController.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\EstoqueController.cs",
               "RelativeDocumentMoniker": "Controllers\\EstoqueController.cs",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\EstoqueController.cs",
               "RelativeToolTip": "Controllers\\EstoqueController.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAAwFwAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAYwGYAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-23T10:21:27.826Z",
               "EditorCaption": ""
@@ -132,7 +130,7 @@
               "RelativeDocumentMoniker": "Services\\EstoqueService.cs",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Services\\EstoqueService.cs",
               "RelativeToolTip": "Services\\EstoqueService.cs",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAcwHsAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAAwIAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-23T08:16:37.233Z",
               "EditorCaption": ""
@@ -147,8 +145,7 @@
               "RelativeToolTip": "Controllers\\PedidoController.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAowBsAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-22T22:29:24.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-22T22:29:24.416Z"
             },
             {
               "$type": "Document",
@@ -160,12 +157,11 @@
               "RelativeToolTip": "Services\\PedidoService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-22T22:27:21.274Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-22T22:27:21.274Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "ClienteController.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\ClienteController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
@@ -173,12 +169,11 @@
               "RelativeToolTip": "Controllers\\ClienteController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T22:08:37.996Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-06T22:08:37.996Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
@@ -186,18 +181,17 @@
               "RelativeToolTip": "Controllers\\HomeController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAQwCwAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T17:40:17.615Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-06T17:40:17.615Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Carrinho.cshtml",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Carrinho.cshtml",
               "RelativeDocumentMoniker": "Views\\Estoque\\Carrinho.cshtml",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Carrinho.cshtml",
               "RelativeToolTip": "Views\\Estoque\\Carrinho.cshtml",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAAwE4AAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAAwGsAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-07-06T16:43:44.703Z",
               "EditorCaption": ""
@@ -224,8 +218,7 @@
               "RelativeToolTip": "Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAFYAAAAAAAAAAAAuwFEAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-07-06T16:44:02.524Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-06T16:44:02.524Z"
             },
             {
               "$type": "Document",
