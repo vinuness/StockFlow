@@ -38,10 +38,10 @@ namespace Estoque.API.Controllers
             return Ok(pedido);
         }
 
-        [HttpPost("save/pedido/user/{id}")]
-        public async Task<ActionResult<Pedido>> Save([FromBody] List<ProdutoPedidoDTO> produtos, int id)
+        [HttpPost("save/pedido/user/{email}")]
+        public async Task<ActionResult<Pedido>> Save([FromBody] List<ProdutoPedidoDTO> produtos, string email)
         {
-            await _service.Save(produtos, id);
+            await _service.Save(produtos, email);
             return Ok("Produto salvo com sucesso");
         }
 

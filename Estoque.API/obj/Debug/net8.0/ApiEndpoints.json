@@ -541,7 +541,7 @@
   {
     "ContainingType": "Estoque.API.Controllers.PedidoController",
     "Method": "Save",
-    "RelativePath": "api/Pedido/save/pedido/user/{id}",
+    "RelativePath": "api/Pedido/save/pedido/user/{email}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -552,8 +552,8 @@
         "IsRequired": true
       },
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

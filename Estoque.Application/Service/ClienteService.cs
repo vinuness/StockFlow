@@ -44,8 +44,6 @@ namespace Estoque.Application.Service
             //Transforma a senha em hash usando BCrypt
             cliente.Senha = HashSenha(cliente.Senha);
             await _repo.Save(cliente);
-            EmailSender emailSender = new();
-            emailSender.SendEmail(cliente);
             return cliente;
         }
 

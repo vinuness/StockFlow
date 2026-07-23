@@ -830,19 +830,18 @@
         }
       }
     },
-    "/api/Pedido/save/pedido/user/{id}": {
+    "/api/Pedido/save/pedido/user/{email}": {
       "post": {
         "tags": [
           "Pedido"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "email",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],

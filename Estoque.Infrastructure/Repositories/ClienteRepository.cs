@@ -1,6 +1,7 @@
 ﻿using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Infrastructure.Data;
+using Estoque.Infrastructure.Entities;
 using Estoque.Infrastructure.Utilidades;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,6 +63,8 @@ namespace Estoque.Infrastructure.Repositories
         {
             _con.Clientes.Add(cliente);
             await _con.SaveChangesAsync();
+            EmailSender emailSender = new();
+            emailSender.SendEmail(cliente);
             return cliente;
         }
 

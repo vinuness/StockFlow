@@ -4,6 +4,8 @@ using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Entities.Pedidos;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Entities.Clientes;
+using Estoque.Domain.Entities;
+using Estoque.Infrastructure.Entities;
 
 namespace Estoque.Infrastructure.Repositories
 {
@@ -54,25 +56,28 @@ namespace Estoque.Infrastructure.Repositories
             return pedido;
         }
 
-        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, int id)
+        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, string email)
         {
 
             var cliente = await _con.Clientes
                 .Include(c => c.Pedidos)
                 .ThenInclude(p => p.Itens)
                 .ThenInclude(item => item.Produto)
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Email == email);
 
             var pedido = new Pedido
             {
-                DataPedido = DateTime.Now,
+                DataPedido = DateTime.UtcNow,
                 Status = StatusPedido.PENDENTE,
                 Itens = new List<ItemPedido>()
             };
 
             foreach (var item in produtos)
             {
-                var produtoBanco = await _con.Produtos.FindAsync(item.ProdutoId); //acha o produto pelo id
+                var produtoBanco = await _con.Produtos
+                    .Include(p => p.Categoria)
+                    .Include(p => p.Fornecedor)
+                    .FirstOrDefaultAsync(p => p.Id == item.ProdutoId); //acha o produto pelo id
 
                 if (produtoBanco == null) 
                     throw new Exception("Produto não encontrado");
@@ -97,6 +102,8 @@ namespace Estoque.Infrastructure.Repositories
             _con.Clientes.Update(cliente);
 
             await _con.SaveChangesAsync();
+            EmailSender emailSender = new();
+            emailSender.EmailPedido(cliente, pedido);
 
             return pedido;
         }

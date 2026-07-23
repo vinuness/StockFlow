@@ -2,11 +2,6 @@
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Interfaces.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Estoque.Application.Service
 {
@@ -35,9 +30,9 @@ namespace Estoque.Application.Service
             return pedido;
         }
 
-        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, int id)
+        public async Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, string email)
         {
-            var pedido = await _repo.Save(produtos, id);
+            var pedido = await _repo.Save(produtos, email);
             return pedido;
         }
 

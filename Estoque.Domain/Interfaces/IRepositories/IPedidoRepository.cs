@@ -7,7 +7,7 @@ namespace Estoque.Domain.Interfaces.IRepositories
     {
         public Task<List<Pedido>> FindAll();
         public Task<Pedido> FindById(int id);
-        public Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, int id);
+        public Task<Pedido> Save(List<ProdutoPedidoDTO> produtos, string email);
         public Task Update(Pedido pedido, int id);
         public Task Delete(int id);
         public Task<List<Pedido>> buscarPedidosDeCliente(string email);

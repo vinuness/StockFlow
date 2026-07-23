@@ -28,8 +28,8 @@ namespace Estoque.Controllers
         [HttpPost]
         public async Task<IActionResult> FazerPedido(List<ProdutoPedidoDTO> produtos)
         {
-            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var pedido = await _pedidoService.FazerPedido(produtos, int.Parse(id));
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var pedido = await _pedidoService.FazerPedido(produtos, email);
 
             if (!pedido.IsSuccessStatusCode)
             {
