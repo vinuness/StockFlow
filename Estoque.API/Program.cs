@@ -4,6 +4,7 @@ using Estoque.Domain.Interfaces.IServices;
 using Estoque.Domain.Interfaces.Repositories;
 using Estoque.Domain.Services;
 using Estoque.Infra.Data.Repositories;
+using Estoque.Infrastructure;
 using Estoque.Infrastructure.Data;
 using Estoque.Infrastructure.Repositories;
 using Estoque.Infrastructure.SwaggerPerso;
@@ -21,6 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddHostedService<BackgroundWorkerService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -81,6 +83,7 @@ builder.Services.AddScoped<IFornecedorService, FornecedorService>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IEnderecoService, EnderecoService>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<JWTService>();
 

@@ -4,17 +4,18 @@ using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Entities.Pedidos;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Entities.Clientes;
-using Estoque.Domain.Entities;
-using Estoque.Infrastructure.Entities;
+using Estoque.Domain.Interfaces.IServices;
 
 namespace Estoque.Infrastructure.Repositories
 {
     public class PedidoRepository : IPedidoRepository
     {
         private readonly AppDbContext _con;
-        public PedidoRepository(AppDbContext con)
+        private readonly IEmailSender _email;
+        public PedidoRepository(AppDbContext con, IEmailSender email)
         {
             _con = con;
+            _email = email;
         }
 
         public async Task Delete(int id)
@@ -128,8 +129,7 @@ namespace Estoque.Infrastructure.Repositories
                         .ThenInclude(p => p.Fornecedor)
                 .FirstAsync(p => p.Id == pedido.Id);
 
-            EmailSender emailSender = new();
-            await emailSender.EmailPedido(cliente, pedido);
+            await _email.EmailPedido(cliente, pedido);
 
             return pedido;
         }

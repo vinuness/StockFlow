@@ -1,6 +1,7 @@
 ﻿using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IRepositories;
+using Estoque.Domain.Interfaces.IServices;
 using Estoque.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +11,11 @@ namespace Estoque.Infrastructure.Repositories
     {
 
         private readonly AppDbContext _con;
-        public CarrinhoRepository(AppDbContext con)
+        private readonly IEmailSender _email;
+        public CarrinhoRepository(AppDbContext con, IEmailSender email)
         {
             _con = con;
+            _email = email;
         }
 
         public async Task<List<ItemCarrinho>> Carrinho(string email)
@@ -46,7 +49,10 @@ namespace Estoque.Infrastructure.Repositories
                 cliente.Carrinho.Items = new List<ItemCarrinho>();
 
             var item = cliente.Carrinho.Items.FirstOrDefault(i => i.ProdutoId == produtoId);
-            if (item == null) return;
+            if (item != null)
+            {
+                item.Quantidade++;
+            }
 
             cliente.Carrinho.Items.Add(new ItemCarrinho
             {
@@ -85,6 +91,27 @@ namespace Estoque.Infrastructure.Repositories
             _con.ItensCarrinho.RemoveRange(itens);
 
             await _con.SaveChangesAsync();
+        }
+
+        public async Task VerificarCarrinhos()
+        {
+            var clientes = await _con.Clientes
+                .Include(c => c.Carrinho)
+                    .ThenInclude(c => c.Items)
+                        .ThenInclude(i => i.Produto)
+                            .ThenInclude(p => p.Categoria)
+
+                .Include(c => c.Carrinho)
+                    .ThenInclude(c => c.Items)
+                        .ThenInclude(i => i.Produto)
+                            .ThenInclude(p => p.Fornecedor)
+                .Where(c => c.Carrinho != null && c.Carrinho.Items.Any())
+                .ToListAsync();
+
+            foreach (var cliente in clientes)
+            {
+                await _email.EmailCarrinho(cliente);
+            }
         }
     }
 }

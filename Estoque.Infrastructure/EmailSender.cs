@@ -1,11 +1,12 @@
 ﻿using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Entities.Pedidos;
+using Estoque.Domain.Interfaces.IServices;
 using System.Net;
 using System.Net.Mail;
 
-namespace Estoque.Infrastructure.Entities
+namespace Estoque.Infrastructure
 {
-    public class EmailSender
+    public class EmailSender : IEmailSender
     {
         public async Task SendEmail(Cliente cliente)
         {
@@ -318,6 +319,135 @@ namespace Estoque.Infrastructure.Entities
                     $"Pedido-{pedido.Id}.pdf",
                     "application/pdf"
                 ));
+                msg.To.Add(cliente.Email);
+                await smtpClient.SendMailAsync(msg);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task EmailCarrinho(Cliente cliente)
+        {
+            var msg = new MailMessage();
+
+            var total = 0m;
+            var linhas = "";
+
+            foreach (var item in cliente.Carrinho.Items)
+            {
+                var subtotal = item.Quantidade * item.Produto.Preco;
+                total += subtotal;
+
+                linhas += $@"
+                    <tr>
+                        <td style='padding:10px;border-bottom:1px solid #ddd;'>{item.Produto.Nome}</td>
+                        <td style='padding:10px;border-bottom:1px solid #ddd;'>{item.Produto.Descricao}</td>
+                        <td style='padding:10px;border-bottom:1px solid #ddd;'>{item.Produto.Categoria.Nome}</td>
+                        <td style='padding:10px;border-bottom:1px solid #ddd;'>{item.Produto.Fornecedor.Nome}</td>
+                        <td align='center' style='padding:10px;border-bottom:1px solid #ddd;'>R$ {item.Produto.Preco:N2}</td>
+                        <td align='center' style='padding:10px;border-bottom:1px solid #ddd;'>{item.Quantidade}</td>
+                        <td align='center' style='padding:10px;border-bottom:1px solid #ddd;'>R$ {subtotal:N2}</td>
+                    </tr>";
+            }
+
+            try
+            {
+                var smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.EnableSsl = true;
+                smtpClient.Timeout = 60_000;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential(
+                    "stockflow569@gmail.com",
+                    "uhkvjbfwuraozjzm"
+                );
+
+                msg.From = new MailAddress("stockflow569@gmail.com", "StockFlow");
+                msg.Body = $@"<!DOCTYPE html>
+                                <html lang=""pt-BR"">
+                                <head>
+                                    <meta charset=""UTF-8"">
+                                </head>
+
+                                <body style=""margin:0;padding:20px;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;"">
+
+                                <table width=""100%"" cellpadding=""0"" cellspacing=""0"">
+                                    <tr>
+                                        <td align=""center"">
+
+                                            <table width=""700"" cellpadding=""0"" cellspacing=""0""
+                                                    style=""background:#ffffff;border:1px solid #ddd;border-radius:8px;overflow:hidden;"">
+
+                                                <tr>
+                                                    <td style=""background:steelblue;padding:20px;color:white;"">
+                                                        <h1 style=""margin:0;"">STOCKFLOW</h1>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style=""padding:40px;"">
+
+                                                        <h2 style=""margin-top:0;color:steelblue;"">
+                                                            Olá, {cliente.Nome.ToUpper()}!
+                                                        </h2>
+
+                                                        <p style=""font-size:16px;color:#444;line-height:1.7;"">
+                                                            Percebemos que você ainda possui produtos adicionados ao seu carrinho de compras.
+                                                        </p>
+
+                                                        <p style=""font-size:16px;color:#444;line-height:1.7;"">
+                                                            Não deixe essa oportunidade passar! Seus produtos continuam aguardando por você.
+                                                        </p>
+
+                                                        <p style=""font-size:16px;color:#444;line-height:1.7;"">
+                                                            Acesse sua conta no <strong>StockFlow</strong> e conclua sua compra de forma rápida e segura.
+                                                        </p>
+
+                                                        <div style=""margin:35px 0;padding:20px;background:#f8f9fa;border-left:5px solid steelblue;border-radius:5px;"">
+                                                            <strong style=""color:steelblue;font-size:18px;"">
+                                                                🛒 Seu carrinho ainda possui itens aguardando a finalização da compra.
+                                                            </strong>
+                                                        </div>
+
+                                                        <p style=""font-size:15px;color:#666;line-height:1.6;"">
+                                                            Caso você já tenha finalizado sua compra recentemente, desconsidere esta mensagem.
+                                                        </p>
+
+                                                        <br>
+
+                                                        <p style=""margin-bottom:5px;"">
+                                                            Atenciosamente,
+                                                        </p>
+
+                                                        <strong style=""color:steelblue;"">
+                                                            Equipe StockFlow
+                                                        </strong>
+
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style=""background:steelblue;color:white;padding:15px;font-size:12px;text-align:center;"">
+                                                        Este é um e-mail enviado automaticamente pelo StockFlow.
+                                                        <br>
+                                                        Por favor, não responda esta mensagem.
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                </body>
+                                </html>";
+
+                msg.Subject = "Confirmação de Pedido";
+                msg.IsBodyHtml = true;
+                msg.Priority = MailPriority.Normal;
+
                 msg.To.Add(cliente.Email);
                 await smtpClient.SendMailAsync(msg);
             }

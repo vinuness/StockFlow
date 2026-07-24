@@ -1,7 +1,7 @@
 ﻿using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Interfaces.IRepositories;
+using Estoque.Domain.Interfaces.IServices;
 using Estoque.Infrastructure.Data;
-using Estoque.Infrastructure.Entities;
 using Estoque.Infrastructure.Utilidades;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +11,13 @@ namespace Estoque.Infrastructure.Repositories
     {
         private readonly AppDbContext _con;
         private readonly JWTService _jwt;
+        private readonly IEmailSender _email;
 
-        public ClienteRepository(AppDbContext con, JWTService jwt)
+        public ClienteRepository(AppDbContext con, JWTService jwt, IEmailSender email)
         {
             _con = con;
             _jwt = jwt;
+            _email = email;
         }
 
         public async Task Delete(int id)
@@ -63,8 +65,7 @@ namespace Estoque.Infrastructure.Repositories
         {
             _con.Clientes.Add(cliente);
             await _con.SaveChangesAsync();
-            EmailSender emailSender = new();
-            emailSender.SendEmail(cliente);
+            _email.SendEmail(cliente);
             return cliente;
         }
 

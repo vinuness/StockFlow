@@ -2,7 +2,6 @@
 using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Interfaces.IServices;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace Estoque.Application.Service
@@ -11,10 +10,12 @@ namespace Estoque.Application.Service
     {
 
         private readonly IClienteRepository _repo;
+        private readonly ICarrinhoRepository _car;
 
-        public ClienteService(IClienteRepository repo)
+        public ClienteService(IClienteRepository repo, ICarrinhoRepository car)
         {
             _repo = repo;
+            _car = car;
         }
 
         public async Task Delete(int id)
@@ -66,14 +67,17 @@ namespace Estoque.Application.Service
                 return null;
             }
 
+
             //retorna o cliente logado com o token JWT
-            return new LoginResponse
+            var response = new LoginResponse
             {
                 Id = cliente.Id,
                 Nome = cliente.Nome,
                 Email = cliente.Email,
                 Token = _repo.GenerateToken(cliente)
             };
+
+            return response;
         }
 
         //metodo para transformar a senha em hash usando BCrypt

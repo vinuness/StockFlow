@@ -10,6 +10,7 @@ namespace Estoque.Domain.Interfaces.IRepositories
         public Task addCarrinho(string email, int id);
         public Task removeCarrinho(string email, int id);
         public Task limparCarrinho(string email);
+        public Task VerificarCarrinhos();
 
     }
 }
