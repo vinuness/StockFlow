@@ -69,31 +69,113 @@
                     </div>
 
                     <hr />
+                    <h5 class="mb-3 text-secondary">Endereço de Entrega</h5>
+                    @foreach(var endereco in cliente.Enderecos)
+                    {
+                        if(endereco.Principal == true)
+                        {
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <div class="mb-2">
+                                        <strong>Rua:</strong> @endereco.Rua
+                                    </div>
+                                    <div class="mb-2">
+                                        <strong>Número:</strong> @endereco.Numero
+                                    </div>
+                                    <div class="mb-2">
+                                        <strong>Cidade:</strong> @endereco.Cidade
+                                    </div>
+                                    <div class="mb-2">
+                                        <strong>Estado:</strong> @endereco.Estado
+                                    </div>
+                                    <div class="mb-4">
+                                        <strong>CEP:</strong> @endereco.Cep
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <hr />
 
                     @if (cliente.Enderecos != null && cliente.Enderecos.Any())
                     {
                         <h5 class="mb-3 text-secondary">Endereços</h5>
 
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
                         @foreach (var endereco in cliente.Enderecos)
                         {
-                            <div class="mb-2">
-                                <strong>Rua:</strong> @endereco.Rua
-                            </div>
-                            <div class="mb-2">
-                                <strong>Número:</strong> @endereco.Numero
-                            </div>
-                            <div class="mb-2">
-                                <strong>Cidade:</strong> @endereco.Cidade
-                            </div>
-                            <div class="mb-2">
-                                <strong>Estado:</strong> @endereco.Estado
-                            </div>
-                            <div class="mb-4">
-                                <strong>CEP:</strong> @endereco.Cep
-                            </div>
 
-                            <hr />
-                        }
+                                <div class="col-md-6 col-lg-4 mb-4">
+                                    <div class="card h-100 shadow-sm border-0 rounded-4">
+
+                                        <div class="card-header bg-primary text-white">
+                                            <h5 class="mb-0">Endereço</h5>
+                                        </div>
+
+                                        <div class="card-body">
+
+                                            <p class="mb-2">
+                                                <strong>Rua:</strong> @endereco.Rua
+                                            </p>
+
+                                            <p class="mb-2">
+                                                <strong>Número:</strong> @endereco.Numero
+                                            </p>
+
+                                            <p class="mb-2">
+                                                <strong>Bairro:</strong> @endereco.Bairro
+                                            </p>
+
+                                            <p class="mb-2">
+                                                <strong>Cidade:</strong> @endereco.Cidade
+                                            </p>
+
+                                            <p class="mb-2">
+                                                <strong>Estado:</strong> @endereco.Estado
+                                            </p>
+
+                                            <p class="mb-0">
+                                                <strong>CEP:</strong> @endereco.Cep
+                                            </p>
+
+                                        </div>
+
+                                        <div class="card-footer bg-white border-0">
+
+                                            <div class="d-grid gap-2">
+
+                                                <form asp-action="SetPrincipalAdress" method="post">
+                                                    <input type="hidden" name="id" value="@endereco.Id" />
+
+                                                    <button type="submit" class="btn btn-success w-100">
+                                                        Definir como Principal
+                                                    </button>
+                                                </form>
+
+                                                <a asp-action="UpdateAdress"
+                                                   asp-route-id="@endereco.Id"
+                                                   class="btn btn-primary w-100">
+                                                    Editar
+                                                </a>
+
+                                                <form asp-action="RemoveAdress" method="post">
+                                                    <input type="hidden" name="id" value="@endereco.Id" />
+
+                                                    <button type="submit" class="btn btn-outline-danger w-100">
+                                                        Remover
+                                                    </button>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
                     }
                     else
                     {

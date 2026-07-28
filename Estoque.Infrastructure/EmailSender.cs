@@ -444,7 +444,7 @@ namespace Estoque.Infrastructure
                                 </body>
                                 </html>";
 
-                msg.Subject = "Confirmação de Pedido";
+                msg.Subject = "Você ainda possui itens no seu carrinho";
                 msg.IsBodyHtml = true;
                 msg.Priority = MailPriority.Normal;
 

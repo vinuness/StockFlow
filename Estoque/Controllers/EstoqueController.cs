@@ -1,6 +1,7 @@
 ﻿using Estoque.Models;
 using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using static System.Net.WebRequestMethods;
@@ -10,10 +11,14 @@ namespace Estoque.Controllers
     public class EstoqueController : Controller
     {
         private readonly IEstoqueService _estoqueService;
+        private readonly ICategoriaService _cat;
+        private readonly IFornecedorService _for;
 
-        public EstoqueController(IEstoqueService estoqueService)
+        public EstoqueController(IEstoqueService estoqueService, ICategoriaService cat, IFornecedorService forn)
         {
             _estoqueService = estoqueService;
+            _cat = cat;
+            _for = forn;
         }
 
         public async Task<IActionResult> Index()
@@ -24,9 +29,15 @@ namespace Estoque.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var categorias = await _cat.FindAll();
+            var fornecedores = await _for.FindAll();
+
+            ViewBag.Categorias = new SelectList(categorias, "Id", "Nome");
+            ViewBag.Fornecedores = new SelectList(fornecedores, "Id", "Nome");
+
+            return View(new ProdutoCreateViewModel());
         }
 
         [HttpPost]

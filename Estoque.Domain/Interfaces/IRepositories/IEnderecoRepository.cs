@@ -5,9 +5,10 @@ namespace Estoque.Domain.Interfaces.Repositories
     public interface IEnderecoRepository
     {
         Task<List<Endereco>> FindAll();
-        Task<Endereco> FindById(int id);
+        Task SetPrincipalAdress(string email, int id);
+        Task<Endereco> FindById(string email, int id);
         Task Save(string email, EnderecoDTO endereco);
-        Task Update(Endereco endereco);
-        Task Delete(int id);
+        Task Update(string email, int id, Endereco endereco);
+        Task Delete(string email, int id);
     }
 }

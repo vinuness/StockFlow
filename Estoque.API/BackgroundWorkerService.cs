@@ -18,6 +18,8 @@ public class BackgroundWorkerService : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
+            await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
+
             try
             {
                 using var scope = _service.CreateScope();
@@ -31,8 +33,6 @@ public class BackgroundWorkerService : BackgroundService
             {
                 _logger.LogError(ex, "Erro ao verificar carrinhos.");
             }
-
-            await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
         }
     }
 

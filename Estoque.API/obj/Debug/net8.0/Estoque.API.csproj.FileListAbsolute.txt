@@ -176,9 +176,6 @@ C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\ro\Xceed.Wpf.AvalonD
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\Newtonsoft.Json.dll
-C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\SendGrid.dll
-C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\StarkbankEcdsa.dll
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\LatoFont\Lato-Black.ttf
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\LatoFont\Lato-BlackItalic.ttf
 C:\Users\Vinicius\source\repos\Estoque.API\bin\Debug\net8.0\LatoFont\Lato-Bold.ttf

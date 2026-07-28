@@ -42,7 +42,6 @@ namespace Estoque.Infrastructure.Data
                 .WithMany(p => p.ItensCarrinho)
                 .HasForeignKey(i => i.ProdutoId);
 
-
         }
 
         //Entidades no banco

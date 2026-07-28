@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Estoque.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260723100825_Estoque")]
+    [Migration("20260728113602_Estoque")]
     partial class Estoque
     {
         /// <inheritdoc />
@@ -118,6 +118,9 @@ namespace Estoque.Infrastructure.Migrations
 
                     b.Property<int>("Numero")
                         .HasColumnType("integer");
+
+                    b.Property<bool>("Principal")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Rua")
                         .HasColumnType("text");

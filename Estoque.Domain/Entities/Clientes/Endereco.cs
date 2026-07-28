@@ -12,6 +12,7 @@ namespace Estoque.Domain.Entities.Clientes
         public string Bairro { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
+        public bool Principal { get; set; } = false;
 
         [JsonIgnore]
         public List<Cliente> Clientes { get; set; } = new();
@@ -19,6 +20,7 @@ namespace Estoque.Domain.Entities.Clientes
 
     public class EnderecoDTO
     {
+        public int Id { get; set; }
         public int Numero { get; set; }
         public string Cep { get; set; }
         public string Rua { get; set; }

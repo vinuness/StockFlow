@@ -116,6 +116,9 @@ namespace Estoque.Infrastructure.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("Principal")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Rua")
                         .HasColumnType("text");
 

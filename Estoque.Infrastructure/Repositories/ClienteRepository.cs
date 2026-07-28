@@ -63,6 +63,7 @@ namespace Estoque.Infrastructure.Repositories
 
         public async Task<Cliente> Save(Cliente cliente)
         {
+            cliente.Roles = "Cliente";
             _con.Clientes.Add(cliente);
             await _con.SaveChangesAsync();
             _email.SendEmail(cliente);

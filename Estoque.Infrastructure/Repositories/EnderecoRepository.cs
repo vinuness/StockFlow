@@ -16,12 +16,19 @@ namespace Estoque.Infra.Data.Repositories
 
         public async Task<List<Endereco>> FindAll()
         {
-            return await _context.Enderecos.ToListAsync();
+            return await _context.Enderecos
+                .Include(e => e.Clientes)
+                .ToListAsync();
         }
 
-        public async Task<Endereco> FindById(int id)
+        public async Task<Endereco> FindById(string email, int id)
         {
-            return await _context.Enderecos.FirstOrDefaultAsync(x => x.Id == id);
+            var cliente = await _context.Clientes
+                .Include(c => c.Enderecos)
+                .FirstOrDefaultAsync(c => c.Email == email);
+
+            return cliente.Enderecos
+                .FirstOrDefault(e => e.Id == id);
         }
 
         public async Task Save(string email, EnderecoDTO dto)
@@ -42,6 +49,12 @@ namespace Estoque.Infra.Data.Repositories
                 Estado = dto.Estado,
                 Cep = dto.Cep
             };
+
+            if(cliente.Enderecos.Count() == 0)
+            {
+                endereco.Principal = true;
+            }
+
             cliente.Enderecos.Add(endereco);
 
             _context.Enderecos.Add(endereco);
@@ -52,20 +65,67 @@ namespace Estoque.Infra.Data.Repositories
 
         }
 
-        public async Task Update(Endereco endereco)
+        public async Task SetPrincipalAdress(string email, int id)
         {
-            _context.Enderecos.Update(endereco);
+            var cliente = await _context.Clientes
+                .Include(c => c.Enderecos)
+                .FirstOrDefaultAsync(c => c.Email == email);
+
+            foreach(var endereco in cliente.Enderecos)
+            {
+                if(endereco.Id == id)
+                {
+                    endereco.Principal = true;
+                }
+                else
+                {
+                    endereco.Principal = false;
+                }
+            }
+
+            _context.Clientes.Update(cliente);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Update(string email, int id, Endereco endereco)
         {
-            var endereco = await FindById(id);
-            if (endereco != null)
+            var cliente = await _context.Clientes
+                .Include(c => c.Enderecos)
+                .FirstOrDefaultAsync(c => c.Email == email);
+
+            foreach(var cliEndereco in cliente.Enderecos)
             {
-                _context.Enderecos.Remove(endereco);
-                await _context.SaveChangesAsync();
+                if (cliEndereco.Id.Equals(id))
+                {
+                    cliEndereco.Id = id;
+                    cliEndereco.Numero = endereco.Numero;
+                    cliEndereco.Cep = endereco.Cep;
+                    cliEndereco.Rua = endereco.Rua;
+                    cliEndereco.Bairro = endereco.Bairro;
+                    cliEndereco.Cidade = endereco.Cidade;
+                    cliEndereco.Estado = endereco.Estado;
+
+                    _context.Enderecos.Update(cliEndereco);
+                }
             }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(string email, int id)
+        {
+            var cliente = await _context.Clientes
+                .Include(c => c.Enderecos)
+                .FirstOrDefaultAsync(c => c.Email == email);
+
+            foreach(var endereco in cliente.Enderecos)
+            {
+                if (endereco.Id.Equals(id))
+                {
+                    _context.Enderecos.Remove(endereco);
+                }
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

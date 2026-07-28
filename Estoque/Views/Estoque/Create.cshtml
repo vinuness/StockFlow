@@ -86,13 +86,18 @@
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="CategoriaId" class="form-label"></label>
-                            <input asp-for="CategoriaId" class="form-control" type="number" />
+                            <label asp-for="CategoriaId" class="form-label">Categoria</label>
+                            <select asp-for="CategoriaId" asp-items="ViewBag.Categorias" class="form-select">
+                                <option value="">Selecione uma categoria</option>
+                            </select>
+                            <span asp-validation-for="CategoriaId" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="FornecedorId" class="form-label"></label>
-                            <input asp-for="FornecedorId" class="form-control" type="number" />
+                            <label asp-for="FornecedorId" class="form-label">Fornecedor</label>
+                            <select asp-for="FornecedorId" asp-items="ViewBag.Fornecedores" class="form-select">
+                                <option value="">Selecione um fornecedor</option>
+                            </select>
                         </div>
 
                         <div class="mb-3">

@@ -18,9 +18,14 @@ namespace Estoque.Domain.Services
             return await _repository.FindAll();
         }
 
-        public async Task<Endereco> FindById(int id)
+        public async Task<Endereco> FindById(string email, int id)
         {
-            return await _repository.FindById(id);
+            return await _repository.FindById(email, id);
+        }
+
+        public async Task SetPrincipalAdress(string email, int id)
+        {
+            await _repository.SetPrincipalAdress(email, id);
         }
 
         public async Task Save(string email, EnderecoDTO endereco)
@@ -28,14 +33,14 @@ namespace Estoque.Domain.Services
             await _repository.Save(email, endereco);
         }
 
-        public async Task Update(Endereco endereco)
+        public async Task Update(string email, int id, Endereco endereco)
         {
-            await _repository.Update(endereco);
+            await _repository.Update(email, id, endereco);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(string email, int id)
         {
-            await _repository.Delete(id);
+            await _repository.Delete(email, id);
         }
     }
 }

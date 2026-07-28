@@ -416,12 +416,20 @@
         }
       }
     },
-    "/api/Endereco/findById/{id}": {
+    "/api/Endereco/find/{email}/adress/{id}": {
       "get": {
         "tags": [
           "Endereco"
         ],
         "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path",
@@ -497,18 +505,27 @@
         }
       }
     },
-    "/api/Endereco/update{id}": {
+    "/api/Endereco/update/{email}/adress/{id}": {
       "put": {
         "tags": [
           "Endereco"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "email",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -538,12 +555,51 @@
         }
       }
     },
-    "/api/Endereco/delete/{id}": {
+    "/api/Endereco/delete/{email}/adress/{id}": {
       "delete": {
         "tags": [
           "Endereco"
         ],
         "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Endereco/set/{email}/principal/adress/{id}": {
+      "put": {
+        "tags": [
+          "Endereco"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path",
@@ -1743,6 +1799,9 @@
           "estado": {
             "type": "string",
             "nullable": true
+          },
+          "principal": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -1750,6 +1809,10 @@
       "EnderecoDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "numero": {
             "type": "integer",
             "format": "int32"

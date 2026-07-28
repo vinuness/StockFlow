@@ -50,10 +50,30 @@ namespace Estoque.Services
             return cliente;
         }   
 
-        public async Task<EnderecoModel> AddEndereco(string email, EnderecoModel endereco)
+        public async Task<EnderecoModel> AddAdress(string email, EnderecoModel endereco)
         {
             var response = await _http.PostAsJsonAsync($"https://localhost:7238/api/Endereco/save/user/{email}", endereco);
             return await response.Content.ReadFromJsonAsync<EnderecoModel>();
+        }
+
+        public async Task SetPrincipalAdress(string email, int id)
+        {
+            await _http.PutAsync($"https://localhost:7238/api/Endereco/set/{email}/principal/adress/{id}", null);
+        }
+
+        public async Task RemoveAdress(string email, int id)
+        {
+            await _http.DeleteAsync($"https://localhost:7238/api/Endereco/delete/{email}/adress/{id}");
+        }
+
+        public async Task UpdateAdress(string email, int id, EnderecoModel endereco)
+        {
+            await _http.PutAsJsonAsync($"https://localhost:7238/api/Endereco/update/{email}/adress/{id}", endereco);
+        }
+
+        public async Task<EnderecoModel> FindById(int id, string email)
+        {
+            return await _http.GetFromJsonAsync<EnderecoModel>($"https://localhost:7238/api/Endereco/find/{email}/adress/{id}");
         }
     }
 }

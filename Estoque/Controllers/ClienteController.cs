@@ -1,4 +1,6 @@
-﻿using Estoque.Models.Cliente;
+﻿using Estoque.Models;
+using Estoque.Models.Cliente;
+using Estoque.Services;
 using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -87,7 +89,39 @@ namespace Estoque.Controllers
         public async Task<IActionResult> AddEndereco(EnderecoModel endereco)
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
-            await _clienteService.AddEndereco(email, endereco);
+            await _clienteService.AddAdress(email, endereco);
+            return RedirectToAction("Perfil");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SetPrincipalAdress(int id)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            await _clienteService.SetPrincipalAdress(email, id);
+            return RedirectToAction("Perfil");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveAdress(int id)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            await _clienteService.RemoveAdress(email, id);
+            return RedirectToAction("Perfil");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateAdress(int id)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var endereco = await _clienteService.FindById(id, email);
+            return View(endereco);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAdress(EnderecoModel dto)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            await _clienteService.UpdateAdress(email, dto.Id, dto);
             return RedirectToAction("Perfil");
         }
 

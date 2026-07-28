@@ -20,6 +20,13 @@ namespace Estoque.Controllers
         }
 
         [HttpGet]
+        public async Task<List<CategoriaModel>> FindAll()
+        {
+            List<CategoriaModel> categorias = await _categoriaService.FindAll();
+            return categorias;
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View();

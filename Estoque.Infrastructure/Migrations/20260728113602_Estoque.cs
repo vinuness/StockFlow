@@ -54,7 +54,8 @@ namespace Estoque.Infrastructure.Migrations
                     Rua = table.Column<string>(type: "text", nullable: true),
                     Bairro = table.Column<string>(type: "text", nullable: true),
                     Cidade = table.Column<string>(type: "text", nullable: true),
-                    Estado = table.Column<string>(type: "text", nullable: true)
+                    Estado = table.Column<string>(type: "text", nullable: true),
+                    Principal = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

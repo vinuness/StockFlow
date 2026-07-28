@@ -240,11 +240,16 @@
   {
     "ContainingType": "Estoque.API.Controllers.EnderecoController",
     "Method": "Delete",
-    "RelativePath": "api/Endereco/delete/{id}",
+    "RelativePath": "api/Endereco/delete/{email}/adress/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
       {
         "Name": "id",
         "Type": "System.Int32",
@@ -256,11 +261,16 @@
   {
     "ContainingType": "Estoque.API.Controllers.EnderecoController",
     "Method": "FindById",
-    "RelativePath": "api/Endereco/findById/{id}",
+    "RelativePath": "api/Endereco/find/{email}/adress/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
       {
         "Name": "id",
         "Type": "System.Int32",
@@ -302,20 +312,46 @@
   },
   {
     "ContainingType": "Estoque.API.Controllers.EnderecoController",
-    "Method": "Update",
-    "RelativePath": "api/Endereco/update{id}",
+    "Method": "SetPrincipalAdress",
+    "RelativePath": "api/Endereco/set/{email}/principal/adress/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "endereco",
-        "Type": "Estoque.Domain.Entities.Clientes.Endereco",
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       },
       {
         "Name": "id",
-        "Type": "",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Estoque.API.Controllers.EnderecoController",
+    "Method": "Update",
+    "RelativePath": "api/Endereco/update/{email}/adress/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "endereco",
+        "Type": "Estoque.Domain.Entities.Clientes.Endereco",
         "IsRequired": true
       }
     ],
