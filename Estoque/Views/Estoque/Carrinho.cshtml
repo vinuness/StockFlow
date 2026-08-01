@@ -1,116 +1,324 @@
 ﻿@model List<Estoque.Models.Carrinho.ItemCarrinho>
 
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">StockFlow</a>
+@{
+    var total = Model.Sum(x => x.Produto.Preco * x.Quantidade);
+}
 
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Index">Produtos</a>
-                    </li>
+<div class="container mt-4">
 
-                    @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Categoria" asp-action="Index">Categorias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
-                        </li>
-                    }
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Pedido" asp-action="Index">Pedidos</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<h1>Carrinho</h1>
-
-<form asp-controller="Pedido"
-      asp-action="FazerPedido"
-      method="post">
-
-    <table class="table table-sm table-striped">
-        <thead>
-            <tr>
-                <th>SKU</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Quantidade</th>
-                <th>Categoria</th>
-                <th>Fornecedor</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <tr>
-                    <td>@Model[i].Produto.SKU</td>
-                    <td>@Model[i].Produto.Nome</td>
-                    <td>@Model[i].Produto.Descricao</td>
-                    <td>R$ @Model[i].Produto.Preco.ToString("F2")</td>
-
-                    <td>
-                        <input type="number"
-                               name="[@i].Quantidade"
-                               value="@Model[i].Quantidade"
-                               min="1"
-                               max="@Model[i].Produto.Quantidade"
-                               class="form-control" />
-                    </td>
-
-                    <td>@Model[i].Produto.Categoria?.Nome</td>
-                    <td>@Model[i].Produto.Fornecedor?.Nome</td>
-
-                    <td>
-                        <a asp-action="RemoverCarrinho"
-                           asp-route-id="@Model[i].ProdutoId"
-                           class="btn btn-danger btn-sm">
-                            Remover
-                        </a>
-                    </td>
-                </tr>
-
-                <input type="hidden"
-                       name="[@i].ProdutoId"
-                       value="@Model[i].ProdutoId" />
-            }
-        </tbody>
-    </table>
-
-    <div class="d-flex justify-content-between mt-3">
-        <a asp-controller="Estoque"
-           asp-action="Index"
-           class="btn btn-secondary">
-            Continuar Comprando
-        </a>
-
-        <a asp-controller="Estoque"
-           asp-action="limparCarrinho"
-           class="btn btn-danger btn-sm">
-            Limpar Carrinho
-        </a>
-
-        <button type="submit" class="btn btn-success">
-            Fazer Pedido
-        </button>
+    <div class="mb-4">
+        <h1 class="fw-bold mb-1">Carrinho</h1>
+        <p class="text-muted mb-0">
+            Confira os produtos antes de finalizar seu pedido
+        </p>
     </div>
 
-</form>
+    @if (Model == null || !Model.Any())
+    {
+        <div class="card border-0 shadow-sm text-center p-5">
+
+            <div class="mb-3">
+                <i class="bi bi-cart-x display-4 text-muted"></i>
+            </div>
+
+            <h4 class="fw-bold">Seu carrinho está vazio</h4>
+
+            <p class="text-muted">
+                Adicione produtos ao carrinho para realizar um pedido.
+            </p>
+
+            <div>
+                <a asp-controller="Estoque"
+                   asp-action="Index"
+                   class="btn btn-primary">
+                    <i class="bi bi-bag me-1"></i>
+                    Ver Produtos
+                </a>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <form asp-controller="Pedido"
+              asp-action="FazerPedido"
+              method="post">
+
+            <div class="row g-4">
+
+                <div class="col-lg-9">
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover align-middle mb-0">
+
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="ps-4">Produto</th>
+                                        <th>Preço</th>
+                                        <th style="width: 150px;">Quantidade</th>
+                                        <th>Total</th>
+                                        <th class="text-end pe-4">Ações</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @for (int i = 0; i < Model.Count; i++)
+                                    {
+                                        var item = Model[i];
+                                        var subtotal = item.Produto.Preco * item.Quantidade;
+
+                                        <tr>
+
+                                            <td class="ps-4">
+
+                                                <div>
+                                                    <strong>
+                                                        @item.Produto.Nome
+                                                    </strong>
+
+                                                    <div class="small text-muted">
+                                                        SKU: @item.Produto.SKU
+                                                    </div>
+
+                                                    @if (item.Produto.Categoria != null)
+                                                    {
+                                                        <div class="small text-muted">
+                                                            @item.Produto.Categoria.Nome
+                                                        </div>
+                                                    }
+                                                </div>
+
+                                            </td>
+
+                                            <td>
+                                                R$ @item.Produto.Preco.ToString("F2")
+                                            </td>
+
+                                            <td>
+
+                                                <div class="input-group input-group-sm">
+
+                                                    <button type="button"
+                                                            class="btn btn-outline-secondary"
+                                                            onclick="alterarQuantidade(this, -1)">
+                                                        -
+                                                    </button>
+
+                                                    <input type="number"
+                                                           name="[@i].Quantidade"
+                                                           value="@item.Quantidade"
+                                                           min="1"
+                                                           max="@item.Produto.Quantidade"
+                                                           class="form-control text-center quantity-input"
+                                                           data-price="@item.Produto.Preco"
+                                                           onchange="atualizarCarrinho()" />
+
+                                                    <button type="button"
+                                                            class="btn btn-outline-secondary"
+                                                            onclick="alterarQuantidade(this, 1)">
+                                                        +
+                                                    </button>
+
+                                                </div>
+
+                                                <input type="hidden"
+                                                       name="[@i].ProdutoId"
+                                                       value="@item.ProdutoId" />
+
+                                            </td>
+
+                                            <td>
+                                                <strong class="item-subtotal">
+                                                    R$ @subtotal.ToString("F2")
+                                                </strong>
+                                            </td>
+
+                                            <td class="text-end pe-4">
+
+                                                <a asp-action="RemoverCarrinho"
+                                                   asp-route-id="@item.ProdutoId"
+                                                   class="btn btn-danger btn-sm">
+
+                                                    <i class="bi bi-trash me-1"></i>
+                                                    Remover
+
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3">
+
+                    <div class="card border-0 shadow-sm">
+
+                        <div class="card-body">
+
+                            <h5 class="fw-bold mb-4">
+                                Resumo do Pedido
+                            </h5>
+
+                            <div class="d-flex justify-content-between mb-2">
+
+                                <span class="text-muted">
+                                    Produtos
+                                </span>
+
+                                <span id="totalItems">
+                                    @Model.Sum(x => x.Quantidade)
+                                </span>
+
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-3">
+
+                                <span class="text-muted">
+                                    Itens
+                                </span>
+
+                                <span>
+                                    @Model.Count
+                                </span>
+
+                            </div>
+
+                            <hr />
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                                <strong>
+                                    Total
+                                </strong>
+
+                                <h4 class="fw-bold text-success mb-0"
+                                    id="cartTotal">
+                                    R$ @total.ToString("F2")
+                                </h4>
+
+                            </div>
+
+                            <button type="submit"
+                                    class="btn btn-success w-100 mb-2">
+
+                                <i class="bi bi-check-circle me-1"></i>
+                                Fazer Pedido
+
+                            </button>
+
+                            <a asp-controller="Estoque"
+                               asp-action="Index"
+                               class="btn btn-outline-secondary w-100">
+
+                                <i class="bi bi-arrow-left me-1"></i>
+                                Continuar Comprando
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                    <a asp-controller="Estoque"
+                       asp-action="limparCarrinho"
+                       class="btn btn-outline-danger w-100 mt-3">
+
+                        <i class="bi bi-trash me-1"></i>
+                        Limpar Carrinho
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+    }
+
+</div>
+
+<script>
+
+    function alterarQuantidade(button, valor) {
+
+        const input = button
+            .closest(".input-group")
+            .querySelector(".quantity-input");
+
+        let quantidade = parseInt(input.value) || 1;
+
+        const min = parseInt(input.min);
+        const max = parseInt(input.max);
+
+        quantidade += valor;
+
+        if (quantidade < min) {
+            quantidade = min;
+        }
+
+        if (quantidade > max) {
+            quantidade = max;
+        }
+
+        input.value = quantidade;
+
+        atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+
+        const inputs = document.querySelectorAll(".quantity-input");
+        const subtotais = document.querySelectorAll(".item-subtotal");
+
+        let total = 0;
+        let totalItems = 0;
+
+        inputs.forEach((input, index) => {
+
+            let quantidade = parseInt(input.value) || 1;
+
+            const min = parseInt(input.min);
+            const max = parseInt(input.max);
+
+            if (quantidade < min) {
+                quantidade = min;
+                input.value = quantidade;
+            }
+
+            if (quantidade > max) {
+                quantidade = max;
+                input.value = quantidade;
+            }
+
+            const preco = parseFloat(input.dataset.price);
+
+            const subtotal = preco * quantidade;
+
+            total += subtotal;
+            totalItems += quantidade;
+
+            subtotais[index].textContent =
+                "R$ " + subtotal.toFixed(2).replace(".", ",");
+        });
+
+        document.getElementById("totalItems").textContent = totalItems;
+
+        document.getElementById("cartTotal").textContent =
+            "R$ " + total.toFixed(2).replace(".", ",");
+    }
+
+</script>

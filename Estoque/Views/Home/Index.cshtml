@@ -1,43 +1,6 @@
 ﻿@model List<Estoque.Models.ProdutoMaisVendidoDTO>
 @using System.Text.Json
 
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StockFlow</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Produtos</a>
-                    </li>
-                    @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
-                        </li>
-                    }
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
 <div class="container mb-4">
 
     <div class="p-4 p-md-5 mb-4 rounded text-bg-dark shadow-sm">
@@ -49,10 +12,10 @@
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div class="row mb-4 g-3">
 
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
                     <h6 class="text-muted">Produtos no ranking</h6>
                     <h3 class="fw-bold">@Model?.Count()</h3>
@@ -60,8 +23,8 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
                     <h6 class="text-muted">Produto mais vendido</h6>
                     <h3 class="fw-bold">
@@ -71,25 +34,30 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
                     <h6 class="text-muted">Faturamento</h6>
+
                     <h3 class="fw-bold text-success">
                         @(((double)ViewBag.Faturamento).ToString("C"))
                     </h3>
-                    <button class="btn btn-success mb-3" onclick="baixarFaturamento()">
-                        Baixar faturamento
-                    </button>
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
+                    {
+                        <button class="btn btn-success mb-3" onclick="baixarFaturamento()">
+                            Baixar faturamento
+                        </button>
+                    }
                 </div>
             </div>
-
         </div>
 
-        <div class="col-md-4">
-            <div class="card shadow-sm border-0">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 h-100">
                 <div class="card-body">
                     <h6 class="text-muted">Total de vendas</h6>
+
                     <h3 class="fw-bold">
                         @Model?.Sum(x => x.QuantidadeVendida)
                     </h3>
@@ -105,10 +73,11 @@
             <h5 class="mb-3">Produtos mais vendidos</h5>
 
             <canvas id="grafico" height="100"></canvas>
-            <button class="btn btn-primary mb-3" onclick="downloadChart()">
-                Baixar gráfico
-            </button>
-
+            @if (User.IsInRole("Admin") || User.IsInRole("Operador")){
+                <button class="btn btn-primary mb-3" onclick="downloadChart()">
+                    Baixar gráfico
+                </button>
+            }
         </div>
     </div>
 

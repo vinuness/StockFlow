@@ -4,61 +4,125 @@
     var categorias = Model;
 }
 
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StockFlow</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Produtos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
 
-<h1>Categorias</h1>
-<a asp-action="Create" class="btn btn-success">Adicionar Categoria</a>
-<table class ="table table-sm table-striped">
-    <thead>
-        <tr>
-            <th> ID </th>
-            <th> Nome </th>
-            <th> Acões </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var categoria in categorias)
-        {
-            <tr>
-                <td> @categoria.Id </td>
-                <td>@categoria.Nome</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@categoria.Id" class="btn btn-primary btn-sm">Editar</a>
-                    <a asp-action="Delete" asp-route-id="@categoria.Id" class="btn btn-danger btn-sm">Excluir</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div>
+        <h1 class="fw-bold mb-1">Categorias</h1>
+        <p class="text-muted mb-0">Gerencie as categorias dos produtos</p>
+    </div>
+
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-lg me-1"></i>
+        Adicionar Categoria
+    </a>
+
+</div>
+
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+
+        <div class="input-group">
+            <span class="input-group-text bg-white">
+                <i class="bi bi-search"></i>
+            </span>
+
+            <input class="form-control"
+                   type="search"
+                   placeholder="Pesquisar categoria..."
+                   aria-label="Pesquisar categoria"
+                   id="search" />
+        </div>
+
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm">
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle mb-0">
+
+            <thead class="table-light">
+                <tr>
+                    <th scope="col" class="ps-4">
+                        ID
+                    </th>
+
+                    <th scope="col">
+                        Nome
+                    </th>
+
+                    <th scope="col" class="text-end pe-4">
+                        Ações
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var categoria in categorias)
+                {
+                    <tr class="categoria-row">
+
+                        <td class="ps-4 text-muted">
+                            #@categoria.Id
+                        </td>
+
+                        <td class="categoria-name fw-semibold">
+                            @categoria.Nome
+                        </td>
+
+                        <td class="text-end pe-4">
+
+                            <a asp-action="Edit"
+                               asp-route-id="@categoria.Id"
+                               class="btn btn-primary btn-sm">
+                                <i class="bi bi-pencil me-1"></i>
+                                Editar
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@categoria.Id"
+                               class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash me-1"></i>
+                                Excluir
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+    const searchInput = document.getElementById("search");
+    const rows = document.querySelectorAll(".categoria-row");
+
+    searchInput.addEventListener("input", function (event) {
+
+        const value = formatString(event.target.value);
+
+        rows.forEach(row => {
+
+            const name = row.querySelector(".categoria-name");
+            const content = formatString(name.textContent);
+
+            row.style.display = content.includes(value) ? "" : "none";
+
+        });
+
+    });
+
+    function formatString(value) {
+        return value
+            .toLowerCase()
+            .trim();
+    }
+</script>

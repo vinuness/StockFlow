@@ -4,48 +4,9 @@
     var cliente = Model;
 }
 
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StockFlow</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Index">Produtos</a>
-                    </li>
-                    @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categoria" asp-action="Index">Categorias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
-                        </li>
-                    }
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pedido" asp-action="Index">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Estoque" asp-action="Carrinho">Carrinho</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Perfil">Perfil</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-
 <div class="container mt-5">
-
     <div class="row justify-content-center">
         <div class="col-md-7">
-
             <div class="card shadow-lg border-0 rounded-4">
 
                 <div class="card-header bg-primary text-white text-center rounded-top-4">
@@ -185,12 +146,7 @@
                 </div>
 
             </div>
-            <form asp-controller="Cliente" asp-action="Logout" method="post">
-                <div class="col-md-6 mb-2">
-                    <button style="margin: 2%" class="btn btn-danger" id="sair"> Sair </button>
-                </div>
-            </form>
-            <div class="col-md-6 mb-2">
+            <div style="margin: 2%" class="col-md-6 mb-2">
                     <a class="btn btn-dark" asp-controller="Cliente" asp-action="AddEndereco">Adicionar Endereço</a>
             </div>
         </div>

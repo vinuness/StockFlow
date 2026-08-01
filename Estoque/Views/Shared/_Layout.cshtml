@@ -1,29 +1,182 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>StockFlow</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Estoque.styles.css" asp-append-version="true" />
 </head>
-<body>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+<body class="@(User.Identity != null && User.Identity.IsAuthenticated ? "app-layout" : "auth-layout")">
+    <div class="app">
+
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <aside class="sidebar">
+                <div class="sidebar-content">
+
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="sidebar-brand">
+                        <span class="fs-4 fw-bold">
+                            StockFlow
+                        </span>
+                    </a>
+
+                    <hr />
+
+                    <ul class="nav nav-pills flex-column gap-1">
+
+                        <li class="nav-item">
+                            <a asp-area=""
+                               asp-controller="Home"
+                               asp-action="Index"
+                               class="nav-link active">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"></path>
+                                </svg>
+                                Dashboard
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-area=""
+                               asp-controller="Estoque"
+                               asp-action="Index"
+                               class="nav-link link-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop-window" viewBox="0 0 16 16">
+                                    <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.37 2.37 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0M1.5 8.5A.5.5 0 0 1 2 9v6h12V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5m2 .5a.5.5 0 0 1 .5.5V13h8V9.5a.5.5 0 0 1 1 0V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5" />
+                                </svg>
+                                Produtos
+                            </a>
+                        </li>
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
+                        {
+                            <li>
+                                <a asp-area=""
+                                   asp-controller="Categoria"
+                                   asp-action="Index"
+                                   class="nav-link link-dark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                                        <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+                                        <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043z" />
+                                    </svg>
+                                    Categorias
+                                </a>
+                            </li>
+
+                            <li>
+                                <a asp-area=""
+                                   asp-controller="Fornecedor"
+                                   asp-action="Index"
+                                   class="nav-link link-dark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                                    </svg>
+                                    Fornecedores
+                                </a>
+                            </li>
+                        }
+
+                        <hr />
+
+                        <li>
+                            <a asp-area=""
+                               asp-controller="Pedido"
+                               asp-action="Index"
+                               class="nav-link link-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                                </svg>
+                                Pedidos
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-area=""
+                               asp-controller="Estoque"
+                               asp-action="Carrinho"
+                               class="nav-link link-dark">
+                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+  <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0"/>
+</svg>
+                                Carrinho
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <hr />
+
+                    <div class="dropdown mt-auto">
+                        <a href="#"
+                           class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+
+                            <div class="user-avatar">
+                                @User.Identity.Name?.Substring(0, 1).ToUpper()
+                            </div>
+
+                            <strong class="ms-2">
+                                @User.Identity.Name
+                            </strong>
+                        </a>
+
+                        <ul class="dropdown-menu text-small shadow">
+                            <li>
+                                <a asp-area=""
+                                   asp-controller="Cliente"
+                                   asp-action="Perfil"
+                                   class="dropdown-item">
+                                    <span>♙</span>
+                                    Perfil
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#">Configurações</a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+
+                            <li>
+                                <form asp-controller="Cliente" asp-action="Logout" method="post">
+                                    <button class="dropdown-item" href="#">Sair</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </aside>
+        }
+
+        <div class="main-wrapper">
+            <main role="main" class="main-content">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="mt-auto py-3">
+            <div style="text-align: center" class="container">
+                &copy; 2026 - StockFlow
+            </div>
+        </footer>
+
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - StockFlow
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
