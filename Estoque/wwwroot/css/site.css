@@ -38,6 +38,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family:'Courier New', 'Lucida Console', monospace
     padding: .5rem 0;
     text-decoration: none;
 }
