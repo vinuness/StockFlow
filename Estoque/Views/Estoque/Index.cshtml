@@ -5,40 +5,49 @@
 }
 
 <div class="container mt-4">
-
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
-
-        <div>
-            <h1 class="fw-bold mb-1">Produtos</h1>
-            <p class="text-muted mb-0">Confira os produtos disponíveis em estoque</p>
+    <div class="d-flex p-4 p-md-5 mb-4 rounded text-bg-dark shadow-sm">
+        <div class="col-md-8 px-0">
+            <h1 class="display-5 fw-bold">Bem-vindo ao StockFlow</h1>
+            <p class="lead my-3">
+                Encontre os produtos que você procura, explore nossas opções e aproveite uma experiência de compra simples, rápida e segura.
+            </p>
         </div>
-
-        @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
-        {
-            <a asp-action="Create" class="btn btn-success">
-                <i class="bi bi-plus-lg me-1"></i>
-                Adicionar Produto
-            </a>
-        }
-
     </div>
+
 
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-body">
+            <div class="d-flex flex-column flex-md-row align-items-md-center gap-3">
 
-            <div class="input-group">
-                <span class="input-group-text bg-white">
-                    <i class="bi bi-search"></i>
-                </span>
+                <div class="input-group flex-grow-1">
 
-                <input class="form-control"
-                       type="search"
-                       placeholder="Pesquisar produto..."
-                       aria-label="Pesquisar produto"
-                       id="search" />
+                    <span class="input-group-text bg-white">
+                        <i class="bi bi-search"></i>
+                    </span>
+
+                    <input class="form-control"
+                           type="search"
+                           placeholder="Pesquisar produto..."
+                           aria-label="Pesquisar produto"
+                           id="search" />
+
+                </div>
+
+                @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
+                {
+                    <a asp-action="Create"
+                       class="btn btn-success flex-shrink-0">
+
+                        <i class="bi bi-plus-lg me-1"></i>
+                        Adicionar Produto
+
+                    </a>
+                }
+
             </div>
 
         </div>
+
     </div>
 
     <div class="row g-4" id="products">
@@ -130,10 +139,18 @@
 
                         <div class="mt-auto">
 
-                            <a asp-action="AddCarrinho"
-                               asp-route-id="@produto.Id"
-                               class="btn btn-primary w-100 mb-2">
-                                Adicionar ao Carrinho
+                            @if(User.Identity.IsAuthenticated && User.Identity != null)
+                            {
+                                <a asp-action="AddCarrinho"
+                                   asp-route-id="@produto.Id"
+                                   class="btn btn-primary w-100 mb-2">
+                                    Adicionar ao Carrinho
+                                </a>
+                            }
+
+                            <a asp-action="Details" asp-route-id="@produto.Id" class="btn btn-outline-secondary w-100 mb-2">
+                                <i class="bi bi-eye me-1"></i>
+                                Ver detalhes
                             </a>
 
                             @if (User.IsInRole("Admin") || User.IsInRole("Operador"))

@@ -57,7 +57,7 @@ namespace Estoque.Controllers
                 Expires = DateTimeOffset.UtcNow.AddDays(1)
             });
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Estoque");
         }
 
         public async Task<IActionResult> Logout()
@@ -66,7 +66,7 @@ namespace Estoque.Controllers
             //remove os cookies armazenados
             Response.Cookies.Delete("jwt");
 
-            return RedirectToAction("Logar", "Cliente");
+            return RedirectToAction("Index", "Estoque");
         }
 
         public async Task<IActionResult> Perfil()

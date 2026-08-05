@@ -40,6 +40,13 @@ namespace Estoque.Controllers
             return View(new ProdutoCreateViewModel());
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var produto = await _estoqueService.FindById(id);
+            return View(produto);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(ProdutoCreateViewModel produto)
         {
@@ -87,9 +94,16 @@ namespace Estoque.Controllers
         public async Task<IActionResult> Carrinho()
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
-            var carrinho = await _estoqueService.Carrinho(email);
 
-            return View(carrinho);
+            if(User.Identity.IsAuthenticated && User.Identity != null)
+            {
+                var carrinho = await _estoqueService.Carrinho(email);
+                return View(carrinho);
+            }
+            else
+            {
+                return RedirectToAction("Logar", "Cliente");
+            }
         }
 
         public async Task<IActionResult> AddCarrinho(int id)

@@ -28,7 +28,6 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findAll")]
-        [Authorize(Roles = "Admin,Operador,Cliente")]
         public async Task<ActionResult<List<Produto>>> FindAll()
         {
             List<Produto> produtos = await _service.FindAll();
@@ -36,7 +35,6 @@ namespace Estoque.API.Controllers
         }
 
         [HttpGet("findById/{id}")]
-        [Authorize(Roles = "Admin,Operador,Cliente")]
         public async Task<ActionResult<Produto>> FindById(int id)
         {
             Produto produto = await _service.FindById(id);

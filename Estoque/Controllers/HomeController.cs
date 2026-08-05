@@ -22,7 +22,7 @@ namespace Estoque.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Dashboard()
         {
 
             var jwt = Request.Cookies["jwt"];
