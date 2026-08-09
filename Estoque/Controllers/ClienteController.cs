@@ -1,10 +1,5 @@
-﻿using Estoque.Models;
-using Estoque.Models.Cliente;
-using Estoque.Services;
+﻿using Estoque.Models.Cliente;
 using Estoque.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -46,7 +41,8 @@ namespace Estoque.Controllers
 
             if (usuario == null)
             {
-                return Content("usuario nulo");
+                TempData["Error"] = "Dados incorretos ou usuario inexistente.";
+                return RedirectToAction("Logar");
             }
             
             Response.Cookies.Append("jwt", usuario.Token, new CookieOptions

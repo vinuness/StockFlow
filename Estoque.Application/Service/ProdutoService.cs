@@ -2,6 +2,7 @@
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Interfaces.IServices;
+using Estoque.Domain.Pagination;
 
 namespace Estoque.Application.Service
 {
@@ -19,10 +20,9 @@ namespace Estoque.Application.Service
             await _repo.Delete(id);
         }
 
-        public async Task<List<Produto>> FindAll()
+        public async Task<PagedList<Produto>> FindAll(int pageNumber, int pageSize)
         {
-            List<Produto> produtos = await _repo.FindAll();
-            return produtos;
+            return await _repo.FindAll(pageNumber, pageSize);
         }
 
         public async Task<Produto> FindById(int id)

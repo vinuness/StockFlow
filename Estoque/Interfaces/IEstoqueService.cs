@@ -1,11 +1,12 @@
 ﻿using Estoque.Models;
 using Estoque.Models.Carrinho;
+using Estoque.Pagination;
 
 namespace Estoque.Services.Interfaces
 {
     public interface IEstoqueService
     {
-        Task<List<EstoqueModel>?> FindAll();
+        Task<List<EstoqueModel>?> FindAll(PaginationParams Pageparams);
         Task<EstoqueModel?> FindById(int id);
         Task Create(ProdutoCreateViewModel produto);
         Task Update(ProdutoCreateViewModel produto, int id);

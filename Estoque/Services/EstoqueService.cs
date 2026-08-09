@@ -1,5 +1,6 @@
 ﻿using Estoque.Models;
 using Estoque.Models.Carrinho;
+using Estoque.Pagination;
 using Estoque.Services.Interfaces;
 using System.Globalization;
 using System.Net.Http.Headers;
@@ -18,9 +19,9 @@ namespace Estoque.Services
             _http = factory.CreateClient("API");
         }
 
-        public async Task<List<EstoqueModel>?> FindAll()
+        public async Task<List<EstoqueModel>?> FindAll(PaginationParams Pageparams)
         {
-            var produtos = await _http.GetFromJsonAsync<List<EstoqueModel>>($"{ProdutoUrl}/findAll");
+            var produtos = await _http.GetFromJsonAsync<List<EstoqueModel>>($"{ProdutoUrl}/findAll?pageNumber={Pageparams.pageNumber}&pageSize={Pageparams.pageSize}");
 
             return produtos;
         }

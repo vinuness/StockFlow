@@ -1,4 +1,5 @@
 ﻿using Estoque.Models;
+using Estoque.Pagination;
 using Estoque.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,9 +22,12 @@ namespace Estoque.Controllers
             _for = forn;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(PaginationParams paginationParams)
         {
-            var produtos = await _estoqueService.FindAll();
+
+            ViewBag.PageNumber = paginationParams.pageNumber;
+            ViewBag.PageSize = paginationParams.pageSize;
+            var produtos = await _estoqueService.FindAll(paginationParams);
 
             return View(produtos);
         }

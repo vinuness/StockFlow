@@ -38,6 +38,12 @@
         </div>
     </div>
 </div>  
+@if (TempData["Error"] != null)
+{
+    <script type="text/javascript">
+        alert('@TempData["Error"].ToString()');
+    </script>
+}
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

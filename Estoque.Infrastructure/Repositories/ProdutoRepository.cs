@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Estoque.Domain.Interfaces.IRepositories;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Entities.Clientes;
+using Estoque.Domain.Pagination;
+using Estoque.Infrastructure.Helper;
 
 namespace Estoque.Infrastructure.Repositories
 {
@@ -35,15 +37,15 @@ namespace Estoque.Infrastructure.Repositories
             await _con.SaveChangesAsync();
         }
 
-        public async Task<List<Produto>> FindAll()
+        public async Task<PagedList<Produto>> FindAll(int pageNumber, int pageSize)
         {
-            List<Produto> produtos = await _con.Produtos
+            var query = _con.Produtos
                 .Include(p => p.Categoria)
                 .Include(p => p.Fornecedor)
                 .Include(p => p.Imagens)
-                .ToListAsync();
+                .AsQueryable();
 
-            return produtos;
+            return await PaginationHelper.CreateAsync(query, pageNumber, pageSize);
         }
 
         public async Task<Produto> FindById(int id)

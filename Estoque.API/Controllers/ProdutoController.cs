@@ -3,6 +3,7 @@ using Estoque.Application.Service;
 using Estoque.Domain.Entities.Clientes;
 using Estoque.Domain.Entities.Produtos;
 using Estoque.Domain.Interfaces.IServices;
+using Estoque.Domain.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,23 +15,19 @@ namespace Estoque.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class ProdutoController(IProdutoService service, IConfiguration config) : ControllerBase
     {
-        private readonly IProdutoService _service;
-        private readonly byte[] _key;
-        private readonly byte[] _iv;
-
-        public ProdutoController(IProdutoService service, IConfiguration config)
-        {
-            _service = service;
-            _key = Encoding.UTF8.GetBytes(config["ImagemByte:ImgKey"]);
-            _iv = Encoding.UTF8.GetBytes(config["ImagemByte:ImgIv"]);
-        }
+        private readonly IProdutoService _service = service;
+        private readonly byte[] _key = Encoding.UTF8.GetBytes(config["ImagemByte:ImgKey"]);
+        private readonly byte[] _iv = Encoding.UTF8.GetBytes(config["ImagemByte:ImgIv"]);
 
         [HttpGet("findAll")]
-        public async Task<ActionResult<List<Produto>>> FindAll()
+        public async Task<ActionResult<PagedList<Produto>>> FindAll([FromQuery]PaginationParams paginationParams)
         {
-            List<Produto> produtos = await _service.FindAll();
+            //numero da pagina será 1 se for menor ou igual a 0, ou será o valor passado no parametro
+            paginationParams.pageNumber = paginationParams.pageNumber <= 0 ? 1 : paginationParams.pageNumber;
+            paginationParams.pageSize = paginationParams.pageSize <= 0 ? 4 : paginationParams.pageSize;
+            var produtos = await _service.FindAll(paginationParams.pageNumber, paginationParams.pageSize);
             return Ok(produtos);
         }
 
@@ -61,7 +58,7 @@ namespace Estoque.API.Controllers
                 FornecedorId = produto.FornecedorId
             };
 
-            List<ImagemModel> list_imagem = new();
+            List<ImagemModel> list_imagem = [];
 
             // Cria o diretório "uploaded_files_encrypted" se não existir
             var path = Path.Combine(Directory.GetCurrentDirectory(), "uploaded_files_encrypted"); 
@@ -82,13 +79,10 @@ namespace Estoque.API.Controllers
                     aes.IV = _iv;
 
                     // Cria um fluxo de arquivo para escrever o arquivo criptografado
-                    using (var cryptorTransform = aes.CreateEncryptor())
-                    using (var fileStream = new FileStream(encryptedFilePath, FileMode.Create))
-                    using (var cryptoStream = new CryptoStream(fileStream, cryptorTransform, CryptoStreamMode.Write))
-                    {
-                        await imagem.CopyToAsync(cryptoStream);
-
-                    }
+                    using var cryptorTransform = aes.CreateEncryptor();
+                    using var fileStream = new FileStream(encryptedFilePath, FileMode.Create);
+                    using var cryptoStream = new CryptoStream(fileStream, cryptorTransform, CryptoStreamMode.Write);
+                    await imagem.CopyToAsync(cryptoStream);
                 }
 
                 var img = new ImagemModel
@@ -110,7 +104,7 @@ namespace Estoque.API.Controllers
         [Authorize(Roles = "Admin,Operador")]
         public async Task<ActionResult> Update(int id, [FromForm] ProdutoSaveDTO dto)
         {
-            List<ImagemModel> list_img = new();
+            List<ImagemModel> list_img = [];
 
             var produto = new Produto
             {
@@ -124,12 +118,7 @@ namespace Estoque.API.Controllers
                 CategoriaId = dto.CategoriaId,
                 FornecedorId = dto.FornecedorId
             };
-
-            string encryptedFilePath = null;
-            string fileName = null;
-            string contentType = null;
-
-            if(dto.Imagem != null)
+            if (dto.Imagem != null)
             {
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "uploaded_files_encrypted");
 
@@ -140,8 +129,8 @@ namespace Estoque.API.Controllers
 
                 foreach (var imagem in dto.Imagem)
                 {
-                    fileName = imagem.FileName + ".enc";
-                    encryptedFilePath = Path.Combine(path, fileName);
+                    string fileName = imagem.FileName + ".enc";
+                    string encryptedFilePath = Path.Combine(path, fileName);
 
                     using var aes = Aes.Create();
                     aes.Key = _key;
@@ -153,8 +142,7 @@ namespace Estoque.API.Controllers
 
                     await imagem.CopyToAsync(cryptoStream);
 
-                    contentType = imagem.ContentType;
-
+                    string contentType = imagem.ContentType;
                     var img = new ImagemModel
                     {
                         FileName = fileName,
@@ -167,7 +155,7 @@ namespace Estoque.API.Controllers
 
             }
 
-            if (list_img.Any())
+            if (list_img.Count > 0)
             {
                 produto.Imagens = list_img;
             }
@@ -209,7 +197,7 @@ namespace Estoque.API.Controllers
 
         [HttpPut("carrinho/clean/{email}")]
         [Authorize(Roles = "Admin,Operador,Cliente")]
-        public async Task<ActionResult> limparCarrinho(string email)
+        public async Task<ActionResult> LimparCarrinho(string email)
         {
             await _service.limparCarrinho(email);
             return Ok("Produto removido do carrinho com sucesso");

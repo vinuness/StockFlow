@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\services\\estoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:services\\estoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\interfaces\\iestoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:interfaces\\iestoqueservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\cliente\\logar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\cliente\\logar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|c:\\users\\vinicius\\source\\repos\\estoque\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{566A7041-FC05-348D-5CA7-323B018A80CE}|Estoque.csproj|solutionrelative:views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,42 +42,88 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAowBgAAAA0AAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EstoqueController.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\EstoqueController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EstoqueController.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\EstoqueController.cs",
+              "RelativeToolTip": "Controllers\\EstoqueController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAA1wBoAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-05T06:21:53.996Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-06T19:07:01.277Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Error.cshtml",
-              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Shared\\Error.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
-              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Shared\\Error.cshtml",
-              "RelativeToolTip": "Views\\Shared\\Error.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-08-05T06:16:23.392Z",
-              "EditorCaption": ""
+              "DocumentIndex": 3,
+              "Title": "IEstoqueService.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Interfaces\\IEstoqueService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IEstoqueService.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Interfaces\\IEstoqueService.cs",
+              "RelativeToolTip": "Interfaces\\IEstoqueService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-06T18:56:42.662Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "EstoqueService.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Services\\EstoqueService.cs",
+              "RelativeDocumentMoniker": "Services\\EstoqueService.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Services\\EstoqueService.cs",
+              "RelativeToolTip": "Services\\EstoqueService.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAgwFgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-06T18:51:21.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Estoque\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Estoque\\Index.cshtml",
+              "RelativeToolTip": "Views\\Estoque\\Index.cshtml",
+              "ViewState": "AgIAALcAAAAAAAAAAAAuwNAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-06T18:51:11.646Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Logar.cshtml",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Cliente\\Logar.cshtml",
+              "RelativeDocumentMoniker": "Views\\Cliente\\Logar.cshtml",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Cliente\\Logar.cshtml",
+              "RelativeToolTip": "Views\\Cliente\\Logar.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-05T16:22:37.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClienteController.cs",
+              "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\ClienteController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
+              "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Controllers\\ClienteController.cs",
+              "RelativeToolTip": "Controllers\\ClienteController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-05T15:53:06.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\Vinicius\\source\\repos\\Estoque\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAEQAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAGIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-08-05T06:13:15.186Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-05T06:13:15.186Z"
             }
           ]
         }

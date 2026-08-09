@@ -2,6 +2,8 @@
 
 @{
     var imagem = "https://localhost:7238/api/Produto/imagem/";
+    @Html.Hidden("pageNumber")
+}
 }
 
 <div class="container mt-4">
@@ -19,19 +21,40 @@
         <div class="card-body">
             <div class="d-flex flex-column flex-md-row align-items-md-center gap-3">
 
-                <div class="input-group flex-grow-1">
+                <input class="form-control"
+                       type="search"
+                       name="search"
+                       placeholder="Pesquisar produto..."
+                       id="search" />
+                <form asp-action="Index" method="get" class="w-100">
+                    <div class="input-group">
 
-                    <span class="input-group-text bg-white">
-                        <i class="bi bi-search"></i>
-                    </span>
+                        <span class="input-group-text bg-white">
+                            Paginar em: 
+                        </span>
 
-                    <input class="form-control"
-                           type="search"
-                           placeholder="Pesquisar produto..."
-                           aria-label="Pesquisar produto"
-                           id="search" />
+                        <select class="form-select"
+                                name="pageSize"
+                                style="max-width: 120px;">
 
-                </div>
+                            <option value="4" selected="@(ViewBag.PageSize == 4)">4</option>
+                            <option value="8" selected="@(ViewBag.PageSize == 8)">8</option>
+                            <option value="12" selected="@(ViewBag.PageSize == 12)">12</option>
+                            <option value="16" selected="@(ViewBag.PageSize == 16)">16</option>
+
+                        </select>
+
+                        <input type="hidden"
+                               name="pageNumber"
+                               value="@ViewBag.PageNumber" />
+
+                        <button id="paginationButton" type="submit" class="btn btn-primary">
+                            <i class="bi bi-search me-1"></i>
+                            Buscar
+                        </button>
+
+                    </div>
+                </form>
 
                 @if (User.IsInRole("Admin") || User.IsInRole("Operador"))
                 {
@@ -186,7 +209,27 @@
         }
 
     </div>
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
 
+            <li class="page-item @(ViewBag.PageNumber == 1 ? "disabled" : "")">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-pageNumber="@(ViewBag.PageNumber - 1)">
+                    Anterior
+                </a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-pageNumber="@(ViewBag.PageNumber + 1)">
+                    Próxima
+                </a>
+            </li>
+
+        </ul>
+    </nav>
 </div>
 
 <script>
