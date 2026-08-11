@@ -9,7 +9,6 @@ namespace Estoque.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin, Operador")]
     public class FornecedorController : ControllerBase
     {
         private readonly IFornecedorService _service;
@@ -37,6 +36,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpPost("save")]
+        [Authorize(Roles = "Admin, Operador")]
         public async Task<ActionResult<Fornecedor>> Save([FromBody] Fornecedor fornecedor)
         {
             await _service.Save(fornecedor);
@@ -44,6 +44,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpPut("update/{id}")]
+        [Authorize(Roles = "Admin, Operador")]
         public async Task<ActionResult> Update([FromBody] Fornecedor fornecedor, int id)
         {
             await _service.Update(fornecedor, id);
@@ -51,6 +52,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "Admin, Operador")]
         public async Task<ActionResult> Delete(int id)
         {
             await _service.Delete(id);

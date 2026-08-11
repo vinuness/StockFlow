@@ -22,12 +22,31 @@ namespace Estoque.Controllers
             _for = forn;
         }
 
-        public async Task<IActionResult> Index(PaginationParams paginationParams)
+        public async Task<IActionResult> Index(PaginationParams paginationParams, int? catId, int? forId)
         {
+            var produtos = await _estoqueService.FindAll(paginationParams);
 
+            if (catId.HasValue)
+            {
+                produtos = produtos
+                    .Where(p => p.CategoriaId == catId.Value)
+                    .ToList();
+            }
+
+            if (forId.HasValue)
+            {
+                produtos = produtos
+                    .Where(p => p.FornecedorId == forId.Value)
+                    .ToList();
+            }
+
+            var categorias = await _cat.FindAll();
+            var fornecedores = await _for.FindAll();
+
+            ViewBag.Categorias = new SelectList(categorias,"Id","Nome",catId);
+            ViewBag.Fornecedores = new SelectList(fornecedores,"Id","Nome",forId);
             ViewBag.PageNumber = paginationParams.pageNumber;
             ViewBag.PageSize = paginationParams.pageSize;
-            var produtos = await _estoqueService.FindAll(paginationParams);
 
             return View(produtos);
         }

@@ -11,7 +11,6 @@ namespace Estoque.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin, Operador")]
     public class CategoriaController : ControllerBase
     {
         private readonly ICategoriaService _service;
@@ -39,6 +38,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpPost("save")]
+        [Authorize(Roles = "Admin, Operador")]
         public async Task<ActionResult<Categoria>> Save([FromBody] Categoria categoria)
         {
             await _service.Save(categoria);
@@ -46,6 +46,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpPut("update/{id}")]
+        [Authorize(Roles = "Admin, Operador")]
         public async Task<ActionResult> Update([FromBody] Categoria categoria, int id)
         {
             await _service.Update(categoria, id);
@@ -53,6 +54,7 @@ namespace Estoque.API.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "Admin, Operador")]
         public async Task<ActionResult> Delete(int id)
         {
             await _service.Delete(id);
